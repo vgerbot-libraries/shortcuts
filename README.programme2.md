@@ -92,13 +92,13 @@ import { Keyboard } from '@shortcut/core';
 const keyboard = new Keyboard();
 
 keyboard.commands({
-    copy: 'Mod+C',
-    paste: 'Mod+V',
-    print: 'Mod+P',
-    find: 'Mod+F',
-    replace: 'Mod+H',
+    copy: 'Ctrl+C',
+    paste: 'Ctrl+V',
+    print: 'Ctrl+P',
+    find: 'Ctrl+F',
+    replace: 'Ctrl+H',
     devtool: 'F12',
-    close: 'Mod+W',
+    close: 'Ctrl+W',
     confirm: 'Enter'
 });
 
@@ -116,20 +116,181 @@ keyboard.contexts({
     },
     editor: {
         commands: ['copy', 'paste'],
-        fallback: ['closable', 'searchable']
+        fallbacks: ['closable', 'searchable']
     },
     previewer: {
         commands: ['print'],
-        fallback: ['closable', 'searchable']
+        fallbacks: ['searchable']
     },
     dialog: {
         commands: ['confirm'],
-        fallback: ['closable']
+        fallbacks: ['closable']
     }
 });
+```
 
+#### Shortcut context
+
+With the above configuration, we can now listen for keyboard events like this：
+
+```js
 keyboard.on('close', () => {
     console.log('close');
+})
+```
+
+However, it doesn't work right now because the current context doesn't have the 'close' command. We can only respond to keyboard events when we switch to a context that supports the 'close' command.
+
+```js
+keyboard.switchContext('editor');
+```
+
+When the user presses `Ctrl+W`, the close event will be executed.
+When the context is switched to `previewer`, since `previewer` does not have a `close` command, the user presses `Ctrl+W` and the event is no longer triggered.
+
+#### Fallback context
+
+If a shortcut command is not found in current activated context, by default, the `shortcuts` will look for same command in `default` context, but if some context has been specified a fallback context, the `shortcuts` will look for that *fallback context* first.
+
+### Shortcut macros
+
+```js
+import { Keyboard, macros } from '@shortcut/core';
+
+const keyboard = new Keyboard();
+
+
+// These following defines the macros globally.
+
+macros('Mod', isMac ? 'Meta' : 'Ctrl');
+macros('Cs', e => {
+    return e.crlKey && e.shifKey;
 });
 
+// or defines the macros for keyboard instance.
+
+keyboard.macros('Mod', isMac ? 'Meta' : 'Ctrl');
+keyboard.macros('Cs', e => {
+    return e.crlKey && e.shifKey;
+});
+
+// After that, you can use macros like this:
+
+keyboard.commands({
+    copy: 'Mod+C', // On Mac OS, it is equivalent to Meta+C, and other systems are equivalent to Ctrl+C
+    capture: 'Cs+A' // Equivalent to Ctrl+Shift+A
+})
 ```
+
+
+### Integration with thirdparty framework/library
+
+#### Rxjs
+
+```js
+import { shortcut } from '@shortcuts/rxjs';
+import { fromEvent } from 'rxjs';
+
+fromEvent(document.body, 'keydown')
+.pipe(shortcut('Ctrl+A'))
+.subscribe(e => console.log('Ctrl+A'))
+```
+
+#### React.js
+
+```jsx
+import { useShortcut } from '@shortcuts/react';
+
+export const ExampleComponent = () => {
+    const [count, setCount] = useState(0);
+    useShortcut('Ctrl+K', () => {
+        setCount(prev => prev + 1)
+    })
+    return (
+        <span>Pressed {count} times</span>
+    );
+}
+
+```
+
+The hook takes care of all the binding and unbinding for you. As soon as the component mounts into the DOM, the key stroke will be listened to.When the component unmounts, it will stop listening.
+
+#### Vue.js
+
+```vue
+<template>
+    <my-component  @shortcut="{'ctrl+alt+o': doTheAction}">
+</template>
+<script>
+    import shortcuts from '@shortcuts/vue';
+    Vue.use(shortcuts);
+<script>
+```
+
+You can define all shortcut key mappings in the global method.
+
+```vue
+<template>
+    <my-component @shortcut="{'context1.action1': doTheAction}">
+</template>
+<script>
+    import shortcuts from '@shortcuts/vue';
+    import { context } from '@shortcut/core';
+    const root = context();
+    Vue.use(shortcuts, {
+        root,
+        keymap: {
+            'context1.action1': 'Ctrl+Alt+O', // context1
+            'context2.action1': 'Ctrl+Alt+K', // context2
+            'context3.action1': 'Ctrl+Alt+F', // context3
+            'context4.action1': 'Ctrl+Alt+H', // context4
+            'action2': 'Ctrl+K' // root context
+        },
+        fallbacks: [
+            ['context1', 'context2'],
+            ['context3', 'context4']
+        ]
+    });
+</script>
+```
+
+Shortcut key map can be rewrote dynamically
+
+```vue
+<template>
+    <my-component @shortcut="{'action1': doTheAction}">
+</template>
+<script>
+    import shortcuts from '@shortcuts/vue';
+    import { context } from '@shortcut/core';
+    const root = context();
+    Vue.use(shortcuts, {
+        root,
+        keymap: {
+            'context1.action1': 'Ctrl+Alt+O', // context1
+            'context2.action1': 'Ctrl+Alt+K', // context2
+            'context3.action1': 'Ctrl+Alt+F', // context3
+            'context4.action1': 'Ctrl+Alt+H', // context4
+            'action2': 'Ctrl+K' // root context
+        },
+        fallbacks: [
+            ['context1', 'context2'],
+            ['context3', 'context4']
+        ]
+    });
+    export default {
+        methods:{
+            doTheAction() {
+                //
+            }
+        },
+        async mounted() {
+            const resp = await fetch('/user-customize-keymap');
+            const keymap = await resp.json();
+            Vue.keymap(keymap);
+        }
+    }
+</script>
+```
+
+#### Angular
