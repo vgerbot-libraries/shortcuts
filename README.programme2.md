@@ -90,43 +90,43 @@ document.body.addEventListener('keydown', e => {
 import { Keyboard } from '@shortcut/core';
 
 const keyboard = new Keyboard();
-
-keyboard.commands({
-    copy: 'Ctrl+C',
-    paste: 'Ctrl+V',
-    print: 'Ctrl+P',
-    find: 'Ctrl+F',
-    replace: 'Ctrl+H',
-    devtool: 'F12',
-    close: 'Ctrl+W',
-    confirm: 'Enter'
-});
-
-keyboard.contexts({
-    default: {
-        commands: ['devtool', 'print']
+keyboard.keymap({
+    commands: {
+        copy: 'Ctrl+C',
+        paste: 'Ctrl+V',
+        print: 'Ctrl+P',
+        find: 'Ctrl+F',
+        replace: 'Ctrl+H',
+        devtool: 'F12',
+        close: 'Ctrl+W',
+        confirm: 'Enter'
     },
-    closable: {
-        abstract: true,
-        commands: ['close']
-    },
-    searchable: {
-        abstract: true,
-        commands: ['find', 'replace']
-    },
-    editor: {
-        commands: ['copy', 'paste'],
-        fallbacks: ['closable', 'searchable']
-    },
-    previewer: {
-        commands: ['print'],
-        fallbacks: ['searchable']
-    },
-    dialog: {
-        commands: ['confirm'],
-        fallbacks: ['closable']
+    contexts: {
+        default: {
+            commands: ['devtool', 'print']
+        },
+        closable: {
+            abstract: true,
+            commands: ['close']
+        },
+        searchable: {
+            abstract: true,
+            commands: ['find', 'replace']
+        },
+        editor: {
+            commands: ['copy', 'paste'],
+            fallbacks: ['closable', 'searchable']
+        },
+        previewer: {
+            commands: ['print'],
+            fallbacks: ['searchable']
+        },
+        dialog: {
+            commands: ['confirm'],
+            fallbacks: ['closable']
+        }
     }
-});
+})
 ```
 
 #### Shortcut context
@@ -176,12 +176,13 @@ keyboard.macros('Cs', e => {
 
 // After that, you can use macros like this:
 
-keyboard.commands({
-    copy: 'Mod+C', // On Mac OS, it is equivalent to Meta+C, and other systems are equivalent to Ctrl+C
-    capture: 'Cs+A' // Equivalent to Ctrl+Shift+A
+keyboard.keymap({
+    commands: {
+        copy: 'Mod+C', // On Mac OS, it is equivalent to Meta+C, and other systems are equivalent to Ctrl+C
+        capture: 'Cs+A' // Equivalent to Ctrl+Shift+A
+    }
 })
 ```
-
 
 ### Integration with thirdparty framework/library
 
@@ -219,11 +220,12 @@ The hook takes care of all the binding and unbinding for you. As soon as the com
 
 ```vue
 <template>
-    <my-component  @shortcut="{'ctrl+alt+o': doTheAction}">
+    <my-component @shortcut="{'ctrl+alt+o': doTheAction}">
 </template>
 <script>
-    import shortcuts from '@shortcuts/vue';
-    Vue.use(shortcuts);
+    import { Keyboard } from '@shortcut/vue';
+    const keyboard = new Keyboard();
+    Vue.use(keyboard);
 <script>
 ```
 
@@ -231,25 +233,18 @@ You can define all shortcut key mappings in the global method.
 
 ```vue
 <template>
-    <my-component @shortcut="{'context1.action1': doTheAction}">
+    <my-component @shortcut.action1="doTheAction">
 </template>
 <script>
-    import shortcuts from '@shortcuts/vue';
-    import { context } from '@shortcut/core';
-    const root = context();
-    Vue.use(shortcuts, {
-        root,
-        keymap: {
-            'context1.action1': 'Ctrl+Alt+O', // context1
-            'context2.action1': 'Ctrl+Alt+K', // context2
-            'context3.action1': 'Ctrl+Alt+F', // context3
-            'context4.action1': 'Ctrl+Alt+H', // context4
-            'action2': 'Ctrl+K' // root context
-        },
-        fallbacks: [
-            ['context1', 'context2'],
-            ['context3', 'context4']
-        ]
+    import { Keyboard } from '@shortcut/vue';
+    const keyboard = new Keyboard();
+    keyboard.keymap({
+        commands: {
+            action1: 'Ctrl+Alt+O',
+            action2: 'Ctrl+Alt+K',
+            action3: 'Ctrl+Alt+F',
+            action4: 'Ctrl+Alt+H',
+        }
     });
 </script>
 ```
@@ -258,36 +253,51 @@ Shortcut key map can be rewrote dynamically
 
 ```vue
 <template>
-    <my-component @shortcut="{'action1': doTheAction}">
+    <my-component @shortcut.action1="doTheAction">
 </template>
 <script>
-    import shortcuts from '@shortcuts/vue';
-    import { context } from '@shortcut/core';
-    const root = context();
-    Vue.use(shortcuts, {
-        root,
-        keymap: {
-            'context1.action1': 'Ctrl+Alt+O', // context1
-            'context2.action1': 'Ctrl+Alt+K', // context2
-            'context3.action1': 'Ctrl+Alt+F', // context3
-            'context4.action1': 'Ctrl+Alt+H', // context4
-            'action2': 'Ctrl+K' // root context
-        },
-        fallbacks: [
-            ['context1', 'context2'],
-            ['context3', 'context4']
-        ]
-    });
+    import { Keyboard } from '@shortcut/vue';
+    const keyboard = new Keyboard();
+    Vue.use(keyboard);
     export default {
         methods:{
             doTheAction() {
                 //
             }
         },
-        async mounted() {
-            const resp = await fetch('/user-customize-keymap');
-            const keymap = await resp.json();
-            Vue.keymap(keymap);
+        mounted() {
+            fetch('/user-customize-keymap.json')
+                .then(resp => resp.json())
+                .then(keymap => {
+                    /*
+                    kaymap = {
+                        commands: {
+                            action1: 'Ctrl+Alt+O',
+                            action2: 'Ctrl+Alt+K',
+                            action3: 'Ctrl+Alt+F',
+                            action4: 'Ctrl+Alt+H',
+                        },
+                        contexts: {
+                            context1: {
+                                commands: ['action1']
+                            },
+                            context2: {
+                                commands: ['action2'],
+                                fallbacks: ['context1']
+                            },
+                            context3: {
+                                commands: ['action3'],
+                                fallbacks: ['context2']
+                            },
+                            context4: {
+                                commands: ['action4'],
+                                fallbacks: ['context3']
+                            }
+                        }
+                    }
+                    */
+                    keyboard.keymap(keymap);
+                });
         }
     }
 </script>
