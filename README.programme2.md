@@ -87,7 +87,7 @@ document.body.addEventListener('keydown', e => {
 ### Shortcut configuration
 
 ```js
-import { Keyboard } from '@shortcut/core';
+import { Keyboard } from '@shortcuts/core';
 
 const keyboard = new Keyboard();
 keyboard.keymap({
@@ -155,7 +155,7 @@ If a shortcut command is not found in current activated context, by default, the
 ### Shortcut macros
 
 ```js
-import { Keyboard, macros } from '@shortcut/core';
+import { Keyboard, macros } from '@shortcuts/core';
 
 const keyboard = new Keyboard();
 
@@ -218,34 +218,38 @@ The hook takes care of all the binding and unbinding for you. As soon as the com
 
 #### Vue.js
 
-```vue
-<template>
-    <my-component @shortcut="{'ctrl+alt+o': doTheAction}">
-</template>
-<script>
-    import { Keyboard } from '@shortcut/vue';
-    const keyboard = new Keyboard();
-    Vue.use(keyboard);
-<script>
+```js
+import { shortcut } from '@shortcuts/vue';
+Vue.use(shortcut);
+
+const vueInstance = new Vue({
+    el: '#app'
+});
+vueInstance.keymap({
+    commands: {
+        action1: 'Ctrl+Alt+O',
+        action2: 'Ctrl+Alt+K',
+        action3: 'Ctrl+Alt+F',
+        action4: 'Ctrl+Alt+H',
+    }
+})
+
 ```
 
-You can define all shortcut key mappings in the global method.
+You can listen to for shortcut key events through Vue directive.
 
 ```vue
 <template>
-    <my-component @shortcut.action1="doTheAction">
+    <my-component @shortcut.action1="doTheAction"></my-component>
 </template>
 <script>
-    import { Keyboard } from '@shortcut/vue';
-    const keyboard = new Keyboard();
-    keyboard.keymap({
-        commands: {
-            action1: 'Ctrl+Alt+O',
-            action2: 'Ctrl+Alt+K',
-            action3: 'Ctrl+Alt+F',
-            action4: 'Ctrl+Alt+H',
+    export default {
+        methods:{
+            doTheAction() {
+                //
+            }
         }
-    });
+    }
 </script>
 ```
 
@@ -253,54 +257,64 @@ Shortcut key map can be rewrote dynamically
 
 ```vue
 <template>
-    <my-component @shortcut.action1="doTheAction">
+    <my-component @shortcut.action1="doTheAction"></my-component>
 </template>
 <script>
-    import { Keyboard } from '@shortcut/vue';
-    const keyboard = new Keyboard();
-    Vue.use(keyboard);
     export default {
         methods:{
             doTheAction() {
                 //
             }
         },
-        mounted() {
-            fetch('/user-customize-keymap.json')
-                .then(resp => resp.json())
-                .then(keymap => {
-                    /*
-                    kaymap = {
-                        commands: {
-                            action1: 'Ctrl+Alt+O',
-                            action2: 'Ctrl+Alt+K',
-                            action3: 'Ctrl+Alt+F',
-                            action4: 'Ctrl+Alt+H',
-                        },
-                        contexts: {
-                            context1: {
-                                commands: ['action1']
-                            },
-                            context2: {
-                                commands: ['action2'],
-                                fallbacks: ['context1']
-                            },
-                            context3: {
-                                commands: ['action3'],
-                                fallbacks: ['context2']
-                            },
-                            context4: {
-                                commands: ['action4'],
-                                fallbacks: ['context3']
-                            }
-                        }
+        async mounted() {
+            const resp = await fetch('/user-customize-keymap.json');
+            const keymap = await resp.json();
+            /*
+            kaymap = {
+                commands: {
+                    action1: 'Ctrl+Alt+O',
+                    action2: 'Ctrl+Alt+K',
+                    action3: 'Ctrl+Alt+F',
+                    action4: 'Ctrl+Alt+H',
+                },
+                contexts: {
+                    context1: {
+                        commands: ['action1']
+                    },
+                    context2: {
+                        commands: ['action2'],
+                        fallbacks: ['context1']
+                    },
+                    context3: {
+                        commands: ['action3'],
+                        fallbacks: ['context2']
+                    },
+                    context4: {
+                        commands: ['action4'],
+                        fallbacks: ['context3']
                     }
-                    */
-                    keyboard.keymap(keymap);
-                });
+                }
+            }
+            */
+            vueInstance.keymap(keymap);
         }
     }
 </script>
 ```
 
 #### Angular
+
+Before you can use shortcut features, you need to import the `ShortcutsModule`.  
+
+```ts
+import { NgModule } from '@angular/core';
+import { ShortcutsModule } from '@shortcuts/angular'
+
+@NgModule({
+    imports: [
+        ShortcutsModule
+    ],
+    // ....
+})
+export class AppModule {}
+```
