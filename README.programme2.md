@@ -92,14 +92,30 @@ import { Keyboard } from '@shortcuts/core';
 const keyboard = new Keyboard();
 keyboard.keymap({
     commands: {
-        copy: 'Ctrl+C',
-        paste: 'Ctrl+V',
+        copy: {
+            shortcut: 'Ctrl+C',
+            preventDefault: true
+        },
+        paste: {
+            shortcut: 'Ctrl+V',
+            preventDefault: true
+        },
         print: 'Ctrl+P',
         find: 'Ctrl+F',
         replace: 'Ctrl+H',
         devtool: 'F12',
         close: 'Ctrl+W',
-        confirm: 'Enter'
+        confirm: {
+            shortcut: 'Enter',
+            interceptors: [
+                (event, next) => {
+                    if(event.target.nodeName === 'INPUT') {
+                        return;
+                    }
+                    next(event);
+                }
+            ]
+        }
     },
     contexts: {
         default: {
@@ -219,8 +235,8 @@ The hook takes care of all the binding and unbinding for you. As soon as the com
 #### Vue.js
 
 ```js
-import { shortcut } from '@shortcuts/vue';
-Vue.use(shortcut);
+import { Shortcuts } from '@shortcuts/vue';
+Vue.use(Shortcuts);
 
 const vueInstance = new Vue({
     el: '#app'
@@ -236,67 +252,36 @@ vueInstance.keymap({
 
 ```
 
+Shortcut key map can be rewrote dynamically
+
+```vue
+<script>
+export default {
+    async mounted() {
+        const resp = await fetch('/user-customize-keymap.json');
+        const keymap = await resp.json();
+        vueInstance.keymap(keymap);
+    }
+}
+</script>
+```
+
 You can listen to for shortcut key events through Vue directive.
 
 ```vue
 <template>
-    <my-component @shortcut.action1="doTheAction"></my-component>
+    <div>
+        <button @shortcut="'action1'" @on.click="close"></button>
+    </div>
 </template>
 <script>
+    import {} from '@shortcuts/vue';
     export default {
         methods:{
-            doTheAction() {
+            close() {
                 //
-            }
-        }
-    }
-</script>
-```
-
-Shortcut key map can be rewrote dynamically
-
-```vue
-<template>
-    <my-component @shortcut.action1="doTheAction"></my-component>
-</template>
-<script>
-    export default {
-        methods:{
-            doTheAction() {
-                //
-            }
-        },
-        async mounted() {
-            const resp = await fetch('/user-customize-keymap.json');
-            const keymap = await resp.json();
-            /*
-            kaymap = {
-                commands: {
-                    action1: 'Ctrl+Alt+O',
-                    action2: 'Ctrl+Alt+K',
-                    action3: 'Ctrl+Alt+F',
-                    action4: 'Ctrl+Alt+H',
-                },
-                contexts: {
-                    context1: {
-                        commands: ['action1']
-                    },
-                    context2: {
-                        commands: ['action2'],
-                        fallbacks: ['context1']
-                    },
-                    context3: {
-                        commands: ['action3'],
-                        fallbacks: ['context2']
-                    },
-                    context4: {
-                        commands: ['action4'],
-                        fallbacks: ['context3']
-                    }
-                }
-            }
-            */
-            vueInstance.keymap(keymap);
+            },
+            show() {}
         }
     }
 </script>
@@ -310,11 +295,54 @@ Before you can use shortcut features, you need to import the `ShortcutsModule`.
 import { NgModule } from '@angular/core';
 import { ShortcutsModule } from '@shortcuts/angular'
 
+const keymap = {
+    commands: {
+        action1: 'Escape',
+        action2: 'Enter',
+        action3: 'Ctrl+F',
+        action4: 'Ctrl+E',
+    },
+    contexts: {
+        dialog: {
+            commands: ['action1', 'action2']
+        }
+    }
+};
+
 @NgModule({
     imports: [
-        ShortcutsModule
+        ShortcutsModule.forRoot(keymap)
     ],
     // ....
 })
 export class AppModule {}
+```
+
+```ts
+import { ShortcutService } from '@shortcuts/angular';
+
+@Component({
+    selector: 'my-dialog',
+    template: `
+        <div>
+            <button [shortcut]="action1" (click)="close()"></button>
+            <button [shortcut]="action2" (click)="confirm()"></button>
+        </div>
+    `
+})
+class MyDialogComponent {
+    constructor(
+        private shortcutService: ShortcutService
+    ){}
+    confirm(){
+        console.log('confirm');
+    }
+    show() {
+        this.shortcutService.switchContext('dialog');
+    }
+    close() {
+        console.log('close');
+        this.shortcutService.switchBack();
+    }
+}
 ```
