@@ -346,3 +346,34 @@ class MyDialogComponent {
     }
 }
 ```
+
+Integration with angular router
+
+```ts
+import { Routes } from '@angular/router';
+import { ShortcutsModule } from '@shortcuts/angular';
+
+const routes: Routes = [
+    {
+        path: 'login',
+        component: YourComponent
+    }
+]
+
+@NgModule({
+    imports: [
+        RouterModules.forRoot(), 
+        ShortcutsModule.forRoot({
+            commands: {
+                // ...
+            },
+            contexts: {
+                context1: {
+                    routerLink: 'login',
+                    // ...
+                }
+            }
+        })
+    ],
+})
+```
