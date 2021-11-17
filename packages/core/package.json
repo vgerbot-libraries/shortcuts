@@ -1,0 +1,32 @@
+{
+  "name": "@shortcuts/core",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "y1j2x34 <y1j2x34@qq.com>",
+  "homepage": "https://github.com/y1j2x34/rollup-jest-boilerplate/tree/main/packages/core#readme",
+  "license": "MIT",
+  "main": "lib/index.cjs.js",
+  "browser": "lib/index.umd.js",
+  "module": "lib/index.es.js",
+  "library": "Shortcuts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/y1j2x34/shortcuts.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/y1j2x34/shortcuts/issues"
+  }
+}
