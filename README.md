@@ -1,4 +1,6 @@
-# shortcuts
+# shortcuts ![Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg) ![NPM](https://img.shields.io/npm/l/@channel/core?style=social)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/08bfda65b05c4df8a98e38847eed9712)](https://www.codacy.com/gh/y1j2x34/shortcuts/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=y1j2x34/shortcuts&amp;utm_campaign=Badge_Grade)
 
 ## Install
 
