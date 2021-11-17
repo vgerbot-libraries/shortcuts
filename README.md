@@ -1,5 +1,7 @@
 # shortcuts
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/42d93433752e4bc290caa81857498ccc)](https://app.codacy.com/gh/y1j2x34/shortcuts?utm_source=github.com&utm_medium=referral&utm_content=y1j2x34/shortcuts&utm_campaign=Badge_Grade_Settings)
+
 ## Install
 
 ```sh
