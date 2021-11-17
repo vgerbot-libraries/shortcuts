@@ -1,4 +1,5 @@
-const pkg = require('./package.json');
+const path = require('path')
+const pkg = require(path.resolve(process.cwd(), 'package.json'));
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const typescript = require('rollup-plugin-typescript2');

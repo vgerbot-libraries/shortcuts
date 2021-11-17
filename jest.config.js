@@ -3,7 +3,7 @@ module.exports = {
         '\\.[jt]sx?': ['rollup-jest', {
             configFile: './rollup.config.js',
             output: {
-                sourceMap: true
+                sourcemap: true
             }
         }]
     },
