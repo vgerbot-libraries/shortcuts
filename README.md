@@ -157,7 +157,7 @@ keyboard.on('close', () => {
 })
 ```
 
-However, it doesn't work right now because the current context doesn't have the 'close' command. We can only respond to keyboard events when we switch to a context that supports the 'close' command.
+However, it doesn't work right now because the current context doesn't have the 'close' command. The event can only be responded to if the currently activated context supports the `close` command.
 
 ```js
 keyboard.switchContext('editor');
