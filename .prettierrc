@@ -3,7 +3,7 @@
     "parser": "typescript",
     "tabWidth": 4,
     "bracketSpacing": true,
-    "printWidth": 120,
+    "printWidth": 80,
     "endOfLine": "lf",
     "arrowParens": "avoid",
     "trailingComma": "none"
