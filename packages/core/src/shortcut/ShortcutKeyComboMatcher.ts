@@ -1,5 +1,5 @@
 import { MacroRegistry } from '../macro/MacroRegistry';
-import { KeyboardEventMatcher } from '../matcher/KeyboardEventMatcher';
+import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
 
 export class ShortcutKeyComboMatcher implements KeyboardEventMatcher {
     private readonly matchers: KeyboardEventMatcher[];

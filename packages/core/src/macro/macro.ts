@@ -1,7 +1,7 @@
 import {
     KeyboardEventMatcher,
     KeyboardEventMatcherFn
-} from '../matcher/KeyboardEventMatcher';
+} from '../foundation/KeyboardEventMatcher';
 import { Shortcut } from '../shortcut/Shortcut';
 import { DEFAULT_MACRO_REGISTRY, MacroRegistry } from './MacroRegistry';
 

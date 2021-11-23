@@ -1,5 +1,5 @@
 import { MacroRegistry } from '../macro/MacroRegistry';
-import { KeyboardEventMatcher } from '../matcher/KeyboardEventMatcher';
+import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
 
 export function parseShortcutKey(
     shortcutKey: string,

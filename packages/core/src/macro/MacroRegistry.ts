@@ -1,4 +1,4 @@
-import { KeyboardEventMatcher } from '../matcher/KeyboardEventMatcher';
+import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
 
 export interface MacroRegistry {
     register(pattern: string, matcher: KeyboardEventMatcher): void;
