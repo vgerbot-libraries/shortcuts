@@ -3,6 +3,9 @@
     "compilerOptions": {
         "paths": {
             "@src": ["src"]
-        }
+        },
+        "types": [
+            "jest"
+        ]
     }
 }

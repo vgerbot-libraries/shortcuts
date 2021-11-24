@@ -1080,6 +1080,18 @@
   dependencies:
     chalk "^4.0.0"
 
+"@cspotcode/source-map-consumer@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.npmmirror.com/@cspotcode/source-map-consumer/download/@cspotcode/source-map-consumer-0.8.0.tgz#33bf4b7b39c178821606f669bbc447a6a629786b"
+  integrity sha1-M79LeznBeIIWBvZpu8RHpqYpeGs=
+
+"@cspotcode/source-map-support@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.npmmirror.com/@cspotcode/source-map-support/download/@cspotcode/source-map-support-0.7.0.tgz#4789840aa859e46d2f3173727ab707c66bf344f5"
+  integrity sha1-R4mECqhZ5G0vMXNyercHxmvzRPU=
+  dependencies:
+    "@cspotcode/source-map-consumer" "0.8.0"
+
 "@endemolshinegroup/cosmiconfig-typescript-loader@^3.0.2":
   version "3.0.2"
   resolved "https://registry.npmmirror.com/@endemolshinegroup/cosmiconfig-typescript-loader/download/@endemolshinegroup/cosmiconfig-typescript-loader-3.0.2.tgz"
@@ -2301,6 +2313,26 @@
   resolved "https://registry.npmmirror.com/@tootallnate/once/download/@tootallnate/once-1.1.2.tgz"
   integrity sha1-zLkURTYBeaBOf+av94wA/8Hur4I=
 
+"@tsconfig/node10@^1.0.7":
+  version "1.0.8"
+  resolved "https://registry.npmmirror.com/@tsconfig/node10/download/@tsconfig/node10-1.0.8.tgz#c1e4e80d6f964fbecb3359c43bd48b40f7cadad9"
+  integrity sha1-weToDW+WT77LM1nEO9SLQPfK2tk=
+
+"@tsconfig/node12@^1.0.7":
+  version "1.0.9"
+  resolved "https://registry.npmmirror.com/@tsconfig/node12/download/@tsconfig/node12-1.0.9.tgz#62c1f6dee2ebd9aead80dc3afa56810e58e1a04c"
+  integrity sha1-YsH23uLr2a6tgNw6+laBDljhoEw=
+
+"@tsconfig/node14@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/@tsconfig/node14/download/@tsconfig/node14-1.0.1.tgz#95f2d167ffb9b8d2068b0b235302fafd4df711f2"
+  integrity sha1-lfLRZ/+5uNIGiwsjUwL6/U33EfI=
+
+"@tsconfig/node16@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@tsconfig/node16/download/@tsconfig/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
+  integrity sha1-Qjx3h30Fadsg4fyAiFrEEYMUAQ4=
+
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.14":
   version "7.1.16"
   resolved "https://registry.npmmirror.com/@types/babel__core/download/@types/babel__core-7.1.16.tgz"
@@ -2393,10 +2425,10 @@
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
 
-"@types/jest@^27.0.2":
-  version "27.0.2"
-  resolved "https://registry.npmmirror.com/@types/jest/download/@types/jest-27.0.2.tgz"
-  integrity sha1-rDg8TUqt3Sm78rkW2NEFwwSl/Nc=
+"@types/jest@^27.0.3":
+  version "27.0.3"
+  resolved "https://registry.npmmirror.com/@types/jest/download/@types/jest-27.0.3.tgz#0cf9dfe9009e467f70a342f0f94ead19842a783a"
+  integrity sha512-cmmwv9t7gBYt7hNKH5Spu7Kuu/DotGa+Ff+JGRKZ4db5eh8PnKS4LuebJ3YLUoyOyIHraTGyULn23YtEAm0VSg==
   dependencies:
     jest-diff "^27.0.0"
     pretty-format "^27.0.0"
@@ -2603,6 +2635,11 @@ acorn-walk@^7.1.1:
   resolved "https://registry.npmmirror.com/acorn-walk/download/acorn-walk-7.2.0.tgz"
   integrity sha1-DeiJpgEgOQmw++B7iTjcIdLpZ7w=
 
+acorn-walk@^8.1.1:
+  version "8.2.0"
+  resolved "https://registry.npmmirror.com/acorn-walk/download/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"
+  integrity sha1-dBIQ8uJCZFRQiFOi9E0KuDt/acE=
+
 acorn@^7.1.1:
   version "7.4.1"
   resolved "https://registry.npmmirror.com/acorn/download/acorn-7.4.1.tgz"
@@ -2612,6 +2649,11 @@ acorn@^8.2.4, acorn@^8.5.0:
   version "8.5.0"
   resolved "https://registry.npmmirror.com/acorn/download/acorn-8.5.0.tgz"
   integrity sha1-RRLMuZs2mMdSWR6btEcuOK1DzuI=
+
+acorn@^8.4.1:
+  version "8.6.0"
+  resolved "https://registry.npmmirror.com/acorn/download/acorn-8.6.0.tgz?cache=0&sync_timestamp=1637225522161&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Facorn%2Fdownload%2Facorn-8.6.0.tgz#e3692ba0eb1a0c83eaa4f37f5fa7368dd7142895"
+  integrity sha512-U1riIR+lBSNi3IbxtaHOIKdH8sLFv3NYfNv8sg7ZsNhcfl4HF2++BfqqrNAxoCLQW1iiylOj76ecnaUxz+z9yw==
 
 add-stream@^1.0.0:
   version "1.0.0"
@@ -2702,6 +2744,11 @@ ansi-styles@^5.0.0:
   version "5.2.0"
   resolved "https://registry.npmmirror.com/ansi-styles/download/ansi-styles-5.2.0.tgz"
   integrity sha1-B0SWkK1Fd30ZJKwquy/IiV26g2s=
+
+any-promise@^1.0.0:
+  version "1.3.0"
+  resolved "https://registry.npmmirror.com/any-promise/download/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
+  integrity sha1-q8av7tzqUugJzcA3au0845Y10X8=
 
 anymatch@^3.0.3:
   version "3.1.2"
@@ -3300,6 +3347,11 @@ commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.npmmirror.com/commander/download/commander-2.20.3.tgz?cache=0&sync_timestamp=1634886396986&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcommander%2Fdownload%2Fcommander-2.20.3.tgz"
   integrity sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=
+
+commander@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.npmmirror.com/commander/download/commander-4.1.1.tgz?cache=0&sync_timestamp=1634886503143&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcommander%2Fdownload%2Fcommander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
+  integrity sha1-n9YCvZNilOnp70aj9NaWQESxgGg=
 
 commander@^8.2.0:
   version "8.3.0"
@@ -4408,6 +4460,18 @@ glob-parent@^6.0.1:
   integrity sha1-bSN9mQg5UMeSkPJMdkKj3poo+eM=
   dependencies:
     is-glob "^4.0.3"
+
+glob@7.1.6:
+  version "7.1.6"
+  resolved "https://registry.npmmirror.com/glob/download/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
+  integrity sha1-FB8zuBp8JJLhJVlDB0gMRmeSeKY=
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
 
 glob@^7.1.1, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6, glob@^7.2.0:
   version "7.2.0"
@@ -6227,6 +6291,15 @@ mute-stream@0.0.8, mute-stream@~0.0.4:
   resolved "https://registry.npmmirror.com/mute-stream/download/mute-stream-0.0.8.tgz"
   integrity sha1-FjDEKyJR/4HiooPelqVJfqkuXg0=
 
+mz@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.npmmirror.com/mz/download/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"
+  integrity sha1-lQCAV6Vsr63CvGPd5/n/aVWUjjI=
+  dependencies:
+    any-promise "^1.0.0"
+    object-assign "^4.0.1"
+    thenify-all "^1.0.0"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/natural-compare/download/natural-compare-1.4.0.tgz"
@@ -6478,7 +6551,7 @@ oauth-sign@~0.9.0:
   resolved "https://registry.npmmirror.com/oauth-sign/download/oauth-sign-0.9.0.tgz"
   integrity sha1-R6ewFrqmi1+g7PPe4IqFxnmsZFU=
 
-object-assign@^4.1.0:
+object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.npmmirror.com/object-assign/download/object-assign-4.1.1.tgz"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -7887,6 +7960,18 @@ stubs@^3.0.0:
   resolved "https://registry.npmmirror.com/stubs/download/stubs-3.0.0.tgz"
   integrity sha1-6NK6H6nJBXAwPAMLaQD31fiavls=
 
+sucrase@^3.20.3:
+  version "3.20.3"
+  resolved "https://registry.npmmirror.com/sucrase/download/sucrase-3.20.3.tgz#424f1e75b77f955724b06060f1ae708f5f0935cf"
+  integrity sha1-Qk8edbd/lVcksGBg8a5wj18JNc8=
+  dependencies:
+    commander "^4.0.0"
+    glob "7.1.6"
+    lines-and-columns "^1.1.6"
+    mz "^2.7.0"
+    pirates "^4.0.1"
+    ts-interface-checker "^0.1.9"
+
 supports-color@8.1.1, supports-color@^8.0.0:
   version "8.1.1"
   resolved "https://registry.npmmirror.com/supports-color/download/supports-color-8.1.1.tgz?cache=0&sync_timestamp=1632381094751&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsupports-color%2Fdownload%2Fsupports-color-8.1.1.tgz"
@@ -8014,6 +8099,20 @@ text-table@^0.2.0:
   resolved "https://registry.npmmirror.com/text-table/download/text-table-0.2.0.tgz"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+thenify-all@^1.0.0:
+  version "1.6.0"
+  resolved "https://registry.npmmirror.com/thenify-all/download/thenify-all-1.6.0.tgz#1a1918d402d8fc3f98fbf234db0bcc8cc10e9726"
+  integrity sha1-GhkY1ALY/D+Y+/I02wvMjMEOlyY=
+  dependencies:
+    thenify ">= 3.1.0 < 4"
+
+"thenify@>= 3.1.0 < 4":
+  version "3.3.1"
+  resolved "https://registry.npmmirror.com/thenify/download/thenify-3.3.1.tgz#8932e686a4066038a016dd9e2ca46add9838a95f"
+  integrity sha1-iTLmhqQGYDigFt2eLKRq3Zg4qV8=
+  dependencies:
+    any-promise "^1.0.0"
+
 throat@^6.0.0, throat@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmmirror.com/throat/download/throat-6.0.1.tgz"
@@ -8096,6 +8195,29 @@ trim-newlines@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmmirror.com/trim-newlines/download/trim-newlines-3.0.1.tgz"
   integrity sha1-Jgpdli2LdSQlsy86fbDcrNF2wUQ=
+
+ts-interface-checker@^0.1.9:
+  version "0.1.13"
+  resolved "https://registry.npmmirror.com/ts-interface-checker/download/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
+  integrity sha1-eE/T1nlyK8EDsbS4AwvN212yppk=
+
+ts-node@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.npmmirror.com/ts-node/download/ts-node-10.4.0.tgz#680f88945885f4e6cf450e7f0d6223dd404895f7"
+  integrity sha1-aA+IlFiF9ObPRQ5/DWIj3UBIlfc=
+  dependencies:
+    "@cspotcode/source-map-support" "0.7.0"
+    "@tsconfig/node10" "^1.0.7"
+    "@tsconfig/node12" "^1.0.7"
+    "@tsconfig/node14" "^1.0.0"
+    "@tsconfig/node16" "^1.0.2"
+    acorn "^8.4.1"
+    acorn-walk "^8.1.1"
+    arg "^4.1.0"
+    create-require "^1.1.0"
+    diff "^4.0.1"
+    make-error "^1.1.1"
+    yn "3.1.1"
 
 ts-node@^9:
   version "9.1.1"
