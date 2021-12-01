@@ -28,5 +28,8 @@
   },
   "bugs": {
     "url": "https://github.com/y1j2x34/shortcuts/issues"
+  },
+  "dependencies": {
+    "detect-browser": "^5.2.1"
   }
 }
