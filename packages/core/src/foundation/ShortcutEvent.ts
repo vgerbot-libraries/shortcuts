@@ -13,3 +13,19 @@ export interface ShortcutCommandEvent extends ShortcutEvent {
     readonly command: string;
     readonly context: ShortcutContext;
 }
+
+export class ShortcutEventImpl implements ShortcutEvent {
+    constructor(
+        public readonly shortcut: Shortcut,
+        public readonly native: KeyboardEvent
+    ) {}
+    preventDefault(): void {
+        this.native.preventDefault();
+    }
+    stopImmediatePropagation(): void {
+        this.native.stopImmediatePropagation();
+    }
+    stopPropagation(): void {
+        this.native.stopPropagation();
+    }
+}
