@@ -1,3 +1,4 @@
+import { Shortcut } from '../shortcut/Shortcut';
 import { Interceptor } from './Interceptor';
 
 export interface KeymapOptions {
@@ -5,11 +6,13 @@ export interface KeymapOptions {
     contexts?: Record<string, ContextOptions>;
 }
 
-export interface CommandOptions extends Partial<FullCommandOptions> {
+export interface CommandOptions
+    extends Partial<Omit<ParsedCommandOptions, 'shortcut'>> {
     shortcut: string;
 }
-export interface FullCommandOptions {
-    shortcut: string;
+
+export interface ParsedCommandOptions {
+    shortcut: Shortcut;
     event: Opportunity[];
     preventDefault: boolean;
     interceptors: Interceptor[];

@@ -1,19 +1,21 @@
 import { EventEmitter } from '../event/EventEmitter';
+import { Shortcut } from '../shortcut/Shortcut';
 import { ActivationContextManager } from './ActivationContextManager';
 import { Disposable } from './Disposable';
+import { Interceptor } from './Interceptor';
 import {
     CommandOptions,
     ContextOptions,
-    FullCommandOptions,
     FullContextOptions,
     KeymapOptions,
-    Opportunity
+    Opportunity,
+    ParsedCommandOptions
 } from './Keymap';
-import { ShortcutEvent } from './ShortcutEvent';
+import { ShortcutEvent, ShortcutEventImpl } from './ShortcutEvent';
 import { ShortcutEventHandler } from './ShortcutEventHandler';
 
 export class Keyboard {
-    private readonly commands: Record<string, FullCommandOptions> = {};
+    private readonly commands: Record<string, ParsedCommandOptions> = {};
     private readonly contexts: Record<string, FullContextOptions> = {};
     private readonly activationContextManager = new ActivationContextManager();
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
@@ -32,10 +34,10 @@ export class Keyboard {
             }
             switch (e.type) {
                 case 'keydown':
-                    this.handleKeydownEvent(e);
+                    this.handleKeyEvent(e);
                     break;
                 case 'keyup':
-                    this.handleKeyupEvent(e);
+                    this.handleKeyEvent(e);
                     break;
             }
         };
@@ -62,11 +64,54 @@ export class Keyboard {
             );
         });
     }
-    handleKeydownEvent(e: KeyboardEvent) {
-        //
+    private handleKeyEvent(e: KeyboardEvent) {
+        const currentContext = this.activationContextManager.peak();
+        if (currentContext === undefined) {
+            return;
+        }
+        const contextOptions = this.contexts[currentContext];
+        if (!contextOptions) {
+            return;
+        }
+        // TODO: supports fallbacks
+        const commands = contextOptions.commands;
+        commands.forEach(it => {
+            const opt = this.commands[it];
+            const shortcut = opt?.shortcut;
+            if (!shortcut) {
+                return;
+            }
+            if (shortcut.match(e)) {
+                this.executeCommand(e, it, opt);
+            }
+        });
     }
-    handleKeyupEvent(e: KeyboardEvent) {
-        //
+    private executeCommand(
+        e: KeyboardEvent,
+        commandName: string,
+        commandOptions: ParsedCommandOptions
+    ) {
+        const includesTheConfiguredEventType =
+            commandOptions.event.indexOf(e.type as Opportunity) > -1;
+        if (!includesTheConfiguredEventType) {
+            return;
+        }
+        const handleEvent = (e: ShortcutEvent) => {
+            if (commandOptions.preventDefault) {
+                e.preventDefault();
+            }
+            this.eventEmitter.emit(commandName, e);
+        };
+        const runner = commandOptions.interceptors.reduceRight(
+            (next: ShortcutEventHandler, cur: Interceptor) => {
+                return (evt: ShortcutEvent) => {
+                    cur(evt, next);
+                };
+            },
+            handleEvent
+        );
+        const shortcutEvent = new ShortcutEventImpl(commandOptions.shortcut, e);
+        runner(shortcutEvent);
     }
     keymap(keymapOptions: KeymapOptions) {
         const commands = keymapOptions.commands;
@@ -79,6 +124,12 @@ export class Keyboard {
         }
     }
     switchContext(context: string) {
+        const contextOptions = this.contexts[context];
+        if (!contextOptions) {
+            throw new Error(
+                'Cannot switch to a non-existent context: ' + context
+            );
+        }
         return this.activationContextManager.push(context);
     }
     on(
@@ -116,14 +167,14 @@ export class Keyboard {
             const options = commands[commandName];
             if (typeof options === 'string') {
                 this.commands[commandName] = {
-                    shortcut: options,
+                    shortcut: Shortcut.from(options),
                     preventDefault: false,
                     event: ['keydown'],
                     interceptors: []
                 };
             } else {
                 this.commands[commandName] = {
-                    shortcut: options.shortcut,
+                    shortcut: Shortcut.from(options.shortcut),
                     event: options.event || ['keydown'],
                     preventDefault: options.preventDefault !== false,
                     interceptors: options.interceptors || []
