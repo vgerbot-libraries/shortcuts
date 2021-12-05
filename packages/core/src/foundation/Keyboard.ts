@@ -1,8 +1,14 @@
 import { EventEmitter } from '../event/EventEmitter';
+import {
+    DEFAULT_MACRO_REGISTRY,
+    MacroRegistry,
+    MacroRegistryImpl
+} from '../macro/MacroRegistry';
 import { Shortcut } from '../shortcut/Shortcut';
 import { ActivationContextManager } from './ActivationContextManager';
 import { Disposable } from './Disposable';
 import { Interceptor } from './Interceptor';
+import { KeyboardConstructorOptions } from './KeyboardConstructorOptions';
 import {
     CommandOptions,
     ContextOptions,
@@ -21,10 +27,15 @@ export class Keyboard {
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
     private paused: boolean = false;
     private disposor = new Disposable();
-    constructor(
-        private anchor: GlobalEventHandlers = document,
-        private options?: AddEventListenerOptions
-    ) {
+    private anchor: GlobalEventHandlers;
+    private eventOptions?: AddEventListenerOptions;
+    private registry: MacroRegistry;
+    constructor(options: KeyboardConstructorOptions) {
+        this.anchor = options.anchor || document;
+        this.eventOptions = options.eventOptions;
+        this.registry = new MacroRegistryImpl(
+            options.macroRegistry || DEFAULT_MACRO_REGISTRY
+        );
         this.registerEvents();
     }
     registerEvents() {
@@ -44,23 +55,23 @@ export class Keyboard {
         this.anchor.addEventListener(
             'keydown',
             keyboardEventHandler,
-            this.options
+            this.eventOptions
         );
         this.anchor.addEventListener(
             'keyup',
             keyboardEventHandler,
-            this.options
+            this.eventOptions
         );
         this.disposor.record(() => {
             this.anchor.removeEventListener(
                 'keydown',
                 keyboardEventHandler,
-                this.options
+                this.eventOptions
             );
             this.anchor.removeEventListener(
                 'keyup',
                 keyboardEventHandler,
-                this.options
+                this.eventOptions
             );
         });
     }
@@ -167,14 +178,14 @@ export class Keyboard {
             const options = commands[commandName];
             if (typeof options === 'string') {
                 this.commands[commandName] = {
-                    shortcut: Shortcut.from(options),
+                    shortcut: Shortcut.from(options, this.registry),
                     preventDefault: false,
                     event: ['keydown'],
                     interceptors: []
                 };
             } else {
                 this.commands[commandName] = {
-                    shortcut: Shortcut.from(options.shortcut),
+                    shortcut: Shortcut.from(options.shortcut, this.registry),
                     event: options.event || ['keydown'],
                     preventDefault: options.preventDefault !== false,
                     interceptors: options.interceptors || []
