@@ -1,4 +1,4 @@
-import { ShortcutEventImpl } from '../foundation/ShortcutEvent';
+import { ShortcutEvent, ShortcutEventImpl } from '../foundation/ShortcutEvent';
 import { ShortcutEventHandler } from '../foundation/ShortcutEventHandler';
 import { Shortcut } from '../shortcut/Shortcut';
 import { PatternMatcher } from './PatternMatcher';
@@ -16,6 +16,7 @@ function _match_<T>(
 }
 
 _match_.case = _match_;
+_match_['else'] = _else([]);
 
 export const match: typeof _match_ | PatternMatcher<unknown> = _match_;
 
@@ -45,7 +46,20 @@ function createMatcher<T = unknown>(
         ))
     );
     match.case = match.bind(null);
+    match.else = _else(cases);
     return match;
+}
+
+function _else(cases?: PatternMatchCase<unknown>[]) {
+    return <T>(handler: (e: KeyboardEvent) => T | T) => {
+        return (e: KeyboardEvent): T | undefined => {
+            return executeCaseMatcher<T>(
+                e,
+                (cases || []) as PatternMatchCase<T>[],
+                handler
+            );
+        };
+    };
 }
 
 function _case<T>(
@@ -65,10 +79,11 @@ function _case<T>(
 }
 function executeCaseMatcher<T>(
     event: KeyboardEvent,
-    cases: PatternMatchCase<T>[]
+    cases: PatternMatchCase<T>[],
+    _else_?: (e: KeyboardEvent) => T | T
 ): T | undefined {
     let result: T | undefined;
-    cases.some(it => {
+    const hasMatch = cases.some(it => {
         return it.shortcuts.some(shortcut => {
             if (shortcut.match(event)) {
                 const handlerOrValue = it.handlerOrValue;
@@ -86,5 +101,12 @@ function executeCaseMatcher<T>(
             return false;
         });
     });
+    if (!hasMatch) {
+        if (typeof _else_ === 'function') {
+            return _else_(event);
+        } else {
+            return _else_;
+        }
+    }
     return result;
 }

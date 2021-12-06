@@ -7,4 +7,7 @@ export interface PatternMatcher<T = unknown> {
     ): PatternMatcher<T>;
     (e: KeyboardEvent): T;
     case: PatternMatcher<T>;
+    else: (
+        handler: (e: KeyboardEvent) => T | T
+    ) => (e: KeyboardEvent) => T | void;
 }

@@ -30,7 +30,11 @@ export class Keyboard {
     private anchor: GlobalEventHandlers;
     private eventOptions?: AddEventListenerOptions;
     private registry: MacroRegistry;
-    constructor(options: KeyboardConstructorOptions) {
+    constructor(
+        options: KeyboardConstructorOptions = {
+            anchor: document
+        }
+    ) {
         this.anchor = options.anchor || document;
         this.eventOptions = options.eventOptions;
         this.registry = new MacroRegistryImpl(
