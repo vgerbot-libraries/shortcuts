@@ -84,12 +84,11 @@ export class Keyboard {
         if (currentContext === undefined) {
             return;
         }
-        const contextOptions = this.contexts[currentContext];
-        if (!contextOptions) {
+        // TODO: supports fallbacks
+        const commands = this.commandsOf(currentContext);
+        if (commands.length === 0) {
             return;
         }
-        // TODO: supports fallbacks
-        const commands = contextOptions.commands;
         commands.forEach(it => {
             const opt = this.commands[it];
             const shortcut = opt?.shortcut;
@@ -100,6 +99,27 @@ export class Keyboard {
                 this.executeCommand(e, it, opt);
             }
         });
+    }
+    private commandsOf(context: string): string[] {
+        const fallbackContexts: FullContextOptions[] = [];
+        const obtainFallbackContexts = (ctx: string) => {
+            const options = this.contexts[ctx];
+            if (!options) {
+                return;
+            }
+            if (fallbackContexts.indexOf(options) > -1) {
+                return;
+            }
+            fallbackContexts.push(options);
+            options.fallbacks.forEach(obtainFallbackContexts);
+        };
+        obtainFallbackContexts(context);
+        const allCommands = fallbackContexts.reduce((allCommands, it) => {
+            return allCommands.concat(it.commands);
+        }, [] as string[]);
+        return allCommands.filter(
+            (it, index) => allCommands.indexOf(it) === index
+        );
     }
     private executeCommand(
         e: KeyboardEvent,
