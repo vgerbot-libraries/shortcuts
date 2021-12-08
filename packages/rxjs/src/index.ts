@@ -18,4 +18,6 @@
 // fromEvent(document.body, 'keydown')
 // .pipe()
 
-console.log('hello');
+export function hello() {
+    return 'world';
+}

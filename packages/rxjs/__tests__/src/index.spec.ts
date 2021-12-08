@@ -1,5 +1,7 @@
+import { hello } from '../../src';
+
 describe('@shortcuts/rxjs', () => {
     it('casual', () => {
-        expect(true).toBeTruthy();
+        expect(hello()).toBe('world');
     })
 });

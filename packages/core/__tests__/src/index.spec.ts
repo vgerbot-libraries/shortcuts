@@ -1,5 +1,7 @@
+import { Shortcut } from '../../src/shortcut/Shortcut';
+
 describe('@shortcuts/core', () => {
     it('casual', () => {
-        expect(true).toBeTruthy();
+        expect(Shortcut.from('Ctrl+Shift+A')).toBeDefined();
     })
 })

@@ -1,6 +1,7 @@
 import { DEFAULT_MACRO_REGISTRY, MacroRegistry } from '../macro/MacroRegistry';
 import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
 import { parseShortcutKey } from './parser';
+import '../locales/default';
 
 export class Shortcut implements KeyboardEventMatcher {
     static keyDeliminator: string = '+';
