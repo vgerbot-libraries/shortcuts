@@ -1,5 +1,8 @@
 import path from 'path';
 
+const packageName = path.basename(process.cwd());
+const basedir = `<rootDir>/packages/${packageName}`;
+
 export default {
     transform: {
         '\\.tsx?$': [
@@ -9,12 +12,14 @@ export default {
             }
         ]
     },
-    testEnvironment: 'node', // dom
-    testMatch: ['**/__tests__/**/*.spec.ts'],
+    testEnvironment: 'jsdom',
+    testMatch: [`${basedir}/__tests__/**/*.spec.ts`],
     moduleFileExtensions: ['ts', 'js'],
-    collectCoverage: false,
-    collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**'],
-    coverageDirectory: './report/coverage',
+    collectCoverage: true,
+    collectCoverageFrom: [`${basedir}/src/**/*.ts`],
+    coveragePathIgnorePatterns: ['/__test__/', '/node_modules/'],
+    coverageProvider: 'v8',
+    coverageDirectory: `${basedir}/report/coverage/`,
     coverageReporters: ['json', 'html', 'text-summary'],
     reporters: [
         'default',
