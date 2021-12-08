@@ -10,8 +10,8 @@ async function rmdir(path) {
     });
 }
 
-await rmdir('./report');
+const dirs = argv._.slice(1);
 
-await rmdir('./lib');
-
-await rmdir('./docs');
+for(let dir of dirs) {
+    await rmdir(dir);
+}

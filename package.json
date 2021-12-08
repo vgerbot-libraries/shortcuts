@@ -4,7 +4,7 @@
     "description": "",
     "private": true,
     "scripts": {
-        "pretest": "npm run clear",
+        "pretest": "npm run clear -- ./report",
         "test": "lerna exec -- zx ../../scripts/test.mjs",
         "posttest": "zx ./scripts/merge-coverage.mjs",
         "postinstall": "husky install",
@@ -12,8 +12,9 @@
         "commit": "commit",
         "lint": "lerna exec -- eslint {src,__test__}/**/*.{js,ts,tsx}",
         "format": "lerna exec -- eslint --fix {src,__test__}/**/*.{js,ts,tsx}",
-        "prebuild": "npm run clear",
+        "prebuild": "npm run clear -- ./lib",
         "build": "lerna exec -- zx ../../scripts/build.mjs",
+        "pregendoc": "npm run clear -- ./docs",
         "gendoc": "lerna exec -- zx ../../scripts/typedoc.mjs",
         "clear": "lerna exec -- zx ../../scripts/clear.mjs"
     },
