@@ -1,4 +1,4 @@
-import { ShortcutEvent, ShortcutEventImpl } from '../foundation/ShortcutEvent';
+import { ShortcutEventImpl } from '../foundation/ShortcutEvent';
 import { ShortcutEventHandler } from '../foundation/ShortcutEventHandler';
 import { Shortcut } from '../shortcut/Shortcut';
 import { PatternMatcher } from './PatternMatcher';
