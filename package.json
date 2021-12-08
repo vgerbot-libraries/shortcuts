@@ -4,14 +4,18 @@
     "description": "",
     "private": true,
     "scripts": {
-        "test": "lerna exec -- cross-env NODE_ENV=test jest",
+        "pretest": "npm run clear",
+        "test": "lerna exec -- zx ../../scripts/test.mjs",
+        "posttest": "zx ./scripts/merge-coverage.mjs",
         "postinstall": "husky install",
         "release": "standard-version",
         "commit": "commit",
         "lint": "lerna exec -- eslint {src,__test__}/**/*.{js,ts,tsx}",
         "format": "lerna exec -- eslint --fix {src,__test__}/**/*.{js,ts,tsx}",
-        "build": "lerna exec -- cross-env NODE_ENV=production rollup -c ../../scripts/rollup.config.js",
-        "gendoc": "lerna exec -- zx ../../scripts/typedoc.mjs"
+        "prebuild": "npm run clear",
+        "build": "lerna exec -- zx ../../scripts/build.mjs",
+        "gendoc": "lerna exec -- zx ../../scripts/typedoc.mjs",
+        "clear": "lerna exec -- zx ../../scripts/clear.mjs"
     },
     "lint-staged": {
         "{src,test}/**/*.{js,ts,tsx}": [
@@ -21,7 +25,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/y1j2x34/rollup-jest-boilerplate.git"
+        "url": "git+https://github.com/y1j2x34/shortcuts.git"
     },
     "keywords": [],
     "author": "",
@@ -41,6 +45,9 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^4.0.0",
         "husky": "7.0.2",
+        "istanbul-lib-report": "^3.0.0",
+        "istanbul-lib-source-maps": "^4.0.1",
+        "istanbul-reports": "^3.1.1",
         "jest": "^27.3.1",
         "jest-html-reporter": "^3.4.1",
         "lerna": "^4.0.0",
@@ -56,7 +63,7 @@
         "zx": "^4.2.0"
     },
     "bugs": {
-        "url": "https://github.com/y1j2x34/rollup-jest-boilerplate/issues"
+        "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
-    "homepage": "https://github.com/y1j2x34/rollup-jest-boilerplate#readme"
+    "homepage": "https://github.com/y1j2x34/shortcuts#readme"
 }

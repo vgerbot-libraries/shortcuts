@@ -1,5 +1,5 @@
-describe('@shortcuts/core', () => {
+describe('@shortcuts/rxjs', () => {
     it('casual', () => {
         expect(true).toBeTruthy();
     })
-})
+});

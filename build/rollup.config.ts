@@ -8,6 +8,8 @@ import { terser } from 'rollup-plugin-terser';
 
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
 
+const inputFile = path.resolve(process.cwd(), 'src/index.ts');
+
 const outputConfig = [
     [pkg.browser, 'umd'],
     [pkg.module, 'es'],
@@ -16,7 +18,7 @@ const outputConfig = [
 
 const rollupConfig: RollupOptions = {
     output: outputConfig,
-    input: 'src/index.ts',
+    input: inputFile,
     plugins: [
         nodeResolve({
             mainFields: ['main', 'browser', 'jsnext']
