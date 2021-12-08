@@ -5,7 +5,7 @@ async function rmdir(path) {
     if(!exists) {
         return;
     }
-    await fs.rmdir(path, {
+    await fs.rm(path, {
         recursive: true
     });
 }
