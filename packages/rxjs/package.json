@@ -13,6 +13,7 @@
   "main": "lib/index.cjs.js",
   "browser": "lib/index.umd.js",
   "module": "lib/index.es.js",
+  "library": "shortcutrxjs",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

@@ -1,4 +1,4 @@
-import { Shortcut } from '../../src/shortcut/Shortcut';
+import { Shortcut } from '../../src';
 
 describe('@shortcuts/core', () => {
     it('casual', () => {
