@@ -1,8 +1,8 @@
-import { KeyCodeMatcher } from '..';
 import {
     KeyboardEventMatcher,
     KeyboardEventMatcherFn
 } from '../foundation/KeyboardEventMatcher';
+import { KeyCodeMatcher } from '../matchers/KeyCodeMatcher';
 import {
     CaseInsensitiveKeyMatcher,
     CaseSensitiveKeyMatcher
