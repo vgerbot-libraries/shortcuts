@@ -8,6 +8,7 @@
   "main": "lib/index.cjs.js",
   "browser": "lib/index.umd.js",
   "module": "lib/index.es.js",
+  "typings": "lib/index.d.ts",
   "library": "Shortcuts",
   "directories": {
     "lib": "lib",
