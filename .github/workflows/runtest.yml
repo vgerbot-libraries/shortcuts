@@ -30,16 +30,14 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: INSTALL PROJECT DEPENDENCIES (yarn)
-        run: yarn install --frozen-lockfile
+      - name: INSTALL PROJECT DEPENDENCIES
+        run: npm ci
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - name: Running tests
-        run: yarn test
-      - name: Upload coverage data to codecov
-        run: yarn codecov
+        run: npm t
       - name: Upload coverage data to codacy
         uses: codacy/codacy-coverage-reporter-action@master
         with:
