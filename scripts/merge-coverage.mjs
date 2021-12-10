@@ -39,9 +39,16 @@ const context = createContext({
 
 const tree = context.getTree('pkg');
 
-const report = create('cobertura', {
+const cobertura_report = create('cobertura', {
     skipEmpty: false,
     skipFull: false
 });
 
-tree.visit(report, context);
+tree.visit(cobertura_report, context);
+
+const html_report = create('html', {
+    skipEmpty: false,
+    skipFull: false
+});
+
+tree.visit(html_report, context);
