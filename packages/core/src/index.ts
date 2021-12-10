@@ -12,3 +12,4 @@ export * from './shortcut/Shortcut';
 export * from './foundation/ShortcutContext';
 export * from './foundation/ShortcutEvent';
 export * from './foundation/ShortcutEventHandler';
+import './locales/default';
