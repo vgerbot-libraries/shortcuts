@@ -30,12 +30,12 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: INSTALL PROJECT DEPENDENCIES
-        run: lerna bootstrap --hoist --ci
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: INSTALL PROJECT DEPENDENCIES
+        run: lerna bootstrap --hoist --ci
       - name: Running tests
         run: npm t
       - name: Upload coverage data to codacy
