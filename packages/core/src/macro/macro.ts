@@ -1,3 +1,4 @@
+import { KeyCodeMatcher } from '..';
 import {
     KeyboardEventMatcher,
     KeyboardEventMatcherFn
@@ -47,4 +48,8 @@ export function keyMacro(pattern: string, key: string = pattern) {
 }
 export function keyMacro_ins(pattern: string, key: string = pattern) {
     macro(pattern, new CaseInsensitiveKeyMatcher(key));
+}
+
+export function keyCodeMacro(pattern: string, keyCode: number) {
+    return macro(pattern, new KeyCodeMatcher(keyCode));
 }

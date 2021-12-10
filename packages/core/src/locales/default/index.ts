@@ -9,7 +9,13 @@ import {
     versionLe,
     versionLt
 } from '../../common/browser';
-import { alias, keyMacro, keyMacro_ins, macro } from '../../macro/macro';
+import {
+    alias,
+    keyMacro,
+    keyMacro_ins,
+    macro,
+    keyCodeMacro
+} from '../../macro/macro';
 import { KeyCodeMatcher } from '../../matchers/KeyCodeMatcher';
 import { CaseInsensitiveKeyMatcher } from '../../matchers/KeyMatcher';
 import { or } from '../../matchers/or';
@@ -30,6 +36,8 @@ keyMacro_ins('FnLock');
 keyMacro_ins('NumLock');
 keyMacro_ins('Shift');
 
+keyMacro_ins('BrowserHome'); // 0xac
+
 if (isFirefox || isIE9 || isIE11) {
     keyMacro_ins('OS');
     alias('Super', 'OS');
@@ -40,6 +48,19 @@ if (isFirefox || isIE9 || isIE11) {
     keyMacro_ins('Super');
     keyMacro_ins('Hyper');
 }
+
+alias('Command', 'Meta');
+alias('Cmd', 'Meta');
+alias('⌘', 'Meta');
+alias('⌃', 'Ctrl');
+alias('⌥', 'Alt');
+alias('Option', 'Alt');
+alias('⇧', 'Shift');
+keyCodeMacro('LeftCommand', 91);
+keyCodeMacro('RightCommand', 93);
+keyCodeMacro('Pause', 19);
+keyCodeMacro('Break', 19);
+
 if (isIE9 || isIE11) {
     keyMacro_ins('Scroll');
     alias('ScrollLock', 'Scroll');
@@ -57,6 +78,7 @@ keyMacro_ins('SymbolLock');
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values#whitespace_keys
 
 keyMacro_ins('Enter');
+alias('Return', 'Enter');
 keyMacro_ins('Tab');
 
 macro('Space', e => {
@@ -114,7 +136,7 @@ keyMacro_ins('Accept');
 keyMacro_ins('Again');
 
 if (isIE9 || isIE11) {
-    macro('Attn', new KeyCodeMatcher(0xf0));
+    keyCodeMacro('Attn', 0xf0);
 } else {
     keyMacro_ins('Attn');
 }
@@ -136,7 +158,7 @@ if (isIE || (isFirefox && versionLe('36'))) {
 }
 
 if (isIE) {
-    macro('Finish', new KeyCodeMatcher(0xf1));
+    keyCodeMacro('Finish', 0xf1);
 } else if (isFirefox) {
     macro(
         'Finish',
