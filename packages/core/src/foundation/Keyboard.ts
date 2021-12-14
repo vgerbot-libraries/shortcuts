@@ -158,6 +158,9 @@ export class Keyboard {
             this.recordContexts(contexts);
         }
     }
+    getCommandOptions(commandName: string): ParsedCommandOptions | undefined {
+        return this.commands[commandName];
+    }
     switchContext(context: string) {
         const contextOptions = this.contexts[context];
         if (!contextOptions) {
