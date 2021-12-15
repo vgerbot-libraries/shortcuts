@@ -22,18 +22,25 @@ export const Shortcuts: ShortcutsPluginObject = {
         vue: VueConstructor<ShortcutsMixVue>,
         installOptions: ShortcutsVuePluginOptions = {}
     ) => {
-        vue.prototype.keymap = function (extKeymapOptions: KeymapOptions) {
-            let keyboard = this.keyboard as Keyboard;
-            if (!keyboard) {
-                const { anchor, keymap: setupKeymap } = installOptions;
-                const targetAnchor = anchor || this.$el;
-                const tabindex = targetAnchor.tabIndex;
-                if (isNaN(tabindex)) {
-                    targetAnchor.tabIndex = -1;
+        Object.defineProperty(vue.prototype, 'keyboard', {
+            get: function () {
+                if (!this.$keyboard) {
+                    const { anchor, keymap: setupKeymap } = installOptions;
+                    const targetAnchor = anchor || this.$el;
+                    const tabindex = targetAnchor.tabIndex;
+                    if (isNaN(tabindex)) {
+                        targetAnchor.tabIndex = -1;
+                    }
+                    const keyboard = new Keyboard(targetAnchor);
+                    keyboard.keymap(setupKeymap || {});
+                    this.$keyboard = keyboard;
                 }
-                keyboard = new Keyboard(targetAnchor);
-                keyboard.keymap(setupKeymap || {});
+                return this.$keyboard;
             }
+        });
+
+        vue.prototype.keymap = function (extKeymapOptions: KeymapOptions) {
+            const keyboard = this.keyboard as Keyboard;
             keyboard.keymap(extKeymapOptions);
         };
         vue.directive(
