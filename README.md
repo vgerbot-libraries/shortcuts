@@ -242,8 +242,21 @@ The hook takes care of all the binding and unbinding for you. As soon as the com
 #### Vue.js
 
 ```js
+import { DEFAULT_MACRO_REGISTRY, MacroRegistryImpl, macro } from '@shortcuts/core';
 import { Shortcuts } from '@shortcuts/vue';
-Vue.use(Shortcuts);
+
+const myMacroRegistry = new MacroRegistryImpl();
+
+macro('Cm', e => {
+    return e.key === 'Control';
+}, myMacroRegistry);
+
+Vue.use(Shortcuts, {
+    keymap: {
+        undo: 'Cm+Z'
+    },
+    macroRegistry: myMacroRegistry
+});
 
 const vueInstance = new Vue({
     el: '#app'
@@ -278,17 +291,33 @@ You can listen to for shortcut key events through Vue directive.
 ```vue
 <template>
     <div>
-        <button @shortcut="'action1'" @on.click="close"></button>
+        <textarea 
+            v-shortkey:undo.preventDefault="'Ctrl+Z'" 
+            v-shortkey:redo.preventDefault="'Ctrl+Y'" 
+            @undo="undo()"
+            @redo="redo()"
+            @shortkey="undoOrRedo()"
+        ></textarea>
+        <!-- v-shortcut:action1="" is equivalent to v-shortcut:action1="'action1'" -->
+        <textarea 
+            v-shortcut:action1=""
+            v-shortcut:action2="'action2'"
+            @action1="foo()"
+            @action2="bar()"
+            @shortcut="foo(),bar()"
+        ></textarea>
     </div>
 </template>
 <script>
-    import {} from '@shortcuts/vue';
     export default {
         methods:{
-            close() {
+            foo() {
                 //
             },
-            show() {}
+            bar() {},
+            baz() {},
+            undo() {},
+            redo() {}
         }
     }
 </script>
