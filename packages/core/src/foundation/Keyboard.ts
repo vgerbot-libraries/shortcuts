@@ -6,6 +6,7 @@ import {
 } from '../macro/MacroRegistry';
 import { Shortcut } from '../shortcut/Shortcut';
 import { ActivationContextManager } from './ActivationContextManager';
+import { AddShortcutEventOptions } from './AddShortcutEventOptions';
 import { Disposable } from './Disposable';
 import { Interceptor } from './Interceptor';
 import { KeyboardConstructorOptions } from './KeyboardConstructorOptions';
@@ -173,7 +174,10 @@ export class Keyboard {
     on(
         command: string,
         handler: ShortcutEventHandler,
-        type: Opportunity = 'keydown'
+        {
+            type = 'keydown',
+            once = false
+        }: Partial<AddShortcutEventOptions> = {}
     ) {
         if (!this.commands[command]) {
             throw new Error(
@@ -181,15 +185,19 @@ export class Keyboard {
                 `Command has not been registered: ${command}, please make sure that the keymap configuration and the spelling are correct!`
             );
         }
-        return this.eventEmitter.on(command, e => {
+        const remove = this.eventEmitter.on(command, e => {
             if (e.native.type !== type) {
                 return;
             }
             if (this.paused) {
                 return;
             }
+            if (once) {
+                remove();
+            }
             handler(e);
         });
+        return remove;
     }
     pause() {
         this.paused = true;
