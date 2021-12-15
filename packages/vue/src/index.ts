@@ -1,16 +1,21 @@
-import { KeymapOptions, Keyboard } from '@shortcuts/core';
+import { KeymapOptions, Keyboard, MacroRegistry } from '@shortcuts/core';
 import { PluginObject, VueConstructor, PluginFunction } from 'vue';
 
 import { ShortcutsMixVue } from './ShortcutsMixVue';
 
-import { shortcutDirectiveDef } from './shortcut.directive';
+import { createShortcutDirectiveDefinition } from './shortcut.directive';
+import { createShortkeyDirectiveDefinition } from './shortkey.directive';
 
 export type ShortcutsVuePluginOptions = {
     keymap?: KeymapOptions;
     anchor?: GlobalEventHandlers;
+    macroRegistry?: MacroRegistry;
 };
 
 export type ShortcutsPluginObject = PluginObject<ShortcutsVuePluginOptions>;
+
+const SHORTCUT_DIRECTIVE_NAME = 'shortcut';
+const SHORTKEY_DIRECTIVE_NAME = 'shortkey';
 
 export const Shortcuts: ShortcutsPluginObject = {
     install: <PluginFunction<ShortcutsVuePluginOptions>>((
@@ -31,7 +36,19 @@ export const Shortcuts: ShortcutsPluginObject = {
             }
             keyboard.keymap(extKeymapOptions);
         };
-
-        vue.directive('shortcut', shortcutDirectiveDef);
+        vue.directive(
+            SHORTCUT_DIRECTIVE_NAME,
+            createShortcutDirectiveDefinition({
+                directiveName: SHORTCUT_DIRECTIVE_NAME,
+                macroRegistry: installOptions.macroRegistry
+            })
+        );
+        vue.directive(
+            SHORTKEY_DIRECTIVE_NAME,
+            createShortkeyDirectiveDefinition({
+                directiveName: SHORTKEY_DIRECTIVE_NAME,
+                macroRegistry: installOptions.macroRegistry
+            })
+        );
     })
 };

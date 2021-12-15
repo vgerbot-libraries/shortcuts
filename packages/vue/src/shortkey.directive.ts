@@ -1,12 +1,10 @@
-import { Keyboard, ShortcutEvent } from '@shortcuts/core';
-import { DirectiveOptions } from 'vue';
+import { Shortcut, ShortcutEventImpl } from '@shortcuts/core';
 import { DirectiveBinding } from 'vue/types/options';
-import { noop } from './noop';
+import { DirectiveOptions } from 'vue/types/umd';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
-import { ShortcutsMixVue } from './ShortcutsMixVue';
 import { VNodeWithDetach } from './VNodeWithDetach';
 
-export function createShortcutDirectiveDefinition(
+export function createShortkeyDirectiveDefinition(
     directiveOptions: ShortcutDirectiveOptions
 ): DirectiveOptions {
     return {
@@ -46,8 +44,8 @@ function update(
     if (vnode.detach) {
         vnode.detach();
     }
-    const actionName = binding.value || binding.arg;
-    if (typeof actionName !== 'string') {
+    const shortcutKey = binding.value;
+    if (typeof shortcutKey !== 'string') {
         return () => undefined;
     }
     const once = binding.modifiers?.once || false;
@@ -59,41 +57,49 @@ function update(
     const keyup = binding.modifiers.keyup;
     const modKeydown = binding.modifiers.keydown;
     const keydown = modKeydown || keyup || true;
-    const keyboard = (vnode.context as ShortcutsMixVue).keyboard as Keyboard;
-    let removeKeydownEvent = noop;
-    let removeKeyupEvent = noop;
-    const listener = (event: ShortcutEvent) => {
+    const shortcut = Shortcut.from(shortcutKey, directiveOptions.macroRegistry);
+
+    const listener = (event: KeyboardEvent) => {
+        if (!shortcut.match(event)) {
+            return;
+        }
         if (preventDefault) {
             event.preventDefault();
         }
         if (stopPropagation) {
             event.stopPropagation();
         }
+        const shortcutEvent = new ShortcutEventImpl(shortcut, event);
         const customEvent = new CustomEvent(emitEventName, {
-            detail: event
+            detail: shortcutEvent
         });
         vnode.elm?.dispatchEvent(customEvent);
         if (emitEventName !== directiveName) {
             const directiveNameEvent = new CustomEvent(directiveName, {
-                detail: event
+                detail: shortcutEvent
             });
             vnode.elm?.dispatchEvent(directiveNameEvent);
         }
     };
+    const addEventListenerOptions: AddEventListenerOptions = {
+        once
+    };
     if (keydown) {
-        removeKeydownEvent = keyboard.on(actionName, listener, {
-            type: 'keydown',
-            once
-        });
+        el.addEventListener('keydown', listener, addEventListenerOptions);
     }
     if (keyup) {
-        removeKeyupEvent = keyboard.on(actionName, listener, {
-            type: 'keyup',
-            once
-        });
+        el.addEventListener('keyup', listener, addEventListenerOptions);
     }
     return (): void => {
-        removeKeydownEvent();
-        removeKeyupEvent();
+        if (keydown) {
+            el.removeEventListener(
+                'keydown',
+                listener,
+                addEventListenerOptions
+            );
+        }
+        if (keyup) {
+            el.removeEventListener('keyup', listener, addEventListenerOptions);
+        }
     };
 }
