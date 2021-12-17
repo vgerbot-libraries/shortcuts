@@ -1,7 +1,7 @@
 import { MacroRegistry } from '../macro/MacroRegistry';
 
 export interface KeyboardConstructorOptions {
-    anchor?: GlobalEventHandlers;
+    anchor?: EventTarget;
     eventOptions?: AddEventListenerOptions;
     macroRegistry?: MacroRegistry;
 }

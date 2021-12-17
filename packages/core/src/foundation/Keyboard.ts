@@ -28,7 +28,7 @@ export class Keyboard {
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
     private paused: boolean = false;
     private disposor = new Disposable();
-    private anchor: GlobalEventHandlers;
+    private anchor: EventTarget;
     private eventOptions?: AddEventListenerOptions;
     private registry: MacroRegistry;
     constructor(
@@ -44,7 +44,7 @@ export class Keyboard {
         this.registerEvents();
     }
     registerEvents() {
-        const keyboardEventHandler = (e: KeyboardEvent) => {
+        const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
             if (this.paused) {
                 return;
             }
@@ -56,7 +56,7 @@ export class Keyboard {
                     this.handleKeyEvent(e);
                     break;
             }
-        };
+        });
         this.anchor.addEventListener(
             'keydown',
             keyboardEventHandler,
@@ -161,6 +161,12 @@ export class Keyboard {
     }
     getCommandOptions(commandName: string): ParsedCommandOptions | undefined {
         return this.commands[commandName];
+    }
+    getCommands() {
+        return this.commands;
+    }
+    getContexts() {
+        return this.contexts;
     }
     switchContext(context: string) {
         const contextOptions = this.contexts[context];
