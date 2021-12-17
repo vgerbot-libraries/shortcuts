@@ -1,9 +1,8 @@
-import { Keyboard, ShortcutEvent } from '@shortcuts/core';
+import { ShortcutEvent } from '@shortcuts/core';
 import { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
 import { noop } from './noop';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
-import { ShortcutsMixVue } from './ShortcutsMixVue';
 import { VNodeWithDetach } from './VNodeWithDetach';
 
 export function createShortcutDirectiveDefinition(
@@ -48,7 +47,7 @@ function update(
     }
     const actionName = binding.value || binding.arg;
     if (typeof actionName !== 'string') {
-        return () => undefined;
+        return noop;
     }
     const once = binding.modifiers?.once || false;
     const preventDefault = binding.modifiers.preventDefault || false;
@@ -59,7 +58,10 @@ function update(
     const keyup = binding.modifiers.keyup;
     const modKeydown = binding.modifiers.keydown;
     const keydown = modKeydown || keyup || true;
-    const keyboard = (vnode.context as ShortcutsMixVue).keyboard as Keyboard;
+    const keyboard = vnode.context?.keyboard;
+    if (!keyboard) {
+        return noop;
+    }
     let removeKeydownEvent = noop;
     let removeKeyupEvent = noop;
     const listener = (event: ShortcutEvent) => {

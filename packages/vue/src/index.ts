@@ -1,16 +1,11 @@
-import { KeymapOptions, Keyboard, MacroRegistry } from '@shortcuts/core';
-import { PluginObject, VueConstructor, PluginFunction } from 'vue';
-
-import { ShortcutsMixVue } from './ShortcutsMixVue';
+import { Keyboard, KeymapOptions } from '@shortcuts/core';
+import Vue, { PluginObject, VueConstructor, PluginFunction } from 'vue';
+import './types';
 
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
 import { createShortkeyDirectiveDefinition } from './shortkey.directive';
-
-export type ShortcutsVuePluginOptions = {
-    keymap?: KeymapOptions;
-    anchor?: GlobalEventHandlers;
-    macroRegistry?: MacroRegistry;
-};
+import { shortcutRouterMixin } from './shortcutRouterMixin';
+import { ShortcutsVuePluginOptions } from './ShortcutsVuePluginOptions';
 
 export type ShortcutsPluginObject = PluginObject<ShortcutsVuePluginOptions>;
 
@@ -19,38 +14,25 @@ const SHORTKEY_DIRECTIVE_NAME = 'shortkey';
 
 export const Shortcuts: ShortcutsPluginObject = {
     install: <PluginFunction<ShortcutsVuePluginOptions>>((
-        vue: VueConstructor<ShortcutsMixVue>,
+        VueConstr: VueConstructor<Vue>,
         installOptions: ShortcutsVuePluginOptions = {}
     ) => {
-        Object.defineProperty(vue.prototype, 'keyboard', {
-            get: function () {
-                if (!this.$keyboard) {
-                    const { anchor, keymap: setupKeymap } = installOptions;
-                    const targetAnchor = anchor || this.$el;
-                    const tabindex = targetAnchor.tabIndex;
-                    if (isNaN(tabindex)) {
-                        targetAnchor.tabIndex = -1;
-                    }
-                    const keyboard = new Keyboard(targetAnchor);
-                    keyboard.keymap(setupKeymap || {});
-                    this.$keyboard = keyboard;
-                }
-                return this.$keyboard;
-            }
-        });
+        VueConstr.mixin(shortcutRouterMixin(VueConstr, installOptions));
 
-        vue.prototype.keymap = function (extKeymapOptions: KeymapOptions) {
+        VueConstr.prototype.keymap = function (
+            extKeymapOptions: KeymapOptions
+        ) {
             const keyboard = this.keyboard as Keyboard;
             keyboard.keymap(extKeymapOptions);
         };
-        vue.directive(
+        VueConstr.directive(
             SHORTCUT_DIRECTIVE_NAME,
             createShortcutDirectiveDefinition({
                 directiveName: SHORTCUT_DIRECTIVE_NAME,
                 macroRegistry: installOptions.macroRegistry
             })
         );
-        vue.directive(
+        VueConstr.directive(
             SHORTKEY_DIRECTIVE_NAME,
             createShortkeyDirectiveDefinition({
                 directiveName: SHORTKEY_DIRECTIVE_NAME,
