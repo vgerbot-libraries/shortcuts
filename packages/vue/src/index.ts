@@ -1,4 +1,4 @@
-import { Keyboard, KeymapOptions } from '@shortcuts/core';
+import { Keyboard, KeymapOptions, macro } from '@shortcuts/core';
 import Vue, { PluginObject, VueConstructor, PluginFunction } from 'vue';
 import './types';
 
@@ -25,6 +25,15 @@ export const Shortcuts: ShortcutsPluginObject = {
             const keyboard = this.keyboard as Keyboard;
             keyboard.keymap(extKeymapOptions);
         };
+        VueConstr.prototype.macro = <typeof macro>(
+            function (pattern, shortcutKey, registry) {
+                return macro(
+                    pattern,
+                    shortcutKey,
+                    registry || installOptions.macroRegistry
+                );
+            }
+        );
         VueConstr.directive(
             SHORTCUT_DIRECTIVE_NAME,
             createShortcutDirectiveDefinition({
