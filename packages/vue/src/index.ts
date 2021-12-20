@@ -5,19 +5,19 @@ import './types';
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
 import { createShortkeyDirectiveDefinition } from './shortkey.directive';
 import { shortcutRouterMixin } from './shortcutRouterMixin';
-import { ShortcutsVuePluginOptions } from './ShortcutsVuePluginOptions';
+import { PluginOptions } from './PluginOptions';
 
-export type ShortcutsPluginObject = PluginObject<ShortcutsVuePluginOptions>;
+export type ShortcutsPluginObject = PluginObject<PluginOptions>;
 
 const SHORTCUT_DIRECTIVE_NAME = 'shortcut';
 const SHORTKEY_DIRECTIVE_NAME = 'shortkey';
 
 export const Shortcuts: ShortcutsPluginObject = {
-    install: <PluginFunction<ShortcutsVuePluginOptions>>((
+    install: <PluginFunction<PluginOptions>>((
         VueConstr: VueConstructor<Vue>,
-        installOptions: ShortcutsVuePluginOptions = {}
+        pluginOptions: PluginOptions = {}
     ) => {
-        VueConstr.mixin(shortcutRouterMixin(VueConstr, installOptions));
+        VueConstr.mixin(shortcutRouterMixin(VueConstr, pluginOptions));
 
         VueConstr.prototype.keymap = function (
             extKeymapOptions: KeymapOptions
@@ -30,7 +30,7 @@ export const Shortcuts: ShortcutsPluginObject = {
                 return macro(
                     pattern,
                     shortcutKey,
-                    registry || installOptions.macroRegistry
+                    registry || pluginOptions.macroRegistry
                 );
             }
         );
@@ -38,14 +38,14 @@ export const Shortcuts: ShortcutsPluginObject = {
             SHORTCUT_DIRECTIVE_NAME,
             createShortcutDirectiveDefinition({
                 directiveName: SHORTCUT_DIRECTIVE_NAME,
-                macroRegistry: installOptions.macroRegistry
+                macroRegistry: pluginOptions.macroRegistry
             })
         );
         VueConstr.directive(
             SHORTKEY_DIRECTIVE_NAME,
             createShortkeyDirectiveDefinition({
                 directiveName: SHORTKEY_DIRECTIVE_NAME,
-                macroRegistry: installOptions.macroRegistry
+                macroRegistry: pluginOptions.macroRegistry
             })
         );
     })

@@ -1,11 +1,11 @@
 import { Keyboard } from '@shortcuts/core';
 import { ComponentOptions, VueConstructor } from 'vue';
-import { ShortcutsVuePluginOptions } from './ShortcutsVuePluginOptions';
+import { PluginOptions } from './PluginOptions';
 import { noop } from './noop';
 
 export function shortcutRouterMixin(
     VueConstr: VueConstructor<Vue>,
-    installOptions: ShortcutsVuePluginOptions = {}
+    installOptions: PluginOptions = {}
 ): ComponentOptions<Vue> {
     return {
         created(this: Vue) {
@@ -36,10 +36,7 @@ export function shortcutRouterMixin(
     };
 }
 
-function createKeyboardInstance(
-    vue: Vue,
-    installOptions: ShortcutsVuePluginOptions
-) {
+function createKeyboardInstance(vue: Vue, installOptions: PluginOptions) {
     const { anchor, keymap: setupKeymap } = installOptions;
     const targetAnchor = anchor || vue.$el;
     if (
