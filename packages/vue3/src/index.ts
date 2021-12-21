@@ -1,5 +1,7 @@
 import { Keyboard } from '@shortcuts/core';
 import { Plugin } from 'vue';
+import { useRouter } from 'vue-router';
+import { noop } from './noop';
 import { PluginOptions } from './PluginOptions';
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
 import { createShortkeyDirectiveDefinition } from './shortcytkey.directive';
@@ -48,5 +50,26 @@ export const Shortcuts: Plugin = {
                 macroRegistry: options.macroRegistry
             })
         );
+        app.mixin({
+            setup() {
+                const router = useRouter();
+                let unbind = noop;
+                const keyboard = app.keyboard;
+                router.afterEach(to => {
+                    const contexts = keyboard.getContexts();
+                    loop: for (const name in contexts) {
+                        const { routerNameOrPath } = contexts[name];
+                        switch (routerNameOrPath) {
+                            case to.name:
+                            case to.path:
+                            case to.fullPath:
+                                unbind();
+                                unbind = keyboard.switchContext(name);
+                                break loop;
+                        }
+                    }
+                });
+            }
+        });
     }
 };
