@@ -105,7 +105,7 @@ dist
 
 report
 
-lib
+packages/*/lib
 
 docs
 
