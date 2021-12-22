@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "47c8d58c-e9a2-49b5-b3e9-b54ef14dcc88"
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "shortcuts": {
+      "projectType": "library",
+      "root": "projects/shortcuts",
+      "sourceRoot": "projects/shortcuts/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/shortcuts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/shortcuts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/shortcuts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shortcuts/src/test.ts",
+            "tsConfig": "projects/shortcuts/tsconfig.spec.json",
+            "karmaConfig": "projects/shortcuts/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "shortcuts"
+}
