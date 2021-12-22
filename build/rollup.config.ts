@@ -14,7 +14,9 @@ const outputConfig = [
     [pkg.browser, 'umd'],
     [pkg.module, 'es'],
     [pkg.main, 'cjs']
-].map(confs => createOutputConfig(confs[0], confs[1]));
+]
+    .filter(([type]) => !!type)
+    .map(confs => createOutputConfig(confs[0], confs[1]));
 
 const rollupConfig: RollupOptions = {
     output: outputConfig,
