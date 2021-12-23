@@ -23,9 +23,8 @@
         "clear": "lerna exec -- zx ../../scripts/clear.mjs"
     },
     "lint-staged": {
-        "{src,test}/**/*.{js,ts,tsx}": [
-            "npm run format",
-            "git add"
+        "*.{mjs,js,ts,tsx}": [
+            "npm run format"
         ]
     },
     "repository": {
