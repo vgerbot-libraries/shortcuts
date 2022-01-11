@@ -7,5 +7,5 @@ export async function runLint(argv = '') {
 
     await $`lerna exec --scope=@shortcuts/angular-root -- eslint  ${argv} projects/**/*.ts`;
 
-    await $`lerna exec -- eslint  ${argv} {src,__test__}/**/*.ts`;
+    await $`lerna exec --ignore @shortcuts/angular-root -- eslint  ${argv} {src,__test__}/**/*.ts`;
 }

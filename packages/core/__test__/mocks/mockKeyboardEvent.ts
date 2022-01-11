@@ -2,7 +2,7 @@ export function mockKeyboardEvent(
     type: 'keydown' | 'keyup',
     options?: KeyboardEventInit
 ) {
-    const event = new KeyboardEvent(type, options);
+    const event = new global.KeyboardEvent(type, options);
     jest.spyOn(event, 'getModifierState').mockImplementation(modifier => {
         switch (modifier) {
             case 'Alt':
