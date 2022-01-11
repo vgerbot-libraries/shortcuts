@@ -22,11 +22,14 @@ export function macro(
             break;
         case 'function':
             macroMatcher = {
-                match: shortcutKey
+                match: shortcutKey,
+                str() {
+                    return pattern;
+                }
             };
             break;
         default:
-            macroMatcher = shortcutKey;
+            macroMatcher = wrap(pattern, shortcutKey);
     }
     registry.register(pattern, macroMatcher);
 }
@@ -46,10 +49,36 @@ export function alias(
 export function keyMacro(pattern: string, key: string = pattern) {
     macro(pattern, new CaseSensitiveKeyMatcher(key));
 }
+
 export function keyMacro_ins(pattern: string, key: string = pattern) {
     macro(pattern, new CaseInsensitiveKeyMatcher(key));
 }
 
 export function keyCodeMacro(pattern: string, keyCode: number) {
     return macro(pattern, new KeyCodeMatcher(keyCode));
+}
+
+function wrap(macroPattern: string, shortcutMatcher: KeyboardEventMatcher) {
+    if (shortcutMatcher.str() === macroPattern) {
+        return shortcutMatcher;
+    }
+    if (shortcutMatcher instanceof MacroWrappedMatcher) {
+        return new MacroWrappedMatcher(macroPattern, shortcutMatcher.origin);
+    }
+    return new MacroWrappedMatcher(macroPattern, shortcutMatcher);
+}
+
+class MacroWrappedMatcher implements KeyboardEventMatcher {
+    constructor(
+        private readonly macroPattern: string,
+        readonly origin: KeyboardEventMatcher
+    ) {}
+
+    match(event: KeyboardEvent): boolean {
+        return this.origin.match(event);
+    }
+
+    str(): string {
+        return this.macroPattern;
+    }
 }
