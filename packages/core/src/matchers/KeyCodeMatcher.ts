@@ -5,4 +5,8 @@ export class KeyCodeMatcher implements KeyboardEventMatcher {
     match(event: KeyboardEvent): boolean {
         return event.keyCode === this.keyCode;
     }
+
+    str(): string {
+        return '';
+    }
 }

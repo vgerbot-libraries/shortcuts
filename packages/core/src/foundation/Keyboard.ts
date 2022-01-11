@@ -26,11 +26,12 @@ export class Keyboard {
     private readonly contexts: Record<string, FullContextOptions> = {};
     private readonly activationContextManager = new ActivationContextManager();
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
+    private readonly partMatchEventEmitter = new EventEmitter<Shortcut>();
     private paused: boolean = false;
-    private disposor = new Disposable();
+    private disposer = new Disposable();
     private anchor: EventTarget;
-    private eventOptions?: AddEventListenerOptions;
-    private registry: MacroRegistry;
+    private readonly eventOptions?: AddEventListenerOptions;
+    private readonly registry: MacroRegistry;
     constructor(
         options: KeyboardConstructorOptions = {
             anchor: document
@@ -43,15 +44,13 @@ export class Keyboard {
         );
         this.registerEvents();
     }
-    registerEvents() {
+    private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
             if (this.paused) {
                 return;
             }
             switch (e.type) {
                 case 'keydown':
-                    this.handleKeyEvent(e);
-                    break;
                 case 'keyup':
                     this.handleKeyEvent(e);
                     break;
@@ -67,7 +66,7 @@ export class Keyboard {
             keyboardEventHandler,
             this.eventOptions
         );
-        this.disposor.record(() => {
+        this.disposer.record(() => {
             this.anchor.removeEventListener(
                 'keydown',
                 keyboardEventHandler,
@@ -85,7 +84,6 @@ export class Keyboard {
         if (currentContext === undefined) {
             return;
         }
-        // TODO: supports fallbacks
         const commands = this.commandsOf(currentContext);
         if (commands.length === 0) {
             return;
@@ -97,7 +95,10 @@ export class Keyboard {
                 return;
             }
             if (shortcut.match(e)) {
-                this.executeCommand(e, it, opt);
+                this.partMatchEventEmitter.emit('change', shortcut);
+                if (shortcut.isFullMatch()) {
+                    this.executeCommand(e, it, opt);
+                }
             }
         });
     }
@@ -205,6 +206,9 @@ export class Keyboard {
         });
         return remove;
     }
+    onPartMatchChange(callback: (shortcut: Shortcut) => void) {
+        return this.partMatchEventEmitter.on('change', callback);
+    }
     pause() {
         this.paused = true;
     }
@@ -212,7 +216,7 @@ export class Keyboard {
         this.paused = false;
     }
     destroy() {
-        this.disposor.destroy();
+        this.disposer.destroy();
     }
     private recordCommands(commands: Record<string, CommandOptions | string>) {
         for (const commandName in commands) {

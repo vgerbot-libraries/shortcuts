@@ -16,35 +16,39 @@ import {
     macro,
     keyCodeMacro
 } from '../../macro/macro';
+import { AltKeyMatcher } from '../../matchers/AltKeyMatcher';
+import { CtrlKeyMatcher } from '../../matchers/CtrlKeyMatcher';
 import { KeyCodeMatcher } from '../../matchers/KeyCodeMatcher';
 import { CaseInsensitiveKeyMatcher } from '../../matchers/KeyMatcher';
+import { MetaKeyMatcher } from '../../matchers/MetaKeyMatcher';
 import { or } from '../../matchers/or';
+import { ShiftKeyMatcher } from '../../matchers/ShiftKeyMatcher';
 
 // Modifire keys
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values#modifier_keys
 
-keyMacro_ins('Alt');
+macro('Alt', new AltKeyMatcher());
 keyMacro_ins('AltGraph');
 alias('AltGr', 'AltGraph');
 keyMacro_ins('CapsLock');
-keyMacro_ins('Control');
+macro('Control', new CtrlKeyMatcher());
 alias('Ctrl', 'Control');
 alias('Ctl', 'Control');
 keyMacro_ins('CapsLock');
 keyMacro_ins('Fn');
 keyMacro_ins('FnLock');
 keyMacro_ins('NumLock');
-keyMacro_ins('Shift');
+macro('Shift', new ShiftKeyMatcher());
 
 keyMacro_ins('BrowserHome'); // 0xac
 
 if (isFirefox || isIE9 || isIE11) {
-    keyMacro_ins('OS');
+    macro('OS', new MetaKeyMatcher('OS'));
     alias('Super', 'OS');
     alias('Hyper', 'OS');
     alias('Meta', 'OS');
 } else {
-    keyMacro_ins('Meta');
+    macro('Meta', new MetaKeyMatcher('Meta'));
     keyMacro_ins('Super');
     keyMacro_ins('Hyper');
 }

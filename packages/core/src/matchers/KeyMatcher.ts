@@ -11,6 +11,10 @@ class KeyMatcher implements KeyboardEventMatcher {
         }
         return event.key.toLowerCase() === this.key;
     }
+
+    str(): string {
+        return this.key;
+    }
 }
 export class CaseInsensitiveKeyMatcher extends KeyMatcher {
     constructor(key: string) {
