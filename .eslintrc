@@ -7,7 +7,7 @@
             "jsx": true,
             "impliedStrict": true
         },
-        "project": ["./tsconfig.json", "test/tsconfig.json"]
+        "project": ["./tsconfig.json", "__test__/tsconfig.json"]
     },
     "extends": [
         "plugin:@typescript-eslint/recommended", //  Use the recommended rules from the @typescript-eslint/eslint-plugin
