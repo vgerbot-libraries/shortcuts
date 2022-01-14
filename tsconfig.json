@@ -23,5 +23,5 @@
             "src/types"
         ]
     },
-    "exclude": ["**/__tests__", "node_modules"]
+    "exclude": ["**/__test__", "node_modules"]
 }
