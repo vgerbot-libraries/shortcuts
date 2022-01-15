@@ -5,7 +5,7 @@ import {
 
 export function or(
     ...matchers: Array<KeyboardEventMatcher | KeyboardEventMatcherFn>
-) {
+): KeyboardEventMatcherFn {
     return (keyboardEvent: KeyboardEvent) => {
         return matchers.some(it => {
             if (typeof it === 'function') {

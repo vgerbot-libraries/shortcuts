@@ -4,5 +4,4 @@ export interface KeyboardEventMatcher {
 }
 export interface KeyboardEventMatcherFn {
     (event: KeyboardEvent): boolean;
-    str(): string;
 }

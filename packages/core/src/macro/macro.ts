@@ -9,6 +9,7 @@ import {
 } from '../matchers/KeyMatcher';
 import { Shortcut } from '../shortcut/Shortcut';
 import { DEFAULT_MACRO_REGISTRY, MacroRegistry } from './MacroRegistry';
+import { MacroKeyboardEventMatcher } from './MacroKeyboardEventMatcher';
 
 export function macro(
     pattern: string,
@@ -62,23 +63,11 @@ function wrap(macroPattern: string, shortcutMatcher: KeyboardEventMatcher) {
     if (shortcutMatcher.str() === macroPattern) {
         return shortcutMatcher;
     }
-    if (shortcutMatcher instanceof MacroWrappedMatcher) {
-        return new MacroWrappedMatcher(macroPattern, shortcutMatcher.origin);
+    if (shortcutMatcher instanceof MacroKeyboardEventMatcher) {
+        return new MacroKeyboardEventMatcher(
+            macroPattern,
+            shortcutMatcher.origin
+        );
     }
-    return new MacroWrappedMatcher(macroPattern, shortcutMatcher);
-}
-
-class MacroWrappedMatcher implements KeyboardEventMatcher {
-    constructor(
-        private readonly macroPattern: string,
-        readonly origin: KeyboardEventMatcher
-    ) {}
-
-    match(event: KeyboardEvent): boolean {
-        return this.origin.match(event);
-    }
-
-    str(): string {
-        return this.macroPattern;
-    }
+    return new MacroKeyboardEventMatcher(macroPattern, shortcutMatcher);
 }

@@ -1,4 +1,4 @@
-import { Shortcut } from '../../src/shortcut/Shortcut';
+import { Shortcut } from '../../src';
 import '../../src/locales/default';
 import { mockKeyboardEvent } from '../mocks/mockKeyboardEvent';
 
@@ -21,9 +21,13 @@ describe('@shortcuts/core Shortcut', () => {
         const event2 = mockKeyboardEvent('keydown', {
             key: 'V'
         });
-        expect(shortcut.match(event1)).toBeFalsy();
-        expect(shortcut.match(event2)).toBeTruthy();
-
-        expect(shortcut.match(event1)).toBeFalsy();
+        for (let i = 0; i < 2; i++) {
+            expect(shortcut.match(event1)).toBeTruthy();
+            expect(shortcut.isPartMatch()).toBeTruthy();
+            expect(shortcut.isFullMatch()).toBeFalsy();
+            expect(shortcut.match(event2)).toBeTruthy();
+            expect(shortcut.isPartMatch()).toBeFalsy();
+            expect(shortcut.isFullMatch()).toBeTruthy();
+        }
     });
 });

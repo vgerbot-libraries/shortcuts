@@ -5,6 +5,7 @@ import { CtrlKeyMatcher } from '../matchers/CtrlKeyMatcher';
 import { AltKeyMatcher } from '../matchers/AltKeyMatcher';
 import { ShiftKeyMatcher } from '../matchers/ShiftKeyMatcher';
 import { MetaKeyMatcher } from '../matchers/MetaKeyMatcher';
+import { MacroKeyboardEventMatcher } from '../macro/MacroKeyboardEventMatcher';
 
 export class Shortcut implements KeyboardEventMatcher {
     static keyDeliminator: string = '+';
@@ -23,7 +24,7 @@ export class Shortcut implements KeyboardEventMatcher {
         );
     }
     private matchTimes: number = 0;
-    private parts: ShortcutPart[];
+    private readonly parts: ShortcutPart[];
     private constructor(matchers: KeyboardEventMatcher[][]) {
         this.parts = matchers.map(it => new ShortcutPart(it));
     }
@@ -45,7 +46,7 @@ export class Shortcut implements KeyboardEventMatcher {
         this.matchTimes = 0;
     }
     isPartMatch() {
-        return this.matchTimes > 0;
+        return this.matchTimes != this.parts.length;
     }
     isFullMatch() {
         return this.matchTimes === this.parts.length;
@@ -66,9 +67,12 @@ class ShortcutPart {
     private shift: boolean = false;
     private alt: boolean = false;
     private meta: boolean = false;
-    private matchers: KeyboardEventMatcher[];
-    constructor(matchers: KeyboardEventMatcher[]) {
-        this.matchers = matchers.filter(matcher => {
+    private readonly matchersWithoutModifiers: KeyboardEventMatcher[];
+    constructor(private readonly allMatchers: KeyboardEventMatcher[]) {
+        this.matchersWithoutModifiers = allMatchers.filter(matcher => {
+            if (matcher instanceof MacroKeyboardEventMatcher) {
+                matcher = matcher.origin;
+            }
             if (matcher instanceof CtrlKeyMatcher) {
                 this.ctrl = true;
                 return false;
@@ -98,9 +102,11 @@ class ShortcutPart {
         if (this.meta && !event.metaKey) {
             return false;
         }
-        return this.matchers.every(matcher => matcher.match(event));
+        return this.matchersWithoutModifiers.every(matcher =>
+            matcher.match(event)
+        );
     }
     str() {
-        return this.matchers.map(it => it.str());
+        return this.allMatchers.map(it => it.str());
     }
 }
