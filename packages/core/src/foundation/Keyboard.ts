@@ -20,18 +20,20 @@ import {
 } from './Keymap';
 import { ShortcutEvent, ShortcutEventImpl } from './ShortcutEvent';
 import { ShortcutEventHandler } from './ShortcutEventHandler';
+import { Store } from './Store';
 
 export class Keyboard {
     private readonly commands: Record<string, ParsedCommandOptions> = {};
     private readonly contexts: Record<string, FullContextOptions> = {};
     private readonly activationContextManager = new ActivationContextManager();
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
-    private readonly partMatchEventEmitter = new EventEmitter<Shortcut>();
     private paused: boolean = false;
-    private disposer = new Disposable();
+    private destroyer = new Disposable();
     private anchor: EventTarget;
     private readonly eventOptions?: AddEventListenerOptions;
     private readonly registry: MacroRegistry;
+    private readonly partMatchShortcutsStore: Store<Set<Shortcut>> =
+        new Store();
     constructor(
         options: KeyboardConstructorOptions = {
             anchor: document
@@ -42,7 +44,17 @@ export class Keyboard {
         this.registry = new MacroRegistryImpl(
             options.macroRegistry || DEFAULT_MACRO_REGISTRY
         );
+        this.partMatchShortcutsStore.dispatch(new Set<Shortcut>());
         this.registerEvents();
+    }
+    public getPartMatchShortcuts() {
+        return Array.from(this._getPartMatchShortcuts());
+    }
+    public resetAll() {
+        const shortcuts = this._getPartMatchShortcuts();
+        shortcuts.forEach(it => it.reset());
+        shortcuts.clear();
+        this.partMatchShortcutsStore.dispatch(shortcuts);
     }
     private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
@@ -66,7 +78,7 @@ export class Keyboard {
             keyboardEventHandler,
             this.eventOptions
         );
-        this.disposer.record(() => {
+        this.destroyer.record(() => {
             this.anchor.removeEventListener(
                 'keydown',
                 keyboardEventHandler,
@@ -88,6 +100,8 @@ export class Keyboard {
         if (commands.length === 0) {
             return;
         }
+        const shortcuts = this._getPartMatchShortcuts();
+        const sizeBeforeMatch = shortcuts.size;
         commands.forEach(it => {
             const opt = this.commands[it];
             const shortcut = opt?.shortcut;
@@ -95,12 +109,20 @@ export class Keyboard {
                 return;
             }
             if (shortcut.match(e)) {
-                this.partMatchEventEmitter.emit('change', shortcut);
                 if (shortcut.isFullMatch()) {
+                    shortcuts.delete(shortcut);
                     this.executeCommand(e, it, opt);
+                } else {
+                    shortcuts.add(shortcut);
                 }
+            } else {
+                shortcuts.delete(shortcut);
             }
         });
+        const haseChanged = shortcuts.size - sizeBeforeMatch !== 0;
+        if (haseChanged) {
+            this.partMatchShortcutsStore.dispatch(shortcuts);
+        }
     }
     private commandsOf(context: string): string[] {
         const fallbackContexts: FullContextOptions[] = [];
@@ -149,6 +171,14 @@ export class Keyboard {
         );
         const shortcutEvent = new ShortcutEventImpl(commandOptions.shortcut, e);
         runner(shortcutEvent);
+    }
+    private _getPartMatchShortcuts() {
+        return this.partMatchShortcutsStore.getData() as Set<Shortcut>;
+    }
+    onMatchPartChange(callback: (shortcuts: Set<Shortcut>) => void) {
+        return this.partMatchShortcutsStore.subscribe(shortcuts => {
+            callback(shortcuts as Set<Shortcut>);
+        });
     }
     keymap(keymapOptions: KeymapOptions) {
         const commands = keymapOptions.commands;
@@ -206,9 +236,6 @@ export class Keyboard {
         });
         return remove;
     }
-    onPartMatchChange(callback: (shortcut: Shortcut) => void) {
-        return this.partMatchEventEmitter.on('change', callback);
-    }
     pause() {
         this.paused = true;
     }
@@ -216,7 +243,7 @@ export class Keyboard {
         this.paused = false;
     }
     destroy() {
-        this.disposer.destroy();
+        this.destroyer.destroy();
     }
     private recordCommands(commands: Record<string, CommandOptions | string>) {
         for (const commandName in commands) {
