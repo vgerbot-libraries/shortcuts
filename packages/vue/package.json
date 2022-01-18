@@ -29,7 +29,6 @@
     "url": "git+https://github.com/y1j2x34/shortcuts.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/y1j2x34/shortcuts/issues"
