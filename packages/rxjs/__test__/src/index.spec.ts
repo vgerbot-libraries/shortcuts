@@ -1,4 +1,4 @@
-import { fromShortcutEvent, shortcut } from '../../src';
+import { fromShortcutKeyEvent, shortcut } from '../../src';
 import { mockKeyboardEvent } from '@shortcuts/core/__test__/mocks/mockKeyboardEvent';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { take } from 'rxjs/operators';
@@ -17,9 +17,11 @@ describe('@shortcuts/rxjs', () => {
         await promise;
     });
     it('fromShortcutEvent should work correctly', async () => {
-        const promise = fromShortcutEvent(document.body, 'Enter')
+        const promise = fromShortcutKeyEvent(document.body, 'Enter')
             .pipe(take(1))
             .toPromise();
+
+        document.body.onkeydown = console.log;
 
         document.body.dispatchEvent(event);
 
@@ -28,7 +30,7 @@ describe('@shortcuts/rxjs', () => {
     it('fromShortcutEvent selector should be called', async () => {
         const selector = jest.fn().mockReturnValue(event);
 
-        const promise = fromShortcutEvent(
+        const promise = fromShortcutKeyEvent(
             document.body,
             'Enter',
             'keydown',
