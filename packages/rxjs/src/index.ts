@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
-import { Shortcut } from '@shortcuts/core';
+import { Shortcut, Keyboard } from '@shortcuts/core';
 import {
     EventTargetLike,
     SelectorMethodSignature
 } from 'rxjs/observable/FromEventObservable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
+import { AddShortcutEventOptions } from '@shortcuts/core/lib/foundation/AddShortcutEventOptions';
 
 export function shortcut(shortcutKey: string) {
     const shortcutMatcher = Shortcut.from(shortcutKey);
@@ -27,7 +28,7 @@ export function shortcut(shortcutKey: string) {
     };
 }
 
-export function fromShortcutEvent<T>(
+export function fromShortcutKeyEvent<T>(
     target: EventTargetLike,
     shortcutKey: string,
     eventName: 'keydown' | 'keyup' = 'keydown',
@@ -40,4 +41,22 @@ export function fromShortcutEvent<T>(
         );
     }
     return fromEvent<T>(target, eventName, options).pipe(shortcut(shortcutKey));
+}
+export function fromShortcutEvent(
+    keyboard: Keyboard,
+    command: string,
+    options: Partial<AddShortcutEventOptions> = {}
+) {
+    return new Observable(subscriber => {
+        return keyboard.on(
+            command,
+            event => {
+                subscriber.next(event);
+                if (options.once) {
+                    subscriber.complete();
+                }
+            },
+            options
+        );
+    });
 }
