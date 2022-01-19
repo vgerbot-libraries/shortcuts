@@ -212,12 +212,44 @@ keyboard.keymap({
 #### Rxjs
 
 ```js
-import { shortcut } from '@shortcuts/rxjs';
+import { shortcut, fromShortcutKeyEvent } from '@shortcuts/rxjs';
 import { fromEvent } from 'rxjs';
 
 fromEvent(document.body, 'keydown')
 .pipe(shortcut('Ctrl+A'))
 .subscribe(e => console.log('Ctrl+A'))
+
+// Equivalent to：
+
+fromShortcutKeyEvent(
+    document.body, 'Ctrl+A',
+).subscribe(e => console.log('Ctrl+A'))
+
+```
+
+Subscribe shortcut event from Keyboard:
+
+```ts
+import { fromShortcut } from '@shortcuts/rxjs';
+import { Keyboard, ShortcutEvent } from '@shortcuts/core';
+
+const keyboard = new Keyboard();
+
+keyboard.keymap({
+    commands: {
+        selectAll: 'Mod+A'
+    },
+    contexts: {
+        default: {
+            commands: ['selectAll']
+        }
+    }
+})
+
+fromShortcutEvent(keyboard, 'selectAll')
+    .subscribe((event: ShortcutEvent) => {
+        console.log('select all', event);
+    })
 ```
 
 #### React.js
