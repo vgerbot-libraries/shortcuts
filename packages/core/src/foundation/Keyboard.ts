@@ -32,7 +32,7 @@ export class Keyboard {
     private anchor: EventTarget;
     private readonly eventOptions?: AddEventListenerOptions;
     private readonly registry: MacroRegistry;
-    private readonly partMatchShortcutsStore: Store<Set<Shortcut>> =
+    private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
     constructor(
         options: KeyboardConstructorOptions = {
@@ -44,17 +44,17 @@ export class Keyboard {
         this.registry = new MacroRegistryImpl(
             options.macroRegistry || DEFAULT_MACRO_REGISTRY
         );
-        this.partMatchShortcutsStore.dispatch(new Set<Shortcut>());
+        this.partiallyMatchShortcutsStore.dispatch(new Set<Shortcut>());
         this.registerEvents();
     }
     public getPartMatchShortcuts() {
-        return Array.from(this._getPartMatchShortcuts());
+        return Array.from(this._getPartiallyMatchShortcuts());
     }
     public resetAll() {
-        const shortcuts = this._getPartMatchShortcuts();
+        const shortcuts = this._getPartiallyMatchShortcuts();
         shortcuts.forEach(it => it.reset());
         shortcuts.clear();
-        this.partMatchShortcutsStore.dispatch(shortcuts);
+        this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
     private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
@@ -100,7 +100,7 @@ export class Keyboard {
         if (commands.length === 0) {
             return;
         }
-        const shortcuts = this._getPartMatchShortcuts();
+        const shortcuts = this._getPartiallyMatchShortcuts();
         const sizeBeforeMatch = shortcuts.size;
         commands.forEach(it => {
             const opt = this.commands[it];
@@ -121,7 +121,7 @@ export class Keyboard {
         });
         const haseChanged = shortcuts.size != sizeBeforeMatch;
         if (haseChanged) {
-            this.partMatchShortcutsStore.dispatch(shortcuts);
+            this.partiallyMatchShortcutsStore.dispatch(shortcuts);
         }
     }
     private commandsOf(context: string): string[] {
@@ -172,11 +172,11 @@ export class Keyboard {
         const shortcutEvent = new ShortcutEventImpl(commandOptions.shortcut, e);
         runner(shortcutEvent);
     }
-    private _getPartMatchShortcuts() {
-        return this.partMatchShortcutsStore.getData() as Set<Shortcut>;
+    private _getPartiallyMatchShortcuts() {
+        return this.partiallyMatchShortcutsStore.getData() as Set<Shortcut>;
     }
     onMatchPartChange(callback: (shortcuts: Set<Shortcut>) => void) {
-        return this.partMatchShortcutsStore.subscribe(shortcuts => {
+        return this.partiallyMatchShortcutsStore.subscribe(shortcuts => {
             callback(shortcuts as Set<Shortcut>);
         });
     }

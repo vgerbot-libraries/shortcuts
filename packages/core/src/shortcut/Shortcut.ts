@@ -54,7 +54,7 @@ export class Shortcut implements KeyboardEventMatcher {
     str() {
         return this.parts.map(it => it.str).join(Shortcut.comboDeliminator);
     }
-    matchPartStr() {
+    partiallyMatchesStr() {
         return this.parts
             .slice(0, this.matchTimes)
             .map(it => it.str())
