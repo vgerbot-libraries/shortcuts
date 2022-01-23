@@ -119,7 +119,7 @@ export class Keyboard {
                 shortcuts.delete(shortcut);
             }
         });
-        const haseChanged = shortcuts.size - sizeBeforeMatch !== 0;
+        const haseChanged = shortcuts.size != sizeBeforeMatch;
         if (haseChanged) {
             this.partMatchShortcutsStore.dispatch(shortcuts);
         }

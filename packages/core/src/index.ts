@@ -12,4 +12,6 @@ export * from './shortcut/Shortcut';
 export * from './foundation/ShortcutContext';
 export * from './foundation/ShortcutEvent';
 export * from './foundation/ShortcutEventHandler';
+export * from './common/combine';
+export * from './common/addKeyboardEventListener';
 import './locales/default';
