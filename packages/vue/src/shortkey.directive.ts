@@ -1,4 +1,10 @@
-import { Shortcut, ShortcutEventImpl } from '@shortcuts/core';
+import {
+    Shortcut,
+    ShortcutEventImpl,
+    addKeydownEventListener,
+    addKeyupEventListener,
+    combine
+} from '@shortcuts/core';
 import { DirectiveBinding } from 'vue/types/options';
 import { DirectiveOptions } from 'vue/types/umd';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
@@ -84,22 +90,9 @@ function update(
     const addEventListenerOptions: AddEventListenerOptions = {
         once
     };
-    if (keydown) {
-        el.addEventListener('keydown', listener, addEventListenerOptions);
-    }
-    if (keyup) {
-        el.addEventListener('keyup', listener, addEventListenerOptions);
-    }
-    return (): void => {
-        if (keydown) {
-            el.removeEventListener(
-                'keydown',
-                listener,
-                addEventListenerOptions
-            );
-        }
-        if (keyup) {
-            el.removeEventListener('keyup', listener, addEventListenerOptions);
-        }
-    };
+    return combine(
+        keydown &&
+            addKeydownEventListener(el, listener, addEventListenerOptions),
+        keyup && addKeyupEventListener(el, listener, addEventListenerOptions)
+    );
 }

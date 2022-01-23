@@ -1,19 +1,23 @@
-import { Shortcut, ShortcutEventImpl } from '@shortcuts/core';
-import { DirectiveBinding, Directive, VNode } from 'vue';
+import {
+    addKeydownEventListener,
+    addKeyupEventListener,
+    combine,
+    Shortcut,
+    ShortcutEventImpl
+} from '@shortcuts/core';
+import { Directive, DirectiveBinding, VNode } from 'vue';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
 import './types';
 
-export function createShortkeyDirectiveDefinition(
+export function createShortcutKeyDirectiveDefinition(
     directiveOptions: ShortcutDirectiveOptions
 ): Directive {
     return {
         mounted: function (el, binding, vnode) {
-            const detach = update(el, binding, vnode, directiveOptions);
-            vnode.detach = detach;
+            vnode.detach = update(el, binding, vnode, directiveOptions);
         },
         updated: function (el, binding, vnode) {
-            const detach = update(el, binding, vnode, directiveOptions);
-            vnode.detach = detach;
+            vnode.detach = update(el, binding, vnode, directiveOptions);
         },
         unmounted: (el, binding, vnode) => {
             if (vnode.detach) {
@@ -72,22 +76,9 @@ function update(
     const addEventListenerOptions: AddEventListenerOptions = {
         once
     };
-    if (keydown) {
-        el.addEventListener('keydown', listener, addEventListenerOptions);
-    }
-    if (keyup) {
-        el.addEventListener('keyup', listener, addEventListenerOptions);
-    }
-    return (): void => {
-        if (keydown) {
-            el.removeEventListener(
-                'keydown',
-                listener,
-                addEventListenerOptions
-            );
-        }
-        if (keyup) {
-            el.removeEventListener('keyup', listener, addEventListenerOptions);
-        }
-    };
+    return combine(
+        keydown &&
+            addKeydownEventListener(el, listener, addEventListenerOptions),
+        keyup && addKeyupEventListener(el, listener, addEventListenerOptions)
+    );
 }

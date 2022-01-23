@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { noop } from './noop';
 import { PluginOptions } from './PluginOptions';
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
-import { createShortkeyDirectiveDefinition } from './shortcytkey.directive';
+import { createShortcutKeyDirectiveDefinition } from './shortkey.directive';
 import './types';
 
 const SHORTCUT_DIRECTIVE_NAME = 'shortcut';
@@ -45,7 +45,7 @@ export const Shortcuts: Plugin = {
         );
         app.directive(
             SHORTKEY_DIRECTIVE_NAME,
-            createShortkeyDirectiveDefinition({
+            createShortcutKeyDirectiveDefinition({
                 directiveName: SHORTKEY_DIRECTIVE_NAME,
                 macroRegistry: options.macroRegistry
             })
@@ -58,8 +58,8 @@ export const Shortcuts: Plugin = {
                 router.afterEach(to => {
                     const contexts = keyboard.getContexts();
                     loop: for (const name in contexts) {
-                        const { routerNameOrPath } = contexts[name];
-                        switch (routerNameOrPath) {
+                        const { router } = contexts[name];
+                        switch (router) {
                             case to.name:
                             case to.path:
                             case to.fullPath:
