@@ -21,6 +21,12 @@ import {
 import { ShortcutEvent, ShortcutEventImpl } from './ShortcutEvent';
 import { ShortcutEventHandler } from './ShortcutEventHandler';
 import { Store } from './Store';
+import {
+    addKeydownEventListener,
+    addKeyupEventListener
+} from '../common/addKeyboardEventListener';
+import { combine } from '../common/combine';
+import { ShortcutEventTarget } from './ShortcutEventTarget';
 
 export class Keyboard {
     private readonly commands: Record<string, ParsedCommandOptions> = {};
@@ -29,23 +35,38 @@ export class Keyboard {
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
     private paused: boolean = false;
     private destroyer = new Disposable();
-    private anchor: EventTarget;
+    private anchor!: ShortcutEventTarget;
     private readonly eventOptions?: AddEventListenerOptions;
     private readonly registry: MacroRegistry;
     private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
+    private _unregisterEvents = () => {
+        // PASS
+    };
     constructor(
         options: KeyboardConstructorOptions = {
-            anchor: document
+            anchor: document,
+            registerEvents: true
         }
     ) {
-        this.anchor = options.anchor || document;
         this.eventOptions = options.eventOptions;
         this.registry = new MacroRegistryImpl(
             options.macroRegistry || DEFAULT_MACRO_REGISTRY
         );
+        const anchor = options.anchor || document;
+        this.anchor = anchor;
+        if (options.registerEvents != false) {
+            this.setAnchor(anchor);
+        }
         this.partiallyMatchShortcutsStore.dispatch(new Set<Shortcut>());
-        this.registerEvents();
+    }
+    public setAnchor(anchor: ShortcutEventTarget) {
+        this._unregisterEvents();
+        this.anchor = anchor;
+        this._unregisterEvents = this.registerEvents();
+    }
+    public removeRegisteredEvents() {
+        this._unregisterEvents();
     }
     public getPartMatchShortcuts() {
         return Array.from(this._getPartiallyMatchShortcuts());
@@ -56,42 +77,7 @@ export class Keyboard {
         shortcuts.clear();
         this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
-    private registerEvents() {
-        const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
-            if (this.paused) {
-                return;
-            }
-            switch (e.type) {
-                case 'keydown':
-                case 'keyup':
-                    this.handleKeyEvent(e);
-                    break;
-            }
-        });
-        this.anchor.addEventListener(
-            'keydown',
-            keyboardEventHandler,
-            this.eventOptions
-        );
-        this.anchor.addEventListener(
-            'keyup',
-            keyboardEventHandler,
-            this.eventOptions
-        );
-        this.destroyer.record(() => {
-            this.anchor.removeEventListener(
-                'keydown',
-                keyboardEventHandler,
-                this.eventOptions
-            );
-            this.anchor.removeEventListener(
-                'keyup',
-                keyboardEventHandler,
-                this.eventOptions
-            );
-        });
-    }
-    private handleKeyEvent(e: KeyboardEvent) {
+    public handleKeyboardEvent(e: KeyboardEvent) {
         const currentContext = this.activationContextManager.peak();
         if (currentContext === undefined) {
             return;
@@ -123,6 +109,33 @@ export class Keyboard {
         if (haseChanged) {
             this.partiallyMatchShortcutsStore.dispatch(shortcuts);
         }
+    }
+    private registerEvents() {
+        const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
+            if (this.paused) {
+                return;
+            }
+            switch (e.type) {
+                case 'keydown':
+                case 'keyup':
+                    this.handleKeyboardEvent(e);
+                    break;
+            }
+        });
+        const removeListener = combine(
+            addKeydownEventListener(
+                this.anchor,
+                keyboardEventHandler,
+                this.eventOptions || {}
+            ),
+            addKeyupEventListener(
+                this.anchor,
+                keyboardEventHandler,
+                this.eventOptions || {}
+            )
+        );
+        const clear = this.destroyer.record(removeListener);
+        return combine(removeListener, clear);
     }
     private commandsOf(context: string): string[] {
         const fallbackContexts: FullContextOptions[] = [];
