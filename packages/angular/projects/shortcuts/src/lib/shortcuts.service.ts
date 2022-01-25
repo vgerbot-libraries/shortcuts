@@ -8,8 +8,7 @@ import {
     macro,
     MacroRegistry,
     DEFAULT_MACRO_REGISTRY,
-    alias,
-    ShortcutEventTarget
+    alias
 } from '@shortcuts/core';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
@@ -37,9 +36,6 @@ export class ShortcutsService {
             this.keyboard.keymap(keymap);
         }
     }
-    setAnchor(anchor: ShortcutEventTarget) {
-        this.keyboard.setAnchor(anchor);
-    }
     getKeyboard() {
         return this.keyboard;
     }
@@ -48,11 +44,12 @@ export class ShortcutsService {
     }
     macro(
         pattern: string,
-        shortcutKey: string | KeyboardEventMatcherFn | KeyboardEventMatcher
+        shortcutKey: string | KeyboardEventMatcherFn | KeyboardEventMatcher,
+        str?: string
     ) {
-        macro(pattern, shortcutKey, this.macroRegistry);
+        macro(pattern, shortcutKey, this.macroRegistry, str);
     }
-    alias(aliasPattern: string, originPattern: string) {
-        alias(aliasPattern, originPattern);
+    alias(aliasPattern: string, originPattern: string, str?: string) {
+        alias(aliasPattern, originPattern, this.macroRegistry, str);
     }
 }
