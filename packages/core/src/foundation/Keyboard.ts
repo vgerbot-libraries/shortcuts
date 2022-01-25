@@ -35,12 +35,12 @@ export class Keyboard {
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
     private paused: boolean = false;
     private destroyer = new Disposable();
-    private anchor!: ShortcutEventTarget;
+    private readonly anchor!: ShortcutEventTarget;
     private readonly eventOptions?: AddEventListenerOptions;
     private readonly registry: MacroRegistry;
     private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
-    private _unregisterEvents = () => {
+    private readonly _unregisterEvents = () => {
         // PASS
     };
     constructor(
@@ -53,17 +53,11 @@ export class Keyboard {
         this.registry = new MacroRegistryImpl(
             options.macroRegistry || DEFAULT_MACRO_REGISTRY
         );
-        const anchor = options.anchor || document;
-        this.anchor = anchor;
+        this.anchor = options.anchor || document;
         if (options.registerEvents != false) {
-            this.setAnchor(anchor);
+            this._unregisterEvents = this.registerEvents();
         }
         this.partiallyMatchShortcutsStore.dispatch(new Set<Shortcut>());
-    }
-    public setAnchor(anchor: ShortcutEventTarget) {
-        this._unregisterEvents();
-        this.anchor = anchor;
-        this._unregisterEvents = this.registerEvents();
     }
     public removeRegisteredEvents() {
         this._unregisterEvents();
