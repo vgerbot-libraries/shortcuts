@@ -5,16 +5,23 @@ import { ShortcutsComponent } from './shortcuts.component';
 import { ShortcutsService } from './shortcuts.service';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
 import { ShortcutsAnchorDirective } from './shortcuts-anchor.directive';
-import { ShortcutDirective } from './shortcut.directive';
+import { ShortcutsDirective } from './shortcuts.directive';
+import { ShortcutsKeyComponent } from './shortcuts-key.component';
 
 @NgModule({
     declarations: [
         ShortcutsComponent,
+        ShortcutsKeyComponent,
         ShortcutsAnchorDirective,
-        ShortcutDirective
+        ShortcutsDirective
     ],
     imports: [],
-    exports: [ShortcutsComponent, ShortcutsAnchorDirective, ShortcutDirective]
+    exports: [
+        ShortcutsComponent,
+        ShortcutsKeyComponent,
+        ShortcutsAnchorDirective,
+        ShortcutsDirective
+    ]
 })
 export class ShortcutsModule {
     static forRoot(

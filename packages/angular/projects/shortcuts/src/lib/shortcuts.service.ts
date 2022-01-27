@@ -8,7 +8,9 @@ import {
     macro,
     MacroRegistry,
     DEFAULT_MACRO_REGISTRY,
-    alias
+    alias,
+    ShortcutEventHandler,
+    AddShortcutEventOptions
 } from '@shortcuts/core';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
@@ -41,6 +43,13 @@ export class ShortcutsService {
     }
     keymap(keymap: KeymapOptions) {
         this.keyboard.keymap(keymap);
+    }
+    on(
+        command: string,
+        handler: ShortcutEventHandler<void>,
+        options?: Partial<AddShortcutEventOptions>
+    ) {
+        return this.keyboard.on(command, handler, options);
     }
     macro(
         pattern: string,

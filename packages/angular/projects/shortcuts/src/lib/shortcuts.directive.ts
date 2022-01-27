@@ -13,10 +13,10 @@ import {
 import { Keyboard, ShortcutEvent } from '@shortcuts/core';
 
 @Directive({
-    selector: '[shortcut]'
+    selector: '[shortcuts][command]'
 })
-export class ShortcutDirective implements OnInit, OnChanges, OnDestroy {
-    @Input('shortcut') commandName: string = '';
+export class ShortcutsDirective implements OnInit, OnChanges, OnDestroy {
+    @Input('command') commandName: string = '';
     private removeKeyboardEvent = () => {
         // PASS
     };

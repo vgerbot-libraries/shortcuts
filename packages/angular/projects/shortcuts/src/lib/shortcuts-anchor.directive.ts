@@ -13,10 +13,10 @@ export class ShortcutsAnchorDirective {
     }
     @HostListener('keydown', ['$event'])
     onKeydown(event: KeyboardEvent) {
-        this.keyboard.handleKeyboardEvent(event);
+        this.keyboard.fire(event);
     }
     @HostListener('keyup', ['$event'])
     onKeyup(event: KeyboardEvent) {
-        this.keyboard.handleKeyboardEvent(event);
+        this.keyboard.fire(event);
     }
 }
