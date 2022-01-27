@@ -6,6 +6,7 @@ import { PluginOptions } from './PluginOptions';
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
 import { createShortcutKeyDirectiveDefinition } from './shortkey.directive';
 import './types';
+import { ShortcutEventTarget } from '@shortcuts/core';
 
 const SHORTCUT_DIRECTIVE_NAME = 'shortcut';
 const SHORTKEY_DIRECTIVE_NAME = 'shortkey';
@@ -13,19 +14,22 @@ const SHORTKEY_DIRECTIVE_NAME = 'shortkey';
 export const Shortcuts: Plugin = {
     install: (app, options: PluginOptions = {}) => {
         const appContainer = app._container;
-        let anchor: EventTarget | null = null;
+        let anchor: ShortcutEventTarget | null = null;
         if (options.anchor) {
             anchor = options.anchor;
         } else if (typeof appContainer === 'string') {
-            anchor = document.querySelector(appContainer);
+            anchor = document.querySelector(
+                appContainer
+            ) as ShortcutEventTarget | null;
         } else if (
-            appContainer instanceof Element ||
-            appContainer instanceof Document
+            appContainer instanceof HTMLElement ||
+            appContainer instanceof Document ||
+            appContainer instanceof SVGElement
         ) {
             anchor = appContainer;
         }
         if (!anchor) {
-            throw new Error('');
+            throw new Error('Unsupported container: ' + appContainer);
         }
         app.keyboard = new Keyboard({
             anchor
