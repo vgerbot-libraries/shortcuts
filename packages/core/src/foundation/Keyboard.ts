@@ -71,7 +71,7 @@ export class Keyboard {
         shortcuts.clear();
         this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
-    public handleKeyboardEvent(e: KeyboardEvent) {
+    public fire(e: KeyboardEvent) {
         const currentContext = this.activationContextManager.peak();
         if (currentContext === undefined) {
             return;
@@ -112,7 +112,7 @@ export class Keyboard {
             switch (e.type) {
                 case 'keydown':
                 case 'keyup':
-                    this.handleKeyboardEvent(e);
+                    this.fire(e);
                     break;
             }
         });

@@ -1,5 +1,6 @@
 import {
     Directive,
+    ElementRef,
     EventEmitter,
     Inject,
     Input,
@@ -16,16 +17,14 @@ import { Keyboard, ShortcutEvent } from '@shortcuts/core';
 })
 export class ShortcutDirective implements OnInit, OnChanges, OnDestroy {
     @Input('shortcut') commandName: string = '';
-    @Output('shortcut-event') keyboardEvent: EventEmitter<ShortcutEvent> =
-        new EventEmitter<ShortcutEvent>();
-
     private removeKeyboardEvent = () => {
         // PASS
     };
 
     constructor(
         @Inject(Keyboard)
-        private keyboard: Keyboard
+        private keyboard: Keyboard,
+        private el: ElementRef
     ) {}
     ngOnInit() {
         this.checkCommandName();
@@ -42,8 +41,8 @@ export class ShortcutDirective implements OnInit, OnChanges, OnDestroy {
     }
     registerEvent() {
         this.removeKeyboardEvent();
-        this.removeKeyboardEvent = this.keyboard.on(this.commandName, e => {
-            this.keyboardEvent.emit(e);
+        this.removeKeyboardEvent = this.keyboard.on(this.commandName, () => {
+            this.el.nativeElement.click();
         });
     }
     checkCommandName() {
