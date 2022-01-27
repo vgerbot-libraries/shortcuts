@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Shortcut, Keyboard } from '@shortcuts/core';
+import { Keyboard, Shortcut } from '@shortcuts/core';
 import {
     EventTargetLike,
     SelectorMethodSignature
@@ -11,7 +11,7 @@ export function shortcut(shortcutKey: string) {
     const shortcutMatcher = Shortcut.from(shortcutKey);
     return function shortcutOperatorFunction<T>(source: Observable<T>) {
         return new Observable<T>(subscriber => {
-            const subscription = source.subscribe(
+            return source.subscribe(
                 event => {
                     if (
                         event instanceof KeyboardEvent &&
@@ -23,7 +23,6 @@ export function shortcut(shortcutKey: string) {
                 err => subscriber.error(err),
                 () => subscriber.complete()
             );
-            return subscription;
         });
     };
 }
