@@ -13,16 +13,17 @@ import { Shortcut, ShortcutEvent, ShortcutEventImpl } from '@shortcuts/core';
 })
 export class ShortcutsKeyComponent {
     @Input('key') shortcutKey?: string;
-    @Input('keydown') handleOnKeydown?: boolean;
-    @Input('keyup') handleOnKeyup?: boolean;
-    @Input('preventDefault') preventDefault?: boolean;
-    @Input('stopPropagation') stopPropagation?: boolean;
+    @Input('keydown') handleOnKeydown: boolean = true;
+    @Input('keyup') handleOnKeyup: boolean = false;
+    @Input('preventDefault') preventDefault: boolean = false;
+    @Input('stopPropagation') stopPropagation: boolean = false;
+    @Input('disabled') disabled: boolean = false;
     @Output('handle') emitter: EventEmitter<ShortcutEvent> =
         new EventEmitter<ShortcutEvent>();
 
     @HostListener('keydown', ['$event'])
     onKeydown(event: KeyboardEvent): void {
-        if (this.handleOnKeydown !== false) {
+        if (this.handleOnKeydown) {
             this.fire(event);
         }
     }
@@ -33,6 +34,9 @@ export class ShortcutsKeyComponent {
         }
     }
     fire(event: KeyboardEvent) {
+        if (this.disabled) {
+            return;
+        }
         if (!this.shortcutKey) {
             return;
         }

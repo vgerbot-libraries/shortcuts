@@ -19,6 +19,7 @@ import { ShortcutsService } from './shortcuts.service';
 })
 export class ShortcutsComponent implements OnInit, OnDestroy, OnChanges {
     @Input('command') commandName!: string;
+    @Input('disabled') disabled: boolean = false;
     @Output('handle') emitter: EventEmitter<ShortcutEvent> =
         new EventEmitter<ShortcutEvent>();
 
@@ -45,6 +46,9 @@ export class ShortcutsComponent implements OnInit, OnDestroy, OnChanges {
         this.removeEventListener = this.service
             .getKeyboard()
             .on(this.commandName, event => {
+                if (this.disabled) {
+                    return;
+                }
                 this.emitter.emit(event);
             });
     }
