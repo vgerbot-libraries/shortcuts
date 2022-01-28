@@ -38,7 +38,7 @@ export function shortcutRouterMixin(
 
 function createKeyboardInstance(vue: Vue, installOptions: PluginOptions) {
     const { anchor, keymap: setupKeymap } = installOptions;
-    const targetAnchor = anchor || vue.$el;
+    const targetAnchor = anchor || (vue.$el as HTMLElement | SVGElement);
     if (
         (targetAnchor instanceof HTMLElement ||
             targetAnchor instanceof SVGElement) &&
