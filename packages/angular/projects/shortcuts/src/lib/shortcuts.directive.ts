@@ -1,16 +1,14 @@
 import {
     Directive,
     ElementRef,
-    EventEmitter,
     Inject,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    Output,
     SimpleChanges
 } from '@angular/core';
-import { Keyboard, ShortcutEvent } from '@shortcuts/core';
+import { Keyboard } from '@shortcuts/core';
 
 @Directive({
     selector: '[shortcuts][command]'
