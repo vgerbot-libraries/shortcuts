@@ -2,7 +2,7 @@ import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
 
 export class MacroKeyboardEventMatcher {
     constructor(
-        private readonly user_friendly_str: string,
+        private readonly label: string,
         readonly origin: KeyboardEventMatcher
     ) {}
 
@@ -11,6 +11,6 @@ export class MacroKeyboardEventMatcher {
     }
 
     str(): string {
-        return this.user_friendly_str;
+        return this.label;
     }
 }

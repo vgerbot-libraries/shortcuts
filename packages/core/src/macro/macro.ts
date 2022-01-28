@@ -15,7 +15,7 @@ export function macro(
     pattern: string,
     shortcutKey: string | KeyboardEventMatcherFn | KeyboardEventMatcher,
     registry: MacroRegistry = DEFAULT_MACRO_REGISTRY,
-    userFriendlyStr: string = pattern
+    label: string = pattern
 ) {
     let macroMatcher: KeyboardEventMatcher;
     switch (typeof shortcutKey) {
@@ -26,12 +26,12 @@ export function macro(
             macroMatcher = {
                 match: shortcutKey,
                 str() {
-                    return userFriendlyStr;
+                    return label;
                 }
             };
             break;
         default:
-            macroMatcher = wrap(userFriendlyStr, shortcutKey);
+            macroMatcher = wrap(label, shortcutKey);
     }
     registry.register(pattern, macroMatcher);
 }
@@ -40,13 +40,13 @@ export function alias(
     aliasPattern: string,
     originPattern: string,
     registry: MacroRegistry = DEFAULT_MACRO_REGISTRY,
-    userFriendlyStr: string = aliasPattern
+    label: string = aliasPattern
 ) {
     const matcher = registry.get(originPattern);
     if (!matcher) {
         throw new Error('Cannot set the alias that the pattern is not exists!');
     }
-    macro(aliasPattern, matcher, registry, userFriendlyStr);
+    macro(aliasPattern, matcher, registry, label);
 }
 
 export function keyMacro(
@@ -67,39 +67,26 @@ export function keyMacro_ins(
     pattern: string,
     key: string = pattern,
     registry: MacroRegistry = DEFAULT_MACRO_REGISTRY,
-    userFriendlyStr: string = pattern
+    label: string = pattern
 ) {
-    return macro(
-        pattern,
-        new CaseInsensitiveKeyMatcher(key),
-        registry,
-        userFriendlyStr
-    );
+    return macro(pattern, new CaseInsensitiveKeyMatcher(key), registry, label);
 }
 
 export function keyCodeMacro(
     pattern: string,
     keyCode: number,
     registry: MacroRegistry = DEFAULT_MACRO_REGISTRY,
-    userFriendlyStr: string = pattern
+    label: string = pattern
 ) {
-    return macro(
-        pattern,
-        new KeyCodeMatcher(keyCode),
-        registry,
-        userFriendlyStr
-    );
+    return macro(pattern, new KeyCodeMatcher(keyCode), registry, label);
 }
 
-function wrap(userFriendlyStr: string, shortcutMatcher: KeyboardEventMatcher) {
-    if (shortcutMatcher.str() === userFriendlyStr) {
+function wrap(label: string, shortcutMatcher: KeyboardEventMatcher) {
+    if (shortcutMatcher.str() === label) {
         return shortcutMatcher;
     }
     if (shortcutMatcher instanceof MacroKeyboardEventMatcher) {
-        return new MacroKeyboardEventMatcher(
-            userFriendlyStr,
-            shortcutMatcher.origin
-        );
+        return new MacroKeyboardEventMatcher(label, shortcutMatcher.origin);
     }
-    return new MacroKeyboardEventMatcher(userFriendlyStr, shortcutMatcher);
+    return new MacroKeyboardEventMatcher(label, shortcutMatcher);
 }
