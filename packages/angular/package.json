@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "gendoc": "compodoc -p ./projects/shortcuts/tsconfig.doc.json"
   },
   "author": "y1j2x34 <y1j2x34@qq.com>",
   "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/angular#readme",
@@ -46,6 +47,7 @@
     "@angular-devkit/build-angular": "~13.1.2",
     "@angular/cli": "~13.1.2",
     "@angular/compiler-cli": "~13.1.0",
+    "@compodoc/compodoc": "^1.1.18",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.10.0",
