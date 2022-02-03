@@ -16,4 +16,5 @@ export * from './common/combine';
 export * from './common/addKeyboardEventListener';
 export * from './foundation/AddShortcutEventOptions';
 export * from './foundation/ShortcutEventTarget';
+export * from './common/createEvent';
 import './locales/default';
