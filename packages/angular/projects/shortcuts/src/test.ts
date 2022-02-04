@@ -2,6 +2,7 @@
 
 import 'zone.js';
 import 'zone.js/testing';
+import './ext-shortcuts';
 import { getTestBed } from '@angular/core/testing';
 import {
     BrowserDynamicTestingModule,

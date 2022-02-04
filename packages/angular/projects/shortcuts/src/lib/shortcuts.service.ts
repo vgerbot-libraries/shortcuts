@@ -12,6 +12,7 @@ import {
     ShortcutEventHandler,
     AddShortcutEventOptions
 } from '@shortcuts/core';
+import { Router, NavigationStart } from '@angular/router';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
 
@@ -25,7 +26,8 @@ export class ShortcutsService {
         @Inject(SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN)
         private options: ShortcutsModuleOptions,
         @Inject(DOCUMENT)
-        private document: Document
+        private document: Document,
+        private router: Router
     ) {
         const { anchor, macroRegistry, keymap } = this.options;
         this.macroRegistry = macroRegistry || DEFAULT_MACRO_REGISTRY;
@@ -36,6 +38,17 @@ export class ShortcutsService {
         if (keymap) {
             this.keyboard.keymap(keymap);
         }
+        router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                const contexts = this.keyboard.getContexts();
+                for (const name in contexts) {
+                    if (contexts[name].routerUrl === event.url) {
+                        this.keyboard.switchContext(name);
+                        break;
+                    }
+                }
+            }
+        });
     }
     getKeyboard() {
         return this.keyboard;
