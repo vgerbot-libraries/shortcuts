@@ -39,8 +39,8 @@ function update(
     if (vnode.detach) {
         vnode.detach();
     }
-    const actionName = binding.value || binding.arg;
-    if (typeof actionName !== 'string') {
+    const commandName = binding.value || binding.arg;
+    if (typeof commandName !== 'string') {
         return noop;
     }
     const once = binding.modifiers?.once || false;
@@ -77,13 +77,13 @@ function update(
         }
     };
     if (keydown) {
-        removeKeydownEvent = keyboard.on(actionName, listener, {
+        removeKeydownEvent = keyboard.on(commandName, listener, {
             type: 'keydown',
             once
         });
     }
     if (keyup) {
-        removeKeyupEvent = keyboard.on(actionName, listener, {
+        removeKeyupEvent = keyboard.on(commandName, listener, {
             type: 'keyup',
             once
         });
