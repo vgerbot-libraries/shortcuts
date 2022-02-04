@@ -35,19 +35,20 @@ export class Keyboard {
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
     private paused: boolean = false;
     private destroyer = new Disposable();
-    private readonly anchor!: ShortcutEventTarget;
+    private anchor: ShortcutEventTarget;
     private readonly eventOptions?: AddEventListenerOptions;
     private readonly registry: MacroRegistry;
     private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
+    private readonly keyboardEventStore: Store<KeyboardEvent> =
+        new Store<KeyboardEvent>();
     private readonly interceptors: Interceptor[] = [];
     private readonly _unregisterEvents = () => {
         // PASS
     };
     constructor(
         options: KeyboardConstructorOptions = {
-            anchor: document,
-            registerEvents: true
+            anchor: document
         }
     ) {
         this.eventOptions = options.eventOptions;
@@ -55,13 +56,17 @@ export class Keyboard {
             options.macroRegistry || DEFAULT_MACRO_REGISTRY
         );
         this.anchor = options.anchor || document;
-        if (options.registerEvents != false) {
-            this._unregisterEvents = this.registerEvents();
-        }
+        this.registerEvents();
         this.partiallyMatchShortcutsStore.dispatch(new Set<Shortcut>());
     }
-    public removeRegisteredEvents() {
+    public setAnchor(anchor: ShortcutEventTarget) {
         this._unregisterEvents();
+        this.anchor = anchor;
+        this.keyboardEventStore.reset();
+        this.registerEvents();
+    }
+    public getAnchor() {
+        return this.anchor;
     }
     public getPartMatchShortcuts() {
         return Array.from(this._getPartiallyMatchShortcuts());
@@ -129,6 +134,7 @@ export class Keyboard {
             switch (e.type) {
                 case 'keydown':
                 case 'keyup':
+                    this.keyboardEventStore.dispatch(e);
                     this.fire(e);
                     break;
             }
@@ -234,6 +240,31 @@ export class Keyboard {
             );
         }
         return this.activationContextManager.push(context);
+    }
+    onShortcutKeyMatch(
+        shortcut: string | Shortcut,
+        handler: ShortcutEventHandler,
+        {
+            type = 'keydown',
+            once = false
+        }: Partial<AddShortcutEventOptions> = {}
+    ) {
+        const oShortcut =
+            typeof shortcut === 'string'
+                ? Shortcut.from(shortcut, this.registry)
+                : shortcut;
+        const unsubscribe = this.keyboardEventStore.subscribe(e => {
+            if (!e || e.type !== type) {
+                return;
+            }
+            if (oShortcut.match(e) && oShortcut.isFullMatch()) {
+                if (once) {
+                    unsubscribe();
+                }
+                handler(new ShortcutEventImpl(oShortcut, e));
+            }
+        });
+        return unsubscribe;
     }
     on(
         command: string,
