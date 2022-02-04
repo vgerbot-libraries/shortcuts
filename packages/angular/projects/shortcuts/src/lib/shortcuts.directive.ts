@@ -8,13 +8,13 @@ import {
     OnInit,
     SimpleChanges
 } from '@angular/core';
-import { Keyboard, createEvent, NativeEventType } from '@shortcuts/core';
+import { Keyboard, NativeEventType } from '@shortcuts/core';
 
 @Directive({
-    selector: '[shortcuts][command]'
+    selector: '[shortcut]'
 })
 export class ShortcutsDirective implements OnInit, OnChanges, OnDestroy {
-    @Input('command') commandName: string = '';
+    @Input('shortcut') commandName: string = '';
     @Input('event-type') eventType: NativeEventType = 'click';
 
     private removeKeyboardEvent = () => {
@@ -31,7 +31,7 @@ export class ShortcutsDirective implements OnInit, OnChanges, OnDestroy {
         this.registerEvent();
     }
     ngOnChanges(changes: SimpleChanges) {
-        if ('commandName' in changes) {
+        if ('command' in changes) {
             this.checkCommandName();
             this.registerEvent();
         }
@@ -42,8 +42,7 @@ export class ShortcutsDirective implements OnInit, OnChanges, OnDestroy {
     registerEvent() {
         this.removeKeyboardEvent();
         this.removeKeyboardEvent = this.keyboard.on(this.commandName, () => {
-            const event = createEvent(this.eventType);
-            this.el.nativeElement.dispatchEvent(event);
+            this.el.nativeElement.click();
         });
     }
     checkCommandName() {

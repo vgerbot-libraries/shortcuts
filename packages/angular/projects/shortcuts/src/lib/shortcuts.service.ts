@@ -31,7 +31,6 @@ export class ShortcutsService {
         this.macroRegistry = macroRegistry || DEFAULT_MACRO_REGISTRY;
         this.keyboard = new Keyboard({
             anchor: anchor,
-            registerEvents: !!anchor,
             macroRegistry: this.macroRegistry
         });
         if (keymap) {

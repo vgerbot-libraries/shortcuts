@@ -7,13 +7,15 @@ import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
 import { ShortcutsAnchorDirective } from './shortcuts-anchor.directive';
 import { ShortcutsDirective } from './shortcuts.directive';
 import { ShortcutsKeyComponent } from './shortcuts-key.component';
+import { ShortkeyDirective } from './shortcuts-key.directive';
 
 @NgModule({
     declarations: [
         ShortcutsComponent,
         ShortcutsKeyComponent,
         ShortcutsAnchorDirective,
-        ShortcutsDirective
+        ShortcutsDirective,
+        ShortkeyDirective
     ],
     imports: [],
     exports: [

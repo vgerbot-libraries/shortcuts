@@ -1,22 +1,18 @@
-import { Directive, HostListener, Inject } from '@angular/core';
+import { Directive, ElementRef, Inject, OnDestroy } from '@angular/core';
 import { Keyboard } from '@shortcuts/core';
 
 @Directive({
     selector: '[shortcuts-anchor]'
 })
-export class ShortcutsAnchorDirective {
+export class ShortcutsAnchorDirective implements OnDestroy {
     constructor(
         @Inject(Keyboard)
-        private keyboard: Keyboard
+        private keyboard: Keyboard,
+        private readonly el: ElementRef
     ) {
-        this.keyboard.removeRegisteredEvents();
+        this.keyboard.setAnchor(el.nativeElement);
     }
-    @HostListener('keydown', ['$event'])
-    onKeydown(event: KeyboardEvent) {
-        this.keyboard.fire(event);
-    }
-    @HostListener('keyup', ['$event'])
-    onKeyup(event: KeyboardEvent) {
-        this.keyboard.fire(event);
+    ngOnDestroy() {
+        this.keyboard.destroy();
     }
 }
