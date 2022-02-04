@@ -40,6 +40,7 @@ export class Keyboard {
     private readonly registry: MacroRegistry;
     private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
+    private readonly interceptors: Interceptor[] = [];
     private readonly _unregisterEvents = () => {
         // PASS
     };
@@ -103,6 +104,22 @@ export class Keyboard {
         if (haseChanged) {
             this.partiallyMatchShortcutsStore.dispatch(shortcuts);
         }
+    }
+    public addInterceptor(interceptor: Interceptor, unshift: boolean = false) {
+        const index = this.interceptors.indexOf(interceptor);
+        if (index > -1) {
+            if (unshift) {
+                this.interceptors.unshift(interceptor);
+            } else {
+                this.interceptors.push(interceptor);
+            }
+        }
+        return () => {
+            const index = this.interceptors.indexOf(interceptor);
+            if (index > -1) {
+                this.interceptors.splice(index, 1);
+            }
+        };
     }
     private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
@@ -168,7 +185,10 @@ export class Keyboard {
             }
             this.eventEmitter.emit(commandName, e);
         };
-        const runner = commandOptions.interceptors.reduceRight(
+        const interceptors = Array.from(this.interceptors).concat(
+            commandOptions.interceptors
+        );
+        const runner = interceptors.reduceRight(
             (next: ShortcutEventHandler, cur: Interceptor) => {
                 return (evt: ShortcutEvent) => {
                     cur(evt, next);
