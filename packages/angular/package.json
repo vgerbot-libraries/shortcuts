@@ -28,6 +28,7 @@
     "bugs": {
         "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
+    "private": true,
     "dependencies": {
         "@angular/animations": "~13.1.0",
         "@angular/common": "~13.1.0",
