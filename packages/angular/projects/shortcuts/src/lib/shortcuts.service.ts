@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {
     Keyboard,
@@ -15,6 +15,7 @@ import {
 import { Router, NavigationStart } from '@angular/router';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';
+import '../ext-shortcuts';
 
 @Injectable({
     providedIn: 'root'
@@ -27,7 +28,8 @@ export class ShortcutsService {
         private options: ShortcutsModuleOptions,
         @Inject(DOCUMENT)
         private document: Document,
-        private router: Router
+        @Optional()
+        private router?: Router
     ) {
         const { anchor, macroRegistry, keymap } = this.options;
         this.macroRegistry = macroRegistry || DEFAULT_MACRO_REGISTRY;
@@ -38,13 +40,13 @@ export class ShortcutsService {
         if (keymap) {
             this.keyboard.keymap(keymap);
         }
-        router.events.subscribe(event => {
+        router?.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 const contexts = this.keyboard.getContexts();
                 for (const name in contexts) {
-                    if (contexts[name].routerUrl === event.url) {
+                    const { matchRouter } = contexts[name];
+                    if (matchRouter && matchRouter(event)) {
                         this.keyboard.switchContext(name);
-                        break;
                     }
                 }
             }

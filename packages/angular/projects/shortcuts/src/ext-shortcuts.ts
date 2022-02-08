@@ -1,7 +1,8 @@
+import { NavigationStart } from '@angular/router';
 import '@shortcuts/core';
 
 declare module '@shortcuts/core' {
     export interface FullContextOptions {
-        routerUrl: string | undefined | null;
+        matchRouter?: (e: NavigationStart) => boolean;
     }
 }
