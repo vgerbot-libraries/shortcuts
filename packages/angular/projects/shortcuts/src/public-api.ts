@@ -8,4 +8,5 @@ export * from './lib/shortcuts.module';
 export * from './lib/shortcuts-anchor.directive';
 export * from './lib/shortcuts.directive';
 export * from './lib/shortcuts-key.component';
+export * from './lib/shortcuts.decorator';
 import './ext-shortcuts';
