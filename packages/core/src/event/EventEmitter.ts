@@ -16,9 +16,10 @@ export class EventEmitter<T> {
     emit(name: string, value: T) {
         const handlers = this.events[name];
         if (!handlers) {
-            return;
+            return false;
         }
         handlers.forEach(it => it(value));
+        return true;
     }
     clear() {
         this.events = {};
