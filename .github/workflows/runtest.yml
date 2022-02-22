@@ -6,7 +6,7 @@ on:
       - "master"
   pull_request:
     branches:
-    - "master"
+      - "master"
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version:
-          - 16.x
+          - 14.x
     steps:
       - name: CHECKOUT GIT REPOSIRORY
         uses: actions/checkout@v2
@@ -36,6 +36,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: INSTALL PROJECT DEPENDENCIES
         run: lerna bootstrap --hoist --ci
+      - name: RUN BUILD
+        run: npm run build
       - name: Running tests
         run: npm t
       - name: Upload coverage data to codacy

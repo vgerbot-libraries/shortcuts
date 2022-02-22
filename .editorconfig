@@ -11,3 +11,6 @@ charset = utf-8
 trim_trailing_whitespace = false
 insert_final_newline = false
 quote_type = single
+
+[*.yml]
+indent_size = 2
