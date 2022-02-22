@@ -43,6 +43,6 @@ export function versionGe(version: string): boolean {
 }
 
 function compareVersion(a: number, b: string) {
-    const n = Number(b.replace(/\./g, ''));
+    const n = Number(b.replace(/(?<=^\d*(\.\d+)+)\./g, ''));
     return a > n ? 2 : a === n ? 0 : -1;
 }
