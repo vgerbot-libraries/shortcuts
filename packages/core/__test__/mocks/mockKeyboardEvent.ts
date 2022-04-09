@@ -16,3 +16,11 @@ export function mockKeyboardEvent(
     });
     return event;
 }
+
+export function keydownEvent(options?: KeyboardEventInit) {
+    return mockKeyboardEvent('keydown', options);
+}
+
+export function keyupEvent(options?: KeyboardEventInit) {
+    return mockKeyboardEvent('keyup', options);
+}
