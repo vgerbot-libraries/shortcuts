@@ -33,6 +33,7 @@ export class Shortcut implements KeyboardEventMatcher {
             this.reset();
         }
         const shortcutPart = this.parts[this.matchTimes];
+        /* istanbul ignore if */
         if (!shortcutPart) {
             return false;
         }
@@ -52,7 +53,7 @@ export class Shortcut implements KeyboardEventMatcher {
         return this.matchTimes === this.parts.length;
     }
     str() {
-        return this.parts.map(it => it.str).join(Shortcut.comboDeliminator);
+        return this.parts.map(it => it.str()).join(Shortcut.comboDeliminator);
     }
     partiallyMatchesStr() {
         return this.parts
@@ -107,6 +108,8 @@ class ShortcutPart {
         );
     }
     str() {
-        return this.allMatchers.map(it => it.str());
+        return this.allMatchers
+            .map(it => it.str())
+            .join(Shortcut.keyDeliminator);
     }
 }
