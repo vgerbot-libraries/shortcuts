@@ -16,7 +16,10 @@ export default {
     testMatch: [`${basedir}/__test__/**/*.spec.ts`],
     moduleFileExtensions: ['ts', 'js'],
     collectCoverage: true,
-    collectCoverageFrom: [`${basedir}/src/**/*.ts`],
+    collectCoverageFrom: [
+        `${basedir}/src/**/*.ts`,
+        '!<rootDir>/packages/core/src/common/{browser,createEvent,addKeyboardEventListener}.ts'
+    ],
     coveragePathIgnorePatterns: ['/__test__/', '/node_modules/'],
     coverageProvider: 'v8',
     coverageDirectory: `${basedir}/report/coverage/`,
