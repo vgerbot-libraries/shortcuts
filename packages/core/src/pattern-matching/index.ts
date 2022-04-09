@@ -67,7 +67,7 @@ function _case<T>(
     handlerOrValue: ShortcutEventHandler<T> | T,
     cases: PatternMatchCase<T>[]
 ) {
-    const shortcuts = shortcutsStr.split(/|+/).map(it => {
+    const shortcuts = shortcutsStr.split(/\|+/).map(it => {
         return Shortcut.from(it);
     });
     return createMatcher(
