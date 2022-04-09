@@ -85,6 +85,18 @@ describe('Shortcut', () => {
         expect(meta.match(shiftKey)).toBeFalsy();
         expect(meta.match(altKey)).toBeFalsy();
         expect(meta.match(ctrlKey)).toBeFalsy();
+
+        const ctrlCShortcut = Shortcut.from('Ctrl+C');
+
+        expect(
+            ctrlCShortcut.match(
+                keydownEvent({
+                    ctrlKey: true,
+                    shiftKey: true,
+                    key: 'C'
+                })
+            )
+        ).toBeFalsy();
     });
     it('stringify', () => {
         expect(Shortcut.from('Ctrl+Shift+A').str()).toBe('Ctrl+Shift+A');
