@@ -13,7 +13,6 @@
                 "vue-router",
                 "@vue/*",
                 "@compodoc/*",
-                "@types/*",
                 "jasmine-core"
             ]
         }
