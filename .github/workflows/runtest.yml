@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: INSTALL PROJECT DEPENDENCIES
-        run: lerna bootstrap --hoist --ci
+        run: lerna bootstrap --no-hoist --ci
       - name: RUN BUILD
         run: npm run build
       - name: Running tests
