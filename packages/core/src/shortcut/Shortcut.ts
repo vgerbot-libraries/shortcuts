@@ -91,16 +91,16 @@ class ShortcutPart {
         });
     }
     match(event: KeyboardEvent): boolean {
-        if (this.ctrl && !event.ctrlKey) {
+        if (this.ctrl !== event.ctrlKey) {
             return false;
         }
-        if (this.shift && !event.shiftKey) {
+        if (this.shift !== event.shiftKey) {
             return false;
         }
-        if (this.alt && !event.altKey) {
+        if (this.alt !== event.altKey) {
             return false;
         }
-        if (this.meta && !event.metaKey) {
+        if (this.meta !== event.metaKey) {
             return false;
         }
         return this.matchersWithoutModifiers.every(matcher =>
