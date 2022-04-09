@@ -1,6 +1,22 @@
 {
     "packages": [
         "packages/*"
-    ], 
+    ],
+    "command": {
+        "bootstrap": {
+            "nohoist": [
+                "rxjs",
+                "@angular/*",
+                "@angular-devkit/*",
+                "ng-packagr",
+                "vue",
+                "vue-router",
+                "@vue/*",
+                "@compodoc/*",
+                "@types/*",
+                "jasmine-core"
+            ]
+        }
+    },
     "version": "1.0.0"
 }
