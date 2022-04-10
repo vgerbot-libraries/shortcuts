@@ -47,7 +47,7 @@
   <li>Interfaces</li>
   <li
   >
-  ShortcutsModuleOptions</li>
+  IShortcutsEventHandler</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/shortcuts/src/lib/ShortcutsModuleOptions.ts</code>
+            <code>projects/shortcuts/src/lib/shortcuts.decorator.ts</code>
         </p>
 
 
@@ -84,24 +84,23 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#anchor" 
+                                        <a href="#injector" 
 >
-                                            anchor
+                                            injector
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#keymap" 
+                                        <a href="#ngOnDestroy" 
 >
-                                            keymap
+                                            ngOnDestroy
                                         </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#macroRegistry" 
+                                        <a href="#ngOnInit" 
 >
-                                            macroRegistry
+                                            ngOnInit
                                         </a>
                                 </li>
                             </ul>
@@ -119,9 +118,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="anchor"></a>
-                                        <span class="name "><b>anchor</b>
-                                            <a href="#anchor">
+                                        <a name="injector"></a>
+                                        <span class="name "><b>injector</b>
+                                            <a href="#injector">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -129,7 +128,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>anchor:     <code>HTMLElement | Document | Window</code>
+                                        <code>injector:         <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -137,7 +136,40 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>HTMLElement | Document | Window</code>
+                                            <i>Type : </i>        <code><a href="https://angular.io/api/core/Injector" target="_blank" >Injector</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ngOnDestroy"></a>
+                                        <span class="name "><b>ngOnDestroy</b>
+                                            <a href="#ngOnDestroy">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ngOnDestroy:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
 
                                         </td>
                                     </tr>
@@ -157,9 +189,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="keymap"></a>
-                                        <span class="name "><b>keymap</b>
-                                            <a href="#keymap">
+                                        <a name="ngOnInit"></a>
+                                        <span class="name "><b>ngOnInit</b>
+                                            <a href="#ngOnInit">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -167,7 +199,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>keymap:     <code>KeymapOptions</code>
+                                        <code>ngOnInit:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -175,45 +207,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>KeymapOptions</code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="macroRegistry"></a>
-                                        <span class="name "><b>macroRegistry</b>
-                                            <a href="#macroRegistry">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>macroRegistry:     <code>MacroRegistry</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>MacroRegistry</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" target="_blank" >Function</a></code>
 
                                         </td>
                                     </tr>
@@ -234,12 +228,97 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { KeymapOptions, MacroRegistry } from &#x27;@shortcuts/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injector } from &#x27;@angular/core&#x27;;
+import { AddShortcutEventOptions } from &#x27;@shortcuts/core&#x27;;
+import { ShortcutsService } from &#x27;./shortcuts.service&#x27;;
 
-export interface ShortcutsModuleOptions {
-    keymap?: KeymapOptions;
-    macroRegistry?: MacroRegistry;
-    anchor?: HTMLElement | Document | Window;
+interface IShortcutsEventHandler {
+    injector: Injector;
+    ngOnInit?: Function;
+    ngOnDestroy?: Function;
+}
+type Obj &#x3D; {
+    [key: string | symbol]: any;
+};
+function noop() {
+    // PASS
+}
+export function OnShortcutKey(
+    shortcutKey: string,
+    options?: Partial&lt;AddShortcutEventOptions&gt;
+) {
+    return function (
+        classProto: IShortcutsEventHandler,
+        propertyKey: string | symbol,
+        descriptor: PropertyDescriptor
+    ) {
+        if (typeof (classProto as Obj)[propertyKey] !&#x3D; &#x27;function&#x27;) {
+            throw new Error(&#x27;Shortkey decorator can only be used on function&#x27;);
+        }
+        const ngOnInitUnpatched &#x3D; classProto.ngOnInit;
+        const unbindEvent &#x3D; noop;
+        classProto.ngOnInit &#x3D; function (this: IShortcutsEventHandler) {
+            const method &#x3D; (this as Obj)[propertyKey] as Function;
+            const shortcutsService &#x3D; this.injector.get(ShortcutsService);
+            shortcutsService.getKeyboard().onShortcutKeyMatch(
+                shortcutKey,
+                event &#x3D;&gt; {
+                    method.call(this, event);
+                },
+                options
+            );
+            if (ngOnInitUnpatched) {
+                return ngOnInitUnpatched.call(this);
+            }
+        };
+        const ngOnDestroyUnpatched &#x3D; classProto.ngOnDestroy;
+        classProto.ngOnDestroy &#x3D; function (this: IShortcutsEventHandler) {
+            unbindEvent();
+            if (ngOnDestroyUnpatched) {
+                return ngOnDestroyUnpatched.call(this);
+            }
+        };
+        return descriptor;
+    };
+}
+
+export function OnShortcutCommand(
+    command: string,
+    options?: Partial&lt;AddShortcutEventOptions&gt;
+) {
+    return function (
+        classProto: IShortcutsEventHandler,
+        propertyKey: string | symbol,
+        descriptor: PropertyDescriptor
+    ) {
+        if (typeof (classProto as Obj)[propertyKey] !&#x3D; &#x27;function&#x27;) {
+            throw new Error(&#x27;Shortkey decorator can only be used on function&#x27;);
+        }
+        const ngOnInitUnpatched &#x3D; classProto.ngOnInit;
+        const unbindEvent &#x3D; noop;
+        classProto.ngOnInit &#x3D; function (this: IShortcutsEventHandler) {
+            const method &#x3D; (this as Obj)[propertyKey] as Function;
+            const shortcutsService &#x3D; this.injector.get(ShortcutsService);
+            shortcutsService.on(
+                command,
+                event &#x3D;&gt; {
+                    method.call(this, event);
+                },
+                options
+            );
+            if (ngOnInitUnpatched) {
+                return ngOnInitUnpatched.call(this);
+            }
+        };
+        const ngOnDestroyUnpatched &#x3D; classProto.ngOnDestroy;
+        classProto.ngOnDestroy &#x3D; function (this: IShortcutsEventHandler) {
+            unbindEvent();
+            if (ngOnDestroyUnpatched) {
+                return ngOnDestroyUnpatched.call(this);
+            }
+        };
+        return descriptor;
+    };
 }
 </code></pre>
     </div>
@@ -278,7 +357,7 @@ export interface ShortcutsModuleOptions {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ShortcutsModuleOptions.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'IShortcutsEventHandler.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

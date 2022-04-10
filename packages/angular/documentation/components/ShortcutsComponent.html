@@ -674,10 +674,11 @@ export class ShortcutsComponent implements OnInit, OnDestroy, OnChanges {
 <script>
         var COMPONENT_TEMPLATE = '<div><!-- &lt;shortcuts&gt; --></div>'
     var COMPONENTS = [{'name': 'ShortcutsComponent', 'selector': 'shortcuts[command]'},{'name': 'ShortcutsKeyComponent', 'selector': 'shortcuts[key]'}];
-    var DIRECTIVES = [{'name': 'ShortcutsAnchorDirective', 'selector': '[shortcuts-anchor]'},{'name': 'ShortcutsDirective', 'selector': '[shortcuts][command]'}];
+    var DIRECTIVES = [{'name': 'ShortcutsAnchorDirective', 'selector': '[shortcuts-anchor]'},{'name': 'ShortcutsDirective', 'selector': '[shortcut]'},{'name': 'ShortkeyDirective', 'selector': '[shortkey]'}];
     var ACTUAL_COMPONENT = {'name': 'ShortcutsComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
 
 
 

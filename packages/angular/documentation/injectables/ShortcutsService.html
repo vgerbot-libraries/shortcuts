@@ -132,12 +132,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(options: <a href="../interfaces/ShortcutsModuleOptions.html" target="_self">ShortcutsModuleOptions</a>, document: Document)</code>
+<code>constructor(options: <a href="../interfaces/ShortcutsModuleOptions.html" target="_self">ShortcutsModuleOptions</a>, document: Document, router?: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -178,6 +178,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -212,8 +224,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:75</a></div>
                 </td>
             </tr>
 
@@ -305,8 +317,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:55</a></div>
                 </td>
             </tr>
 
@@ -342,8 +354,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="58"
+                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:58</a></div>
                 </td>
             </tr>
 
@@ -411,8 +423,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:68</a></div>
                 </td>
             </tr>
 
@@ -504,8 +516,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:61</a></div>
                 </td>
             </tr>
 
@@ -604,7 +616,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -632,7 +644,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/shortcuts/src/lib/shortcuts.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -645,7 +657,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Optional } from &#x27;@angular/core&#x27;;
 import { DOCUMENT } from &#x27;@angular/common&#x27;;
 import {
     Keyboard,
@@ -659,8 +671,10 @@ import {
     ShortcutEventHandler,
     AddShortcutEventOptions
 } from &#x27;@shortcuts/core&#x27;;
+import { Router, NavigationStart } from &#x27;@angular/router&#x27;;
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from &#x27;./injection.tokens&#x27;;
 import { ShortcutsModuleOptions } from &#x27;./ShortcutsModuleOptions&#x27;;
+import &#x27;../ext-shortcuts&#x27;;
 
 @Injectable({
     providedIn: &#x27;root&#x27;
@@ -672,18 +686,30 @@ export class ShortcutsService {
         @Inject(SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN)
         private options: ShortcutsModuleOptions,
         @Inject(DOCUMENT)
-        private document: Document
+        private document: Document,
+        @Optional()
+        private router?: Router
     ) {
         const { anchor, macroRegistry, keymap } &#x3D; this.options;
         this.macroRegistry &#x3D; macroRegistry || DEFAULT_MACRO_REGISTRY;
         this.keyboard &#x3D; new Keyboard({
             anchor: anchor,
-            registerEvents: !!anchor,
             macroRegistry: this.macroRegistry
         });
         if (keymap) {
             this.keyboard.keymap(keymap);
         }
+        router?.events.subscribe(event &#x3D;&gt; {
+            if (event instanceof NavigationStart) {
+                const contexts &#x3D; this.keyboard.getContexts();
+                for (const name in contexts) {
+                    const { matchRouter } &#x3D; contexts[name];
+                    if (matchRouter &amp;&amp; matchRouter(event)) {
+                        this.keyboard.switchContext(name);
+                    }
+                }
+            }
+        });
     }
     getKeyboard() {
         return this.keyboard;
@@ -713,6 +739,7 @@ export class ShortcutsService {
     </div>
 
 </div>
+
 
 
 
