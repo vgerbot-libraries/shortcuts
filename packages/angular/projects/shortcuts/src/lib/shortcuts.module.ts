@@ -17,13 +17,13 @@ import { ShortkeyDirective } from './shortkey.directive';
         ShortcutsDirective,
         ShortkeyDirective
     ],
-    imports: [],
     exports: [
         ShortcutsComponent,
         ShortcutsKeyComponent,
         ShortcutsAnchorDirective,
         ShortcutsDirective
-    ]
+    ],
+    imports: []
 })
 export class ShortcutsModule {
     static forRoot(
@@ -38,11 +38,11 @@ export class ShortcutsModule {
                 },
                 ShortcutsService,
                 {
+                    deps: [ShortcutsService],
                     provide: Keyboard,
                     useFactory: (shortcutService: ShortcutsService) => {
                         return shortcutService.getKeyboard();
-                    },
-                    deps: [ShortcutsService]
+                    }
                 }
             ]
         };

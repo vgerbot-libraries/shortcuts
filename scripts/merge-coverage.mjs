@@ -33,8 +33,8 @@ for (const cfile of coverageJSONFiles) {
 const transformedCoverageMap = await store.transformCoverage(coverageMap);
 
 const context = createContext({
-    dir: path.resolve(process.cwd(), 'coverage'),
-    coverageMap: transformedCoverageMap
+    coverageMap: transformedCoverageMap,
+    dir: path.resolve(process.cwd(), 'coverage')
 });
 
 const tree = context.getTree('pkg');

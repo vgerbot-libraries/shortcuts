@@ -16,13 +16,13 @@ export function createShortcutKeyDirectiveDefinition(
         mounted: function (el, binding, vnode) {
             vnode.detach = update(el, binding, vnode, directiveOptions);
         },
-        updated: function (el, binding, vnode) {
-            vnode.detach = update(el, binding, vnode, directiveOptions);
-        },
         unmounted: (el, binding, vnode) => {
             if (vnode.detach) {
                 vnode.detach();
             }
+        },
+        updated: function (el, binding, vnode) {
+            vnode.detach = update(el, binding, vnode, directiveOptions);
         }
     };
 }

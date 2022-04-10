@@ -9,8 +9,8 @@ export class EventEmitter<T> {
     private events: Array<EventPair<T>> = [];
     on(name: string, handler: EventHandler<T>) {
         const pair = {
-            name,
-            handler
+            handler,
+            name
         };
         this.events.push(pair);
         return () => {

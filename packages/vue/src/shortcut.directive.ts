@@ -18,6 +18,12 @@ export function createShortcutDirectiveDefinition(
             );
             (vnode as VNodeWithDetach).detach = detach;
         },
+        unbind: (el, binding, vnode) => {
+            const dnode = vnode as VNodeWithDetach;
+            if (dnode.detach) {
+                dnode.detach();
+            }
+        },
         update: function (el, binding, vnode) {
             const detach = update(
                 el,
@@ -26,12 +32,6 @@ export function createShortcutDirectiveDefinition(
                 directiveOptions
             );
             (vnode as VNodeWithDetach).detach = detach;
-        },
-        unbind: (el, binding, vnode) => {
-            const dnode = vnode as VNodeWithDetach;
-            if (dnode.detach) {
-                dnode.detach();
-            }
         }
     };
 }
@@ -84,14 +84,14 @@ function update(
     };
     if (keydown) {
         removeKeydownEvent = keyboard.on(actionName, listener, {
-            type: 'keydown',
-            once
+            once,
+            type: 'keydown'
         });
     }
     if (keyup) {
         removeKeyupEvent = keyboard.on(actionName, listener, {
-            type: 'keyup',
-            once
+            once,
+            type: 'keyup'
         });
     }
     return (): void => {

@@ -7,8 +7,8 @@ describe('Shortcut', () => {
         const shortcut = Shortcut.from('Ctrl+Shift+A');
         const event = mockKeyboardEvent('keydown', {
             ctrlKey: true,
-            shiftKey: true,
-            key: 'A'
+            key: 'A',
+            shiftKey: true
         });
         expect(shortcut.match(event)).toBeTruthy();
     });
@@ -92,8 +92,8 @@ describe('Shortcut', () => {
             ctrlCShortcut.match(
                 keydownEvent({
                     ctrlKey: true,
-                    shiftKey: true,
-                    key: 'C'
+                    key: 'C',
+                    shiftKey: true
                 })
             )
         ).toBeFalsy();

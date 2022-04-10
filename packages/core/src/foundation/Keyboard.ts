@@ -308,17 +308,17 @@ export class Keyboard {
             const options = commands[commandName];
             if (typeof options === 'string') {
                 this.commands[commandName] = {
-                    shortcut: Shortcut.from(options, this.registry),
-                    preventDefault: false,
                     event: ['keydown'],
-                    interceptors: []
+                    interceptors: [],
+                    preventDefault: false,
+                    shortcut: Shortcut.from(options, this.registry)
                 };
             } else {
                 this.commands[commandName] = {
-                    shortcut: Shortcut.from(options.shortcut, this.registry),
                     event: options.event || ['keydown'],
+                    interceptors: options.interceptors || [],
                     preventDefault: options.preventDefault !== false,
-                    interceptors: options.interceptors || []
+                    shortcut: Shortcut.from(options.shortcut, this.registry)
                 };
             }
         }
@@ -327,8 +327,8 @@ export class Keyboard {
         for (const name in contexts) {
             const contextOption = contexts[name];
             this.contexts[name] = {
-                commands: contextOption.commands,
                 abstract: contextOption.abstract === true,
+                commands: contextOption.commands,
                 fallbacks: contextOption.fallbacks || []
             };
         }

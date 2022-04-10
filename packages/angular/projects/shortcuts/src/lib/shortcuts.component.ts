@@ -14,8 +14,8 @@ import { ShortcutsService } from './shortcuts.service';
 
 @Component({
     selector: 'shortcuts[command]',
-    template: '<!-- &lt;shortcuts&gt; -->',
-    styles: []
+    styles: [],
+    template: '<!-- &lt;shortcuts&gt; -->'
 })
 export class ShortcutsComponent implements OnInit, OnDestroy, OnChanges {
     @Input('command') commandName!: string;

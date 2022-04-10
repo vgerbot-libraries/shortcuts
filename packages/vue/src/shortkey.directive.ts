@@ -23,6 +23,12 @@ export function createShortkeyDirectiveDefinition(
             );
             (vnode as VNodeWithDetach).detach = detach;
         },
+        unbind: (el, binding, vnode) => {
+            const dnode = vnode as VNodeWithDetach;
+            if (dnode.detach) {
+                dnode.detach();
+            }
+        },
         update: function (el, binding, vnode) {
             const detach = update(
                 el,
@@ -31,12 +37,6 @@ export function createShortkeyDirectiveDefinition(
                 directiveOptions
             );
             (vnode as VNodeWithDetach).detach = detach;
-        },
-        unbind: (el, binding, vnode) => {
-            const dnode = vnode as VNodeWithDetach;
-            if (dnode.detach) {
-                dnode.detach();
-            }
         }
     };
 }

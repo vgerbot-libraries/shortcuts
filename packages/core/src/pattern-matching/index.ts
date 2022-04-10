@@ -72,8 +72,8 @@ function _case<T>(
     });
     return createMatcher(
         cases.concat({
-            shortcuts,
-            handlerOrValue
+            handlerOrValue,
+            shortcuts
         })
     );
 }

@@ -23,6 +23,7 @@
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/ban-types": "off",
-        "arrow-parens": "off"
+        "arrow-parens": "off",
+        "sort-keys": "error"
     }
 }

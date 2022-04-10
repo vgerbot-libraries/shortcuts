@@ -18,14 +18,14 @@ export function createShortcutDirectiveDefinition(
             const detach = update(el, binding, vnode, directiveOptions);
             vnode.detach = detach;
         },
-        updated: function (el, binding, vnode) {
-            const detach = update(el, binding, vnode, directiveOptions);
-            vnode.detach = detach;
-        },
         unmounted: (el, binding, vnode) => {
             if (vnode.detach) {
                 vnode.detach();
             }
+        },
+        updated: function (el, binding, vnode) {
+            const detach = update(el, binding, vnode, directiveOptions);
+            vnode.detach = detach;
         }
     };
 }
@@ -78,14 +78,14 @@ function update(
     };
     if (keydown) {
         removeKeydownEvent = keyboard.on(commandName, listener, {
-            type: 'keydown',
-            once
+            once,
+            type: 'keydown'
         });
     }
     if (keyup) {
         removeKeyupEvent = keyboard.on(commandName, listener, {
-            type: 'keyup',
-            once
+            once,
+            type: 'keyup'
         });
     }
     return (): void => {

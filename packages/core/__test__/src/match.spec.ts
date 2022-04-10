@@ -25,8 +25,8 @@ describe('pattern-matching/match', () => {
         matcher(
             keydownEvent({
                 ctrlKey: true,
-                shiftKey: true,
-                key: 'C'
+                key: 'C',
+                shiftKey: true
             })
         );
 
@@ -73,8 +73,8 @@ describe('pattern-matching/match', () => {
         matcher(
             keydownEvent({
                 ctrlKey: true,
-                shiftKey: true,
-                key: 'C'
+                key: 'C',
+                shiftKey: true
             })
         );
 
@@ -85,8 +85,8 @@ describe('pattern-matching/match', () => {
         matcher(
             keydownEvent({
                 ctrlKey: true,
-                shiftKey: true,
-                key: 'D'
+                key: 'D',
+                shiftKey: true
             })
         );
 
