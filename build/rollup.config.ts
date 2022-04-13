@@ -19,20 +19,20 @@ const outputConfig = [
     .map(confs => createOutputConfig(confs[0], confs[1]));
 
 const rollupConfig: RollupOptions = {
-    output: outputConfig,
+    external: /node_modules|@shortcuts/,
     input: inputFile,
+    output: outputConfig,
     plugins: [
         nodeResolve({
             mainFields: ['module', 'browser', 'main']
         }),
         commonjs({
-            include: 'node_modules/**',
             ignore: [],
+            include: 'node_modules/**',
             sourceMap: false
         }),
         typescript()
-    ],
-    external: /node_modules|@shortcuts/
+    ]
 };
 
 export default rollupConfig;
@@ -44,11 +44,11 @@ function createOutputConfig(
 ): OutputOptions {
     return Object.assign(
         {
+            exports: 'named',
             file: path.resolve(process.cwd(), file),
             format,
-            sourcemap: true,
             name: pkg.library,
-            exports: 'named'
+            sourcemap: true
         },
         cfg || {}
     );

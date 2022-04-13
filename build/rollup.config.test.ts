@@ -12,13 +12,13 @@ const rollupConfig: RollupOptions = {
             mainFields: ['module', 'browser', 'main']
         }),
         commonjs({
-            include: 'node_modules/**',
             ignore: [],
+            include: 'node_modules/**',
             sourceMap: false
         }),
         typescript({
-            tsconfig: 'tsconfig.test.json',
-            clean: true
+            clean: true,
+            tsconfig: 'tsconfig.test.json'
         })
     ]
 };
