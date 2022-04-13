@@ -284,9 +284,6 @@ export class Keyboard {
             if (e.native.type !== type) {
                 return;
             }
-            if (this.paused) {
-                return;
-            }
             if (once) {
                 remove();
             }
