@@ -78,6 +78,10 @@ export class Keyboard {
         this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
     public fire(e: KeyboardEvent) {
+        if (this.paused) {
+            return;
+        }
+        this.keyboardEventStore.dispatch(e);
         const currentContext = this.activationContextManager.peak();
         if (currentContext === undefined) {
             return;
@@ -112,7 +116,7 @@ export class Keyboard {
     }
     public addInterceptor(interceptor: Interceptor, unshift: boolean = false) {
         const index = this.interceptors.indexOf(interceptor);
-        if (index > -1) {
+        if (index === -1) {
             if (unshift) {
                 this.interceptors.unshift(interceptor);
             } else {
@@ -128,13 +132,9 @@ export class Keyboard {
     }
     private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
-            if (this.paused) {
-                return;
-            }
             switch (e.type) {
                 case 'keydown':
                 case 'keyup':
-                    this.keyboardEventStore.dispatch(e);
                     this.fire(e);
                     break;
             }
@@ -229,6 +229,9 @@ export class Keyboard {
     getCommands() {
         return this.commands;
     }
+    getCommandsOfContext(contextName: string) {
+        return this.commandsOf(contextName);
+    }
     getContexts() {
         return this.contexts;
     }
@@ -240,6 +243,9 @@ export class Keyboard {
             );
         }
         return this.activationContextManager.push(context);
+    }
+    getCurrentContext() {
+        return this.activationContextManager.peak();
     }
     onShortcutKeyMatch(
         shortcut: string | Shortcut,
