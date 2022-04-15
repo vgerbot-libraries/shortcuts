@@ -234,7 +234,7 @@ describe('foundation/Keyboard', () => {
 
         expect(copyEventListener).toBeCalledTimes(3);
     });
-    it('inteceptor', () => {
+    it('interceptor', () => {
         const keyboard = new Keyboard();
         keyboard.keymap({
             commands: {
@@ -277,5 +277,62 @@ describe('foundation/Keyboard', () => {
         keyboard.fire(event);
 
         expect(copyEventListener).toBeCalled();
+    });
+    it('combine key', () => {
+        const keyboard = new Keyboard();
+        keyboard.keymap({
+            commands: {
+                preview: 'Ctrl+K,V'
+            },
+            contexts: {
+                edit: {
+                    commands: ['preview']
+                }
+            }
+        });
+
+        const ctrlK = keydownEvent({
+            ctrlKey: true,
+            key: 'K'
+        });
+        const v = keydownEvent({
+            key: 'V'
+        });
+
+        keyboard.switchContext('edit');
+
+        const previewEventListener = jest.fn();
+
+        keyboard.on('preview', previewEventListener);
+
+        const matchPartChangeListener = jest.fn();
+
+        keyboard.onMatchPartChange(matchPartChangeListener);
+
+        keyboard.fire(ctrlK);
+
+        expect(matchPartChangeListener).toBeCalled();
+
+        expect(previewEventListener).not.toBeCalled();
+
+        const partMatchShortcuts = keyboard.getPartMatchShortcuts();
+
+        expect(partMatchShortcuts.length).toBe(1);
+
+        expect(partMatchShortcuts[0].isPartMatch()).toBeTruthy();
+
+        keyboard.fire(v);
+
+        expect(previewEventListener).toBeCalled();
+
+        previewEventListener.mockReset();
+
+        keyboard.fire(ctrlK);
+
+        keyboard.resetAll();
+
+        keyboard.fire(v);
+
+        expect(previewEventListener).not.toBeCalled();
     });
 });
