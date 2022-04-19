@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Shortcuts</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css">
+  <!-- <link rel="stylesheet" href="//unpkg.com/docsify@latest/themes/buble.css"> -->
+
+</head>
+
+<body>
+<div id="app"></div>
+<script>
+  window.$docsify = {
+    name: 'Shortcuts',
+    repo: 'https://gitee.com/y1j2x34/shortcuts.git',
+    loadSidebar: true,
+    sidebarDisplayLevel: 1,
+    auto2top: true,
+    alias: {
+      '/.*/_sidebar.md': '/_sidebar.md'
+    },
+    pagination: {
+      previousText: '上一章节',
+      nextText: '下一章节',
+      crossChapter: true,
+      crossChapterText: true
+    },
+    markdown: {
+      renderer: {
+        code: function (code, lang) {
+          if (lang === 'drawio') {
+            if (window.drawioConverter) {
+              return window.drawioConverter(code);
+            } else {
+              return '<div class="drawio-code">' + code + '</div>';
+            }
+          } else {
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      }
+    },
+    themeable: {
+      readyTransition : true, // default
+      responsiveTables: true  // default
+    },
+    search: {
+      depth      : 3,
+      noData     : 'No results!',
+      placeholder: 'Search...'
+    }
+  }
+</script>
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.com/docsify-drawio/viewer.min.js"></script>
+<script src='//unpkg.com/docsify-drawio/drawio.js'></script>
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<script src="//unpkg.com/docsify-swimlanes-io/dist/docsify-swimlanes-io.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+<script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
+<script src="//unpkg.com/docsify-mermaid/dist/docsify-mermaid.js"></script>
+<script src="//unpkg.com/raphael"></script>
+<script src="//unpkg.com/underscore"></script>
+<script src="//unpkg.com/docsify-sequence-diagram/dist/docsify-sequence-diagram.min.js"></script>
+<script src="//unpkg.com/@hpcc-js/wasm/dist/index.min.js"></script>
+<script src="//unpkg.com/docsify-graphviz/dist/docsify-graphviz.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/docsify-themeable/dist/js/docsify-themeable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+
+</body>
+
+</html>

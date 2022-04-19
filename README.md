@@ -1,1 +1,2 @@
-# rollup-jest-boilerplate
+# Shortcuts
+
