@@ -1,0 +1,2 @@
+- `@shortcuts/core`
+    - [Getting start](./docs/core/getting-started.md)
