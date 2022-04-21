@@ -25,11 +25,15 @@
 
 ### Shortcuts 
 
-### Shortcuts thirdparty 
 |Name|Description|
 |--|--|
 |`@shortcuts/core`| Implements core functionalities |
-|`@shortcuts/rxjs` | Rxjs operator and observable |
+
+### Integrate third-party libraries
+
+|Name|Description|
+|--|--|
+|`@shortcuts/rxjs` | Rxjs operator and observable factory |
 |`@shortcuts/vue2` | Vue.js 2.0 plugin |
 |`@shortcuts/vue3` | Vue.js 3.0 plugin |
 |`@shortcuts/angular`| shortcuts library for Angular apps|

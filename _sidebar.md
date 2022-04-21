@@ -1,2 +1,2 @@
-- `@shortcuts/core`
-    - [Getting start](./docs/core/getting-started.md)
+- [@shortcuts/core](./docs/core/index.md)
+- [@shortcuts/angular](./docs/angular/index.md)
