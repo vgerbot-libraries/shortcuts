@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" title="Simple">
-  <link rel="stylesheet" href="assets/css/main.css">
 
   <!-- Alternate Stylesheets -->
   <link rel="stylesheet alternate" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css" title="Defaults">
@@ -35,9 +34,9 @@
     repo: 'https://github.com/y1j2x34/shortcuts.git',
     coverpage: './coverpage.md',
     auto2top: true,
-    loadSidebar: true,
+    loadSidebar: './sidebar.md',
     alias: {
-      '/.*/_sidebar.md': '/_sidebar.md'
+      '/.*/sidebar.md': './sidebar.md'
     },
     maxLevel   : 3,
     subMaxLevel: 3,
