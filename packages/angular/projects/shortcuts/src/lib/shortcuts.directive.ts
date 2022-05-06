@@ -8,7 +8,7 @@ import {
     OnInit,
     SimpleChanges
 } from '@angular/core';
-import { Keyboard, NativeEventType } from '@shortcuts/core';
+import { Keyboard, NativeEventType } from '@vgerbot/shortcuts-core';
 
 @Directive({
     selector: '[shortcut]'

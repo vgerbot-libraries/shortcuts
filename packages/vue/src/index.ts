@@ -1,4 +1,4 @@
-import { Keyboard, KeymapOptions, macro } from '@shortcuts/core';
+import { Keyboard, KeymapOptions, macro } from '@vgerbot/shortcuts-core';
 import Vue, { PluginObject, VueConstructor, PluginFunction } from 'vue';
 import './types';
 

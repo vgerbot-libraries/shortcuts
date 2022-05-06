@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsComponent } from './shortcuts.component';
 import { ShortcutsService } from './shortcuts.service';

@@ -9,7 +9,7 @@ import {
     Output,
     SimpleChanges
 } from '@angular/core';
-import { ShortcutEvent } from '@shortcuts/core';
+import { ShortcutEvent } from '@vgerbot/shortcuts-core';
 import { ShortcutsService } from './shortcuts.service';
 
 @Component({

@@ -41,8 +41,8 @@
         "rxjs": "~7.4.0",
         "tslib": "^2.3.0",
         "zone.js": "~0.11.4",
-        "@shortcuts/core": "1.0.0",
-        "@shortcuts/rxjs": "1.0.0"
+        "@vgerbot/shortcuts-core": "1.0.0",
+        "@vgerbot/shortcuts-rxjs": "1.0.0"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~13.1.2",

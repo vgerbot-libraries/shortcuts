@@ -4,7 +4,7 @@ import {
     addKeydownEventListener,
     addKeyupEventListener,
     combine
-} from '@shortcuts/core';
+} from '@vgerbot/shortcuts-core';
 import { DirectiveBinding } from 'vue/types/options';
 import { DirectiveOptions } from 'vue/types/umd';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';

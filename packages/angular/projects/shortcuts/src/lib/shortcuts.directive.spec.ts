@@ -1,5 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { ShortcutsModule } from './shortcuts.module';
 
 describe('Keyboard', () => {

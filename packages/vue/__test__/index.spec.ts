@@ -1,4 +1,4 @@
-describe('@shortcuts/vue', () => {
+describe('@vgerbot/shortcuts-vue', () => {
     it('TODO', () => {
         // TODO
     });

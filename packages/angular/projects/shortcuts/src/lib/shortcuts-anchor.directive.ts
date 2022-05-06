@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Inject, OnDestroy } from '@angular/core';
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 
 @Directive({
     selector: '[shortcuts-anchor]'

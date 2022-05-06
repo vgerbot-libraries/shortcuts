@@ -1,5 +1,5 @@
 {
-    "name": "@shortcuts/vue",
+    "name": "@vgerbot/shortcuts-vue",
     "version": "1.0.0",
     "description": "Shortcuts for Vue.js 3.x",
     "author": "y1j2x34 <y1j2x34@qq.com>",
@@ -26,7 +26,7 @@
         "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
     "dependencies": {
-        "@shortcuts/core": "^1.0.0",
+        "@vgerbot/shortcuts-core": "^1.0.0",
         "vue": "^3.2.26",
         "vue-router": "4"
     },

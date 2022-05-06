@@ -1,4 +1,4 @@
-import { KeymapOptions, MacroRegistry } from '@shortcuts/core';
+import { KeymapOptions, MacroRegistry } from '@vgerbot/shortcuts-core';
 
 export interface ShortcutsModuleOptions {
     keymap?: KeymapOptions;

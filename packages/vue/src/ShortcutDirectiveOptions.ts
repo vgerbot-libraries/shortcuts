@@ -1,4 +1,4 @@
-import { MacroRegistry } from '@shortcuts/core';
+import { MacroRegistry } from '@vgerbot/shortcuts-core';
 
 export interface ShortcutDirectiveOptions {
     directiveName: string;

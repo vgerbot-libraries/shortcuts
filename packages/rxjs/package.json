@@ -1,5 +1,5 @@
 {
-  "name": "@shortcuts/rxjs",
+  "name": "@vgerbot/shortcuts-rxjs",
   "version": "1.0.0",
   "description": "rxjs operator implementation",
   "keywords": [
@@ -34,7 +34,7 @@
     "url": "https://github.com/y1j2x34/shortcuts/issues"
   },
   "dependencies": {
-    "@shortcuts/core": "^1.0.0",
+    "@vgerbot/shortcuts-core": "^1.0.0",
     "rxjs": "^5.5.12"
   },
   "peerDependencies": {

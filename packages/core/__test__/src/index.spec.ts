@@ -1,6 +1,6 @@
 import { Shortcut } from '../../src';
 
-describe('@shortcuts/core', () => {
+describe('@vgerbot/shortcuts-core', () => {
     it('casual', () => {
         expect(Shortcut.from('Ctrl+Shift+A')).toBeDefined();
     });

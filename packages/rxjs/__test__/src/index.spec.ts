@@ -1,9 +1,9 @@
 import { fromShortcutKeyEvent, shortcut } from '../../src';
-import { mockKeyboardEvent } from '@shortcuts/core/__test__/mocks/mockKeyboardEvent';
+import { mockKeyboardEvent } from '@vgerbot/shortcuts-core/__test__/mocks/mockKeyboardEvent';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { take } from 'rxjs/operators';
 
-describe('@shortcuts/rxjs', () => {
+describe('@vgerbot/shortcuts-rxjs', () => {
     const event = mockKeyboardEvent('keydown', {
         key: 'Enter'
     });

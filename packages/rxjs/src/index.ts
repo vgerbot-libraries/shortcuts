@@ -1,11 +1,14 @@
 import { Observable } from 'rxjs';
-import { Keyboard, Shortcut } from '@shortcuts/core';
+import {
+    Keyboard,
+    Shortcut,
+    AddShortcutEventOptions
+} from '@vgerbot/shortcuts-core';
 import {
     EventTargetLike,
     SelectorMethodSignature
 } from 'rxjs/observable/FromEventObservable';
 import { fromEvent } from 'rxjs/observable/fromEvent';
-import { AddShortcutEventOptions } from '@shortcuts/core/lib/foundation/AddShortcutEventOptions';
 
 export function shortcut(shortcutKey: string) {
     const shortcutMatcher = Shortcut.from(shortcutKey);

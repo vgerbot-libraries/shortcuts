@@ -1,4 +1,4 @@
-import { ShortcutEvent } from '@shortcuts/core';
+import { ShortcutEvent } from '@vgerbot/shortcuts-core';
 import { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
 import { noop } from './noop';

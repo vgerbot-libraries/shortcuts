@@ -1,7 +1,7 @@
 import { ShortkeyDirective } from './shortkey.directive';
 import { inject, TestBed } from '@angular/core/testing';
 import { ElementRef } from '@angular/core';
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { ShortcutsModule } from './shortcuts.module';
 import { RouterModule } from '@angular/router';
 

@@ -1,4 +1,4 @@
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { noop } from './noop';
 import { RouteRecordName } from 'vue-router';
 
@@ -11,7 +11,7 @@ declare module '@vue/runtime-core' {
         detach: typeof noop;
     }
 }
-declare module '@shortcuts/core' {
+declare module '@vgerbot/shortcuts-core' {
     export interface FullContextOptions {
         router: RouteRecordName | undefined | null;
     }

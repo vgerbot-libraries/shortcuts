@@ -1,7 +1,7 @@
 import { NavigationStart } from '@angular/router';
-import '@shortcuts/core';
+import '@vgerbot/shortcuts-core';
 
-declare module '@shortcuts/core' {
+declare module '@vgerbot/shortcuts-core' {
     export interface FullContextOptions {
         matchRouter?: (e: NavigationStart) => boolean;
     }

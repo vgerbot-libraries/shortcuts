@@ -5,7 +5,7 @@
 # shortcuts ![Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg) [![Test](https://github.com/y1j2x34/shortcuts/actions/workflows/runtest.yml/badge.svg)](https://github.com/y1j2x34/shortcuts/actions/workflows/runtest.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/08bfda65b05c4df8a98e38847eed9712)](https://www.codacy.com/gh/y1j2x34/shortcuts/dashboard?utm_source=github.com&utm_medium=referral&utm_content=y1j2x34/shortcuts&utm_campaign=Badge_Coverage) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/42d93433752e4bc290caa81857498ccc)](https://app.codacy.com/gh/y1j2x34/shortcuts?utm_source=github.com&utm_medium=referral&utm_content=y1j2x34/shortcuts&utm_campaign=Badge_Grade_Settings) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-round)](https://github.com/prettier/prettier)
 <!-- 
 [![Discord](https://img.shields.io/discord/918876455457415229?color=7389d8&label=Discord&logo=discord&logoColor=fff)](https://discord.gg/9xSDF6ak) 
-![NPM](https://img.shields.io/npm/l/@shortcuts/core?style=social)
+![NPM](https://img.shields.io/npm/l/@vgerbot/shortcuts-core?style=social)
 -->
 
 
@@ -18,17 +18,17 @@ Keyboard shortcuts management library for javascript;
 - Matching function: Allows you quickly solve the shortcut key matching problem.
 - Key combos: E.g: `Ctrl+K,V`, `Ctrl+K,Ctrl+P`
 - Custom locale: Support for different type of Keyboard or you can customize key names with a locale that better matches your needs.
-- Frameworks/Libraries integration: We provide multiple libraries for quick integration, E.g: `@shortcuts/angular`, `@shortcuts/react`, `@shortcuts/rxjs`, `@shortcuts/vue2`, `@shortcuts/vue`
+- Frameworks/Libraries integration: We provide multiple libraries for quick integration, E.g: `@shortcuts/angular`, `@shortcuts/react`, `@vgerbot/shortcuts-rxjs`, `@vgerbot/shortcuts-vue2`, `@vgerbot/shortcuts-vue`
 
 ## :rocket: Documentation
 
-- [`@shortcuts/core`](./packages/core/README.md)
+- [`@vgerbot/shortcuts-core`](./packages/core/README.md)
   - [Developer Guide](./packages/core/README.md)
   - [API Reference](./packages/core/README.md)
-- [`@shortcuts/rxjs`](./packages/rxjs/README.md)
+- [`@vgerbot/shortcuts-rxjs`](./packages/rxjs/README.md)
 - [`@shortcuts/angular`](./packages/angular/README.md)
-- [`@shortcuts/vue2`](./packages/vue/README.md)
-- [`@shortcuts/vue3`](./packages/vue3/README.md)
+- [`@vgerbot/shortcuts-vue2`](./packages/vue/README.md)
+- [`@vgerbot/shortcuts-vue3`](./packages/vue3/README.md)
 
 ## :handshake: Found a bug? Missing a specific feature?
 

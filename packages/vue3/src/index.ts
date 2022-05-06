@@ -1,4 +1,4 @@
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { Plugin } from 'vue';
 import { useRouter } from 'vue-router';
 import { noop } from './noop';
@@ -6,7 +6,7 @@ import { PluginOptions } from './PluginOptions';
 import { createShortcutDirectiveDefinition } from './shortcut.directive';
 import { createShortcutKeyDirectiveDefinition } from './shortkey.directive';
 import './types';
-import { ShortcutEventTarget } from '@shortcuts/core';
+import { ShortcutEventTarget } from '@vgerbot/shortcuts-core';
 
 const SHORTCUT_DIRECTIVE_NAME = 'shortcut';
 const SHORTKEY_DIRECTIVE_NAME = 'shortkey';

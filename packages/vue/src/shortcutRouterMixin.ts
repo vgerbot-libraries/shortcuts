@@ -1,4 +1,4 @@
-import { Keyboard } from '@shortcuts/core';
+import { Keyboard } from '@vgerbot/shortcuts-core';
 import { ComponentOptions, VueConstructor } from 'vue';
 import { PluginOptions } from './PluginOptions';
 import { noop } from './noop';

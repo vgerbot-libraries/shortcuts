@@ -309,8 +309,7 @@ const alphabet = [
     'Y',
     'Z'
 ];
-alphabet.forEach(it => keyMacro(it));
-alphabet.map(it => it.toLowerCase()).forEach(it => keyMacro(it));
+alphabet.forEach(it => keyMacro_ins(it));
 
 const digits = Array(10)
     .fill(0)
