@@ -1,7 +1,7 @@
 {
     "name": "@vgerbot/shortcuts-core",
     "version": "1.0.0",
-    "description": "> TODO: description",
+    "description": "Keyboard shortcuts library",
     "author": "y1j2x34 <y1j2x34@qq.com>",
     "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/core#readme",
     "license": "MIT",
