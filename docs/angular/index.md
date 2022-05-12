@@ -1,3 +1,3 @@
-# @shortcuts/angular
+# @vgerbot/shortcuts-angular
 
 ## Install

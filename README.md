@@ -27,16 +27,16 @@
 
 |Name|Description|
 |--|--|
-|`@shortcuts/core`| Implements core functionalities |
+|`@vgerbot/shortcuts-core`| Implements core functionalities |
 
 ### Integrate third-party libraries
 
 |Name|Description|
 |--|--|
-|`@shortcuts/rxjs` | Rxjs operator and observable factory |
-|`@shortcuts/vue2` | Vue.js 2.0 plugin |
-|`@shortcuts/vue3` | Vue.js 3.0 plugin |
-|`@shortcuts/angular`| shortcuts library for Angular apps|
+|`@vgerbot/shortcuts-rxjs` | Rxjs operator and observable factory |
+|`@vgerbot/shortcuts-vue2` | Vue.js 2.0 plugin |
+|`@vgerbot/shortcuts-vue3` | Vue.js 3.0 plugin |
+|`@vgerbot/shortcuts-angular`| shortcuts library for Angular apps|
 
 ## :handshake: Found a bug? Missing a specific feature?
 
@@ -45,4 +45,4 @@ If you already found a solution to your problem, **I would love to review your p
 
 ## :blue_book: License
 
-The `@shortcuts` library is released under the under terms of the [MIT License](./LICENSE)
+The `@vgerbot/shortcuts-*` library is released under the under terms of the [MIT License](./LICENSE)

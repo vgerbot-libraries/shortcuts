@@ -1,4 +1,5 @@
-# @shortcuts/*
+# @vgerbot/shortcuts-*
+
 ![](./logo.png)
 
 >
