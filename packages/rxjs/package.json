@@ -1,43 +1,43 @@
 {
-  "name": "@vgerbot/shortcuts-rxjs",
-  "version": "1.0.0",
-  "description": "rxjs operator implementation",
-  "keywords": [
-    "shortcut",
-    "keyboard",
-    "hotkey"
-  ],
-  "author": "y1j2x34 <y1j2x34@qq.com>",
-  "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/rxjs#readme",
-  "license": "MIT",
-  "main": "lib/index.cjs.js",
-  "browser": "lib/index.umd.js",
-  "module": "lib/index.es.js",
-  "library": "shortcutrxjs",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmmirror.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/y1j2x34/shortcuts.git"
-  },
-  "scripts": {
-  },
-  "bugs": {
-    "url": "https://github.com/y1j2x34/shortcuts/issues"
-  },
-  "dependencies": {
-    "@vgerbot/shortcuts-core": "^1.0.0",
-    "rxjs": "^5.5.12"
-  },
-  "peerDependencies": {
-    "rxjs": ">=5.5.12"
-  }
+    "name": "@vgerbot/shortcuts-rxjs",
+    "version": "1.0.0",
+    "description": "Use @vgerbot/shortcut with RxJS",
+    "keywords": [
+        "shortcut",
+        "keyboard",
+        "hotkey"
+    ],
+    "author": "y1j2x34 <y1j2x34@qq.com>",
+    "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/rxjs#readme",
+    "license": "MIT",
+    "main": "lib/index.cjs.js",
+    "browser": "lib/index.umd.js",
+    "module": "lib/index.es.js",
+    "library": "shortcutrxjs",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.npmmirror.com/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/y1j2x34/shortcuts.git"
+    },
+    "scripts": {
+    },
+    "bugs": {
+        "url": "https://github.com/y1j2x34/shortcuts/issues"
+    },
+    "dependencies": {
+        "@vgerbot/shortcuts-core": "^1.0.0",
+        "rxjs": "^5.5.12"
+    },
+    "peerDependencies": {
+        "rxjs": ">=5.5.12"
+    }
 }
