@@ -34,7 +34,7 @@
         "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
     "dependencies": {
-        "@vgerbot/shortcuts-core": "^1.0.0",
+        "@vgerbot/shortcuts": "^1.0.0",
         "vue": "^2.6.14",
         "vue-router": "^3.5.3"
     },

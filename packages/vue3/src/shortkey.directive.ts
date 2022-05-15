@@ -4,7 +4,7 @@ import {
     combine,
     Shortcut,
     ShortcutEventImpl
-} from '@vgerbot/shortcuts-core';
+} from '@vgerbot/shortcuts';
 import { Directive, DirectiveBinding, VNode } from 'vue';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
 import './types';

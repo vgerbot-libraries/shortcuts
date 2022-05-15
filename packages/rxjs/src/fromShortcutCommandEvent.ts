@@ -3,7 +3,7 @@ import {
     Keyboard,
     AddShortcutEventOptions,
     ShortcutEvent
-} from '@vgerbot/shortcuts-core';
+} from '@vgerbot/shortcuts';
 
 export function fromShortcutCommandEvent(
     keyboard: Keyboard,

@@ -1,5 +1,5 @@
 import { fromShortcutKeyEvent, shortcut } from '../../src';
-import { mockKeyboardEvent } from '@vgerbot/shortcuts-core/__test__/mocks/mockKeyboardEvent';
+import { mockKeyboardEvent } from '@vgerbot/shortcuts/__test__/mocks/mockKeyboardEvent';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { take } from 'rxjs/operators';
 

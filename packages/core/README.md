@@ -1,27 +1,27 @@
-# @vgerbot/shortcuts-core
+# @vgerbot/shortcuts
 
-## Install
+## :electric_plug: Install
 
 ```bash
-$ npm i @vgerbot/shortcuts-core
+$ npm i @vgerbot/shortcuts
 $ # or
-$ yarn add @vgerbot/shortcuts-core
+$ yarn add @vgerbot/shortcuts
 ```
 
 Then import/require the module:
 
 ```js
-const { ... } = require('@vgerbot/shortcuts-core');
+const { } = require('@vgerbot/shortcuts');
 // or
-import { ... } from '@vgerbot/shortcuts-core';
+import { } from '@vgerbot/shortcuts';
 ```
 
-## Usage
+## :books: Usage
 
 ### Pattern matching
 
 ```js
-import { match } from '@vgerbot/shortcuts-core';
+import { match } from '@vgerbot/shortcuts';
 const matcher = match
     .case('Ctrl+A', (shortcutEvent) => console.log(`Pressed '${shortcutEvent.shortcut}`)) // output when matching: Pressed 'Ctrl+A'
     .case('Mod+Z', (shortcutEvent) => console.log(`Pressed '${shortcutEvent.shortcut}'`)) // output when matching: Mac: `Pressed 'Meta+A'`, Win,Linux:`Pressed 'Ctrl+A'`
@@ -35,7 +35,7 @@ document.body.addEventListener('keydown', e => {
 You may omit `.case`.
 
 ```js
-import { match } from '@vgerbot/shortcuts-core';
+import { match } from '@vgerbot/shortcuts';
 const matcher = match('Ctrl+A', (shortcutEvent) => console.log(`Pressed '${shortcutEvent.shortcut}`)) // output when matching: Pressed 'Ctrl+A'
     ('Mod+Z', (shortcutEvent) => console.log(`Pressed '${shortcutEvent.shortcut}'`)) // output when matching: Mac: `Pressed 'Meta+A'`, Win,Linux:`Pressed 'Ctrl+A'`
     ('Ctrl+P|Shift+Ctrl+P', (shortcutEvent) => console.log(`Pressed '${shortcutEvent.shortcut}`)) // output when matching: `Pressed 'Ctrl+P'` or `Pressed 'Shift+Ctrl+P'`
@@ -48,7 +48,7 @@ document.body.addEventListener('keydown', e => {
 The result of the callback will be returned from matcher.
 
 ```js
-import { match } from '@vgerbot/shortcuts-core';
+import { match } from '@vgerbot/shortcuts';
 const matcher =
     match('Ctrl+A', () => 'A')
     ('Ctrl+B', () => 'B')
@@ -61,7 +61,7 @@ document.body.addEventListener('keydown', e => {
 If you provide a value instead of a function, that value will be returnd
 
 ```js
-import { match } from '@vgerbot/shortcuts-core';
+import { match } from '@vgerbot/shortcuts';
 const matcher =
     match('Ctrl+A', 'A')
     ('Ctrl+B', 'B')
@@ -74,7 +74,7 @@ document.body.addEventListener('keydown', e => {
 You may use the `.else` to define a callback  if no shortcut pattern matches.
 
 ```js
-import { match } from '@vgerbot/shortcuts-core';
+import { match } from '@vgerbot/shortcuts';
 const matcher =
     match('Ctrl+A', 'A')
     ('Ctrl+B', 'B')
@@ -87,7 +87,7 @@ document.body.addEventListener('keydown', e => {
 ### Keymap configuration
 
 ```js
-import { Keyboard } from '@vgerbot/shortcuts-core';
+import { Keyboard } from '@vgerbot/shortcuts';
 const keyboard = new Keyboard();
 keyboard.keymap({
   commands: {
@@ -170,7 +170,7 @@ If a shortcut command is not found in current activated context, by default, the
 ### Shortcut macros
 
 ```js
-import { Keyboard, macros } from '@vgerbot/shortcuts-core';
+import { Keyboard, macros } from '@vgerbot/shortcuts';
 const keyboard = new Keyboard();
 // These following defines the macros globally.
 macros('Mod', isMac ? 'Meta' : 'Ctrl');

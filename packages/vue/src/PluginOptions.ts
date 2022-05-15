@@ -1,4 +1,4 @@
-import { MacroRegistry, KeymapOptions } from '@vgerbot/shortcuts-core';
+import { MacroRegistry, KeymapOptions } from '@vgerbot/shortcuts';
 
 export type PluginOptions = {
     keymap?: KeymapOptions;

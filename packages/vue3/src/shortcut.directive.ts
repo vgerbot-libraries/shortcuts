@@ -1,4 +1,4 @@
-import { ShortcutEvent } from '@vgerbot/shortcuts-core';
+import { ShortcutEvent } from '@vgerbot/shortcuts';
 import {
     Directive,
     DirectiveBinding,

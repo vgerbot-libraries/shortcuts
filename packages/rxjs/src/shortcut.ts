@@ -1,4 +1,4 @@
-import { Shortcut } from '@vgerbot/shortcuts-core';
+import { Shortcut } from '@vgerbot/shortcuts';
 import { Observable } from 'rxjs';
 
 export function shortcut(shortcutKey: string) {

@@ -11,7 +11,7 @@
         "pretest": "npm run clear -- ./report",
         "test": "lerna exec -- zx ../../scripts/test.mjs",
         "posttest": "zx ./scripts/merge-coverage.mjs",
-        "test:debug": "lerna exec --scope @vgerbot/shortcuts-core -- cross-env ENV=DEBUG zx ../../scripts/test.mjs",
+        "test:debug": "lerna exec --scope @vgerbot/shortcuts -- cross-env ENV=DEBUG zx ../../scripts/test.mjs",
         "postinstall": "husky install",
         "release": "standard-version",
         "commit": "commit",

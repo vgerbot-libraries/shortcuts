@@ -6,7 +6,7 @@ import {
     OnDestroy,
     OnInit
 } from '@angular/core';
-import { Keyboard, Shortcut } from '@vgerbot/shortcuts-core';
+import { Keyboard, Shortcut } from '@vgerbot/shortcuts';
 
 @Directive({
     selector: '[shortkey]'

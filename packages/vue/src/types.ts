@@ -1,5 +1,5 @@
 export type {} from 'vue-router';
-import { Keyboard, KeymapOptions, macro } from '@vgerbot/shortcuts-core';
+import { Keyboard, KeymapOptions, macro } from '@vgerbot/shortcuts';
 
 declare module 'vue' {
     export default interface Vue {
@@ -9,7 +9,7 @@ declare module 'vue' {
     }
 }
 
-declare module '@vgerbot/shortcuts-core' {
+declare module '@vgerbot/shortcuts' {
     export interface FullContextOptions {
         routerNameOrPath?: string;
     }

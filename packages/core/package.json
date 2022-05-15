@@ -1,9 +1,9 @@
 {
-    "name": "@vgerbot/shortcuts-core",
+    "name": "@vgerbot/shortcuts",
     "version": "1.0.0",
     "description": "Keyboard shortcuts library",
     "author": "y1j2x34 <y1j2x34@qq.com>",
-    "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/core#readme",
+    "homepage": "https://github.com/vgerbot-libraries/shortcuts/tree/main/packages/core#readme",
     "license": "MIT",
     "main": "lib/index.cjs.js",
     "browser": "lib/index.umd.js",
@@ -28,7 +28,7 @@
     "scripts": {
     },
     "bugs": {
-        "url": "https://github.com/y1j2x34/shortcuts/issues"
+        "url": "https://github.com/vgerbot-libraries/shortcuts/issues"
     },
     "dependencies": {
         "browser-detect": "^0.2.28"

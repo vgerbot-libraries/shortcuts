@@ -1,5 +1,5 @@
 import { Injector } from '@angular/core';
-import { AddShortcutEventOptions } from '@vgerbot/shortcuts-core';
+import { AddShortcutEventOptions } from '@vgerbot/shortcuts';
 import { ShortcutsService } from './shortcuts.service';
 
 interface IShortcutsEventHandler {

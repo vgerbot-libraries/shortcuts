@@ -11,7 +11,7 @@ import {
     alias,
     ShortcutEventHandler,
     AddShortcutEventOptions
-} from '@vgerbot/shortcuts-core';
+} from '@vgerbot/shortcuts';
 import { Router, NavigationStart } from '@angular/router';
 import { SHORTCUTS_MODULE_OPTIONS_PROVIDER_TOKEN } from './injection.tokens';
 import { ShortcutsModuleOptions } from './ShortcutsModuleOptions';

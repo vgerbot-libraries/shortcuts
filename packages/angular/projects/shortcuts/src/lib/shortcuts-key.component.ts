@@ -5,11 +5,7 @@ import {
     Input,
     Output
 } from '@angular/core';
-import {
-    Shortcut,
-    ShortcutEvent,
-    ShortcutEventImpl
-} from '@vgerbot/shortcuts-core';
+import { Shortcut, ShortcutEvent, ShortcutEventImpl } from '@vgerbot/shortcuts';
 
 @Component({
     selector: 'shortcuts[key]',
