@@ -8,7 +8,6 @@
 ![NPM](https://img.shields.io/npm/l/@vgerbot/shortcuts?style=social)
 -->
 
-
 Keyboard shortcuts management library for javascript;
 
 ## :muscle: Features
@@ -20,15 +19,9 @@ Keyboard shortcuts management library for javascript;
 - Custom locale: Support for different type of Keyboard or you can customize key names with a locale that better matches your needs.
 - Frameworks/Libraries integration: We provide multiple libraries for quick integration, E.g: `@shortcuts/angular`, `@shortcuts/react`, `@vgerbot/shortcuts-rxjs`, `@vgerbot/shortcuts-vue2`, `@vgerbot/shortcuts-vue`
 
-## :rocket: Documentation
+## :rocket: Documentations
 
-- [`@vgerbot/shortcuts`](./packages/core/README.md)
-  - [Developer Guide](./packages/core/README.md)
-  - [API Reference](./packages/core/README.md)
-- [`@vgerbot/shortcuts-rxjs`](./packages/rxjs/README.md)
-- [`@shortcuts/angular`](./packages/angular/README.md)
-- [`@vgerbot/shortcuts-vue2`](./packages/vue/README.md)
-- [`@vgerbot/shortcuts-vue3`](./packages/vue3/README.md)
+<https://vgerbot-libraries.github.io/shortcuts/>
 
 ## :handshake: Found a bug? Missing a specific feature?
 
