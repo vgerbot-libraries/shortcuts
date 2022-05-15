@@ -1,12 +1,16 @@
 import { Observable } from 'rxjs';
-import { Keyboard, AddShortcutEventOptions } from '@vgerbot/shortcuts-core';
+import {
+    Keyboard,
+    AddShortcutEventOptions,
+    ShortcutEvent
+} from '@vgerbot/shortcuts-core';
 
 export function fromShortcutCommandEvent(
     keyboard: Keyboard,
     command: string,
     options: Partial<AddShortcutEventOptions> = {}
 ) {
-    return new Observable(subscriber => {
+    return new Observable<ShortcutEvent>(subscriber => {
         return keyboard.on(
             command,
             event => {
