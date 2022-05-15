@@ -59,13 +59,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ShortcutsModule.html" data-type="entity-link" >ShortcutsModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' : 'data-target="#xs-components-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' }>
+                                            'data-target="#components-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' : 'data-target="#xs-components-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' :
-                                            'id="xs-components-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' :
+                                            'id="xs-components-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' }>
                                             <li class="link">
                                                 <a href="components/ShortcutsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ShortcutsComponent</a>
                                             </li>
@@ -76,13 +76,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#directives-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' : 'data-target="#xs-directives-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' }>
+                                        'data-target="#directives-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' : 'data-target="#xs-directives-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' }>
                                         <span class="icon ion-md-code-working"></span>
                                         <span>Directives</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' :
-                                        'id="xs-directives-links-module-ShortcutsModule-910ba1036fc81b95055e38faa6b4717f9d0d1ba2cb73e9f879a0cf085fc17aa44b1a756999a6f5718de7e39a84a1150d225327d08081a98ab96bcc1944354d2a"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="directives-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' :
+                                        'id="xs-directives-links-module-ShortcutsModule-94254dc9de06764f9b4d48fbe36d0d3def25dca4eb6d098c6efde77518e23588d959bd8de4ffa5fc4ad0b72fba3416b2325f7a007211749b07f97a70438a46e9"' }>
                                         <li class="link">
                                             <a href="directives/ShortcutsAnchorDirective.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ShortcutsAnchorDirective</a>
                                         </li>

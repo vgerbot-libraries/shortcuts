@@ -8,7 +8,7 @@
 ![NPM](https://img.shields.io/npm/l/@vgerbot/shortcuts?style=social)
 -->
 
-Keyboard shortcuts management library for javascript;
+A powerful and lightweight JavaScript library implemented by TypeScript for handling keyboard shortcuts.
 
 ## :muscle: Features
 

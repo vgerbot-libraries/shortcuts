@@ -1,7 +1,7 @@
 {
     "name": "@vgerbot/shortcuts",
     "version": "1.0.0",
-    "description": "Keyboard shortcuts library",
+    "description": "A powerful and lightweight JS library implemented by TypeScript for handling keyboard shortcuts.",
     "author": "y1j2x34 <y1j2x34@qq.com>",
     "homepage": "https://github.com/vgerbot-libraries/shortcuts/tree/main/packages/core#readme",
     "license": "MIT",

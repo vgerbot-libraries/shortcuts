@@ -260,7 +260,7 @@
         </div>
 
         <section>
-
+    
     <h3 id="methods">
         Methods
     </h3>
@@ -297,7 +297,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -333,7 +333,7 @@
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -363,13 +363,13 @@ import { ShortkeyDirective } from &#x27;./shortkey.directive&#x27;;
         ShortcutsDirective,
         ShortkeyDirective
     ],
-    imports: [],
     exports: [
         ShortcutsComponent,
         ShortcutsKeyComponent,
         ShortcutsAnchorDirective,
         ShortcutsDirective
-    ]
+    ],
+    imports: []
 })
 export class ShortcutsModule {
     static forRoot(
@@ -384,11 +384,11 @@ export class ShortcutsModule {
                 },
                 ShortcutsService,
                 {
+                    deps: [ShortcutsService],
                     provide: Keyboard,
                     useFactory: (shortcutService: ShortcutsService) &#x3D;&gt; {
                         return shortcutService.getKeyboard();
-                    },
-                    deps: [ShortcutsService]
+                    }
                 }
             ]
         };

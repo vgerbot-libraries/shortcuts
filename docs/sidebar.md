@@ -1,0 +1,7 @@
+- **Packages**
+  - [@vgerbot/shortcuts](./packages/core/README.md)
+  - [@vgerbot/shortcuts-rxjs](./packages/rxjs/README.md)
+- **API Reference**
+    - <a target="about:blank" href="./packages/core/docs/index.html">🔗@vgerbot/shortcuts</a>
+    - <a target="about:blank" href="./packages/rxjs/docs/index.html">🔗@vgerbot/shortcuts-rxjs</a>
+    - <a target="about:blank" href="./packages/angular/documentation/index.html">🔗@vgerbot/shortcuts-angular</a>
