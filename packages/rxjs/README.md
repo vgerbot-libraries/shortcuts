@@ -18,16 +18,17 @@ npm install @vgerbot/shortcuts-rxjs
 
 ## :muscle: What's in it?
 
-### :factory: Observable factories
+- Rxjs Observable factories: `fromShortcutKeyEvent` and `fromShortcutCommandEvent`;
+- Rxjs operator: `shortcut`.
 
-#### [`fromShortcutKeyEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutKeyEvent.ts)
+### :factory: [`fromShortcutKeyEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutKeyEvent.ts)
 
 > Creates an Observable that emits event of a specific shortcuts coming from the given event target.
 >
 
 `fromShortcutKeyEvent<T>(target: EventTargetLike, shortcutKey: string, eventName?: 'keydown' | 'keyup', options?: EventListenerOptions, selector?: SelectorMethodSignature<T>): Observable<T>;`
 
-##### Parameters
+#### Parameters
 
 |    Parameter     | Type                                                   | Description                                                                               |
 |:----------------:|:-------------------------------------------------------|:------------------------------------------------------------------------------------------|
@@ -37,11 +38,11 @@ npm install @vgerbot/shortcuts-rxjs
 |    `options`     | 	`EventListenerOptions`&#124;`((...args: any[]) => T)` | Optional. Default is `undefined`. Options to pass through to addEventListener             |
 | `resultSelector` | `(...args: any[]) => T`                                | Optional. Default is undefined.                                                           |
 
-##### Returns
+#### Returns
 
 `Observable<T>`.
 
-##### Example
+#### Example
 
 ```ts
 import { fromShortcutKeyEvent } from '@vgerbot/shortcuts-rxjs';
@@ -52,14 +53,14 @@ fromShortcutKeyEvent(document, 'Ctrl+Alt+K', 'keydown', true)
     });
 ```
 
-#### [`fromShortcutCommandEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutCommandEvent.ts)
+### :factory: [`fromShortcutCommandEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutCommandEvent.ts)
 
 > Creates an Observable that emits event of a specific command coming from the Keyboard instance.
 >
 
 `fromShortcutCommandEvent(keyboard: Keyboard, command: string, options?: Partial<AddShortcutEventOptions>): Observable<ShortcutEvent>`
 
-##### Parameters
+#### Parameters
 
 | Parameter  | Type                               | Description                                  |
 |:----------:|:-----------------------------------|:---------------------------------------------|
@@ -67,11 +68,11 @@ fromShortcutKeyEvent(document, 'Ctrl+Alt+K', 'keydown', true)
 | `command`  | `string`                           | Shortcut command                             |
 | `options`  | `Partial<AddShortcutEventOptions>` | Optional. Options to pass to `Keyboard.on()` |
 
-##### Returns
+#### Returns
 
 `Observable<ShortcutEvent>`.
 
-##### Example
+#### Example
 
 ```ts
 import { Keyboard } from '@vgerbot/shortcuts';
