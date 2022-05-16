@@ -10,7 +10,7 @@
 
 A powerful and lightweight JavaScript library implemented by TypeScript for handling keyboard shortcuts.
 
-## :muscle: Features
+## 💪 Features
 
 - Configurable shortcut keys: Make your app support custom shortcut keys;
 - Context management: It ensures that your shortcut keys fire in the correct context;
@@ -19,15 +19,15 @@ A powerful and lightweight JavaScript library implemented by TypeScript for hand
 - Custom locale: Support for different type of Keyboard or you can customize key names with a locale that better matches your needs.
 - Frameworks/Libraries integration: We provide multiple libraries for quick integration, E.g: `@shortcuts/angular`, `@shortcuts/react`, `@vgerbot/shortcuts-rxjs`, `@vgerbot/shortcuts-vue2`, `@vgerbot/shortcuts-vue`
 
-## :rocket: Documentations
+## 🚀 Documentations
 
 <https://vgerbot-libraries.github.io/shortcuts/>
 
-## :handshake: Found a bug? Missing a specific feature?
+## 🤝 Found a bug? Missing a specific feature?
 
 Feel free to **file a new issue** with a respective title and description on the [y1j2x34/shortcuts](https://github.com/y1j2x34/shortcuts) repository.
 If you already found a solution to your problem, **I would love to review your pull request**!
 
-## :blue_book: License
+## 📘 License
 
 The `@shortcuts` library is released under the under terms of the [MIT License](./LICENSE)

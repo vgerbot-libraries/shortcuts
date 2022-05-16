@@ -12,7 +12,7 @@
 
 A package that contains `@vgerbot/shortcut` helper functions for use with RxJS.
 
-## :electric_plug: Install
+## 🔌 Install
 
 Install the package using NPM:
 
@@ -20,12 +20,12 @@ Install the package using NPM:
 npm install @vgerbot/shortcuts-rxjs
 ```
 
-## :muscle: What's in it?
+## 💪 What's in it?
 
 - Rxjs Observable factories: `fromShortcutKeyEvent` and `fromShortcutCommandEvent`;
 - Rxjs operator: `shortcut`.
 
-### :factory: [`fromShortcutKeyEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutKeyEvent.ts)
+### 🏭 [`fromShortcutKeyEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutKeyEvent.ts)
 
 > Creates an Observable that emits event of a specific shortcuts coming from the given event target.
 >
@@ -57,7 +57,7 @@ fromShortcutKeyEvent(document, 'Ctrl+Alt+K', 'keydown', true)
     });
 ```
 
-### :factory: [`fromShortcutCommandEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutCommandEvent.ts)
+### 🏭 [`fromShortcutCommandEvent`](https://github.com/y1j2x34/shortcuts/blob/HEAD/packages/rxjs/src/fromShortcutCommandEvent.ts)
 
 > Creates an Observable that emits event of a specific command coming from the Keyboard instance.
 >
@@ -104,7 +104,7 @@ fromShortcutCommandEvent(keyboard, 'reload')
 
 ```
 
-### :rainbow: `shortcut` operator for use with pipes
+### 🌈 `shortcut` operator for use with pipes
 
 > Filter items emitted by the source Observable created by `fromEvent' to listen for keyboard events and only emit items that match the specified shortcut key.
 > 
@@ -121,6 +121,6 @@ fromShortcutCommandEvent(keyboard, 'reload')
 
 `MonoTypeOperatorFunction<T>`: A function that returns an Observable that emits items matching the shortcut key.
 
-## :blue_book: License
+## 📘 License
 
 The `@vgerbot/shortcuts-rxjs` library is released under the under terms of the [MIT License](../../LICENSE)

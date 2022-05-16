@@ -1,6 +1,6 @@
 # @vgerbot/shortcuts
 
-## :electric_plug: Install
+## 🔌 Install
 
 ```bash
 $ npm i @vgerbot/shortcuts
@@ -16,7 +16,7 @@ const { } = require('@vgerbot/shortcuts');
 import { } from '@vgerbot/shortcuts';
 ```
 
-## :books: Usage
+## 📚 Usage
 
 ### Pattern matching
 
