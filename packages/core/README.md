@@ -6,7 +6,7 @@
 
 ## 🔌 Install
 
-Using npm/yarn:
+### Using npm/yarn
 
 ```bash
 $ npm i @vgerbot/shortcuts
@@ -22,16 +22,26 @@ const { } = require('@vgerbot/shortcuts');
 import { } from '@vgerbot/shortcuts';
 ```
 
-Using jsdelivr CDN:
+### Using CDN
+
+1. jsDelivr:
+
+    ```html
+    <script src="//cdn.jsdelivr.net/npm/@vgerbot/shortcuts/lib/index.min.js"></script>
+    ```
+
+2. unpkg
+
+    ```html
+    <script src="//unpkg.com/@vgerbot/shortcuts/lib/index.min.js"></script>
+    ```
+
+Then:
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/@vgerbot/shortcuts/lib/index.min.js"></script>
-```
-
-Using unpkg CDN:
-
-```html
-<script src="//unpkg.com/@vgerbot/shortcuts/lib/index.min.js"></script>
+<script>
+    const {} = Shortcuts;
+</script>
 ```
 
 ## 📚 Usage
