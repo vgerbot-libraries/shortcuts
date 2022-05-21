@@ -2,13 +2,16 @@
     "name": "@vgerbot/shortcuts",
     "version": "1.0.0",
     "description": "A powerful and lightweight JS library implemented by TypeScript for handling keyboard shortcuts.",
-    "author": "y1j2x34 <y1j2x34@qq.com>",
-    "homepage": "https://github.com/vgerbot-libraries/shortcuts/tree/main/packages/core#readme",
+    "author": "JianXin Yang",
+    "homepage": "https://vgerbot-libraries.github.io/shortcuts/",
     "license": "MIT",
     "main": "lib/index.cjs.js",
     "browser": "lib/index.umd.js",
     "module": "lib/index.es.js",
+    "jsdelivr": "lib/index.min.js",
+    "unpkg": "lib/index.min.js",
     "typings": "lib/index.d.ts",
+    "types": "lib/index.d.ts",
     "library": "Shortcuts",
     "directories": {
         "lib": "lib",
@@ -23,7 +26,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/y1j2x34/shortcuts.git"
+        "url": "git+https://github.com/vgerbot-libraries/shortcuts.git"
     },
     "scripts": {
     },

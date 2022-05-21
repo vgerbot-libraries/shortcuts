@@ -21,7 +21,8 @@
         "build": "lerna exec -- zx ../../scripts/build.mjs",
         "pregendoc": "npm run clear -- ./docs",
         "gendoc": "lerna exec -- zx ../../scripts/typedoc.mjs",
-        "clear": "lerna exec -- zx ../../scripts/clear.mjs"
+        "clear": "lerna exec -- zx ../../scripts/clear.mjs",
+        "prepublish": "npm run build && npm run gendoc"
     },
     "lint-staged": {
         "*.{mjs,js,ts,tsx}": [
