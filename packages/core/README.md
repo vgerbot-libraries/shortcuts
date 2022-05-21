@@ -1,6 +1,12 @@
-# @vgerbot/shortcuts
+<p align="center">
+    <img src="https://github.com/vgerbot-libraries/shortcuts/raw/master/logo.png" width="128" height="128"/>
+</p>
+
+# @vgerbot/shortcuts [![Test](https://github.com/y1j2x34/shortcuts/actions/workflows/runtest.yml/badge.svg)](https://github.com/y1j2x34/shortcuts/actions/workflows/runtest.yml) [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/08bfda65b05c4df8a98e38847eed9712)](https://www.codacy.com/gh/y1j2x34/shortcuts/dashboard?utm_source=github.com&utm_medium=referral&utm_content=y1j2x34/shortcuts&utm_campaign=Badge_Coverage) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/42d93433752e4bc290caa81857498ccc)](https://app.codacy.com/gh/y1j2x34/shortcuts?utm_source=github.com&utm_medium=referral&utm_content=y1j2x34/shortcuts&utm_campaign=Badge_Grade_Settings) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-round)](https://github.com/prettier/prettier)
 
 ## 🔌 Install
+
+Using npm/yarn:
 
 ```bash
 $ npm i @vgerbot/shortcuts
@@ -14,6 +20,18 @@ Then import/require the module:
 const { } = require('@vgerbot/shortcuts');
 // or
 import { } from '@vgerbot/shortcuts';
+```
+
+Using jsdelivr CDN:
+
+```html
+<script src="//cdn.jsdelivr.net/npm/@vgerbot/shortcuts/lib/index.min.js"></script>
+```
+
+Using unpkg CDN:
+
+```html
+<script src="//unpkg.com/@vgerbot/shortcuts/lib/index.min.js"></script>
 ```
 
 ## 📚 Usage
