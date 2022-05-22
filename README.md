@@ -25,7 +25,7 @@ A powerful and lightweight JavaScript library implemented by TypeScript for hand
 
 ## 🤝 Found a bug? Missing a specific feature?
 
-Feel free to **file a new issue** with a respective title and description on the [y1j2x34/shortcuts](https://github.com/y1j2x34/shortcuts) repository.
+Feel free to **file a new issue** with a respective title and description on the [vgerbot-libraries/shortcuts](https://github.com/vgerbot-libraries/shortcuts) repository.
 If you already found a solution to your problem, **I would love to review your pull request**!
 
 ## 📘 License
