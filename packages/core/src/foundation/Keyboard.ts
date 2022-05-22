@@ -29,7 +29,10 @@ import { combine } from '../common/combine';
 import { ShortcutEventTarget } from './ShortcutEventTarget';
 
 export class Keyboard {
-    private readonly commands: Record<string, ParsedCommandOptions> = {};
+    private readonly commands: Record<
+        string,
+        ParsedCommandOptions | undefined
+    > = {};
     private readonly contexts: Record<string, FullContextOptions> = {};
     private readonly activationContextManager = new ActivationContextManager();
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
@@ -308,24 +311,32 @@ export class Keyboard {
     }
     private recordCommands(commands: Record<string, CommandOptions | string>) {
         for (const commandName in commands) {
-            const options = commands[commandName];
+            let options = commands[commandName];
             if (typeof options === 'string') {
-                this.commands[commandName] = {
-                    event: ['keydown'],
-                    interceptors: [],
-                    preventDefault: false,
-                    shortcut: Shortcut.from(options, this.registry)
-                };
-            } else {
-                this.commands[commandName] = {
-                    event: options.event || ['keydown'],
-                    interceptors: options.interceptors || [],
-                    preventDefault: options.preventDefault !== false,
-                    shortcut: Shortcut.from(options.shortcut, this.registry)
+                options = {
+                    shortcut: options
                 };
             }
+            const prevOptions = this.commands[commandName];
+            this.commands[commandName] = {
+                event: trinomial(options.event, prevOptions?.event, [
+                    'keydown'
+                ]),
+                interceptors: trinomial(
+                    options.interceptors,
+                    prevOptions?.interceptors,
+                    []
+                ),
+                preventDefault: trinomial(
+                    options.preventDefault,
+                    prevOptions?.preventDefault,
+                    true
+                ),
+                shortcut: Shortcut.from(options.shortcut, this.registry)
+            };
         }
     }
+
     private recordContexts(contexts: Record<string, ContextOptions>) {
         for (const name in contexts) {
             const contextOption = contexts[name];
@@ -336,4 +347,15 @@ export class Keyboard {
             };
         }
     }
+}
+
+function trinomial<T>(
+    newValue: T | undefined,
+    prevValue: T | undefined,
+    defaultValue: T
+): T {
+    if (newValue === undefined) {
+        return prevValue === undefined ? defaultValue : prevValue;
+    }
+    return newValue;
 }

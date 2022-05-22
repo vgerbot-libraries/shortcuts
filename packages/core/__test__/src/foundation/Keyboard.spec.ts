@@ -61,6 +61,58 @@ describe('foundation/Keyboard', () => {
         expect(keyboard.getCommandOptions('delete')).toBeDefined();
         expect(keyboard.getCommandOptions('undo')).toBeDefined();
     });
+    it('overrite keymap', () => {
+        const keyboard = new Keyboard();
+        const interceptorsOfRedoCommand = [
+            () => {
+                //
+            }
+        ];
+        keyboard.keymap({
+            commands: {
+                combine: 'Ctrl+M',
+                redo: {
+                    event: ['keydown'],
+                    interceptors: interceptorsOfRedoCommand,
+                    preventDefault: false,
+                    shortcut: 'Ctrl+Y'
+                },
+                undo: {
+                    event: ['keyup'],
+                    preventDefault: true,
+                    shortcut: 'Ctrl+Z'
+                }
+            }
+        });
+        expect(keyboard.getCommandOptions('redo')?.preventDefault).toBeFalsy();
+
+        keyboard.keymap({
+            commands: {
+                redo: {
+                    interceptors: [],
+                    preventDefault: true,
+                    shortcut: 'Ctrl+Shift+Z'
+                }
+            }
+        });
+        const commandOptionsOfRedo = keyboard.getCommandOptions('redo');
+        expect(commandOptionsOfRedo?.shortcut?.str()).toBe('Ctrl+Shift+Z');
+
+        expect(commandOptionsOfRedo?.preventDefault).toBeTruthy();
+        expect(commandOptionsOfRedo?.interceptors).toEqual([]);
+
+        keyboard.keymap({
+            commands: {
+                undo: {
+                    interceptors: interceptorsOfRedoCommand,
+                    shortcut: 'Ctrl+Z'
+                }
+            }
+        });
+        expect(keyboard.getCommandOptions('undo')?.interceptors).toBe(
+            interceptorsOfRedoCommand
+        );
+    });
     it('switchContext', () => {
         const keyboard = new Keyboard();
         keyboard.keymap({
