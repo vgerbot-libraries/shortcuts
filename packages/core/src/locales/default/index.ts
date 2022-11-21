@@ -24,7 +24,7 @@ import { MetaKeyMatcher } from '../../matchers/MetaKeyMatcher';
 import { or } from '../../matchers/or';
 import { ShiftKeyMatcher } from '../../matchers/ShiftKeyMatcher';
 
-// Modifire keys
+// Modifier keys
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values#modifier_keys
 
 macro('Alt', new AltKeyMatcher());
