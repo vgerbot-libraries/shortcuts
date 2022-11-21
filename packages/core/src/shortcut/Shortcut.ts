@@ -10,6 +10,7 @@ import { MacroKeyboardEventMatcher } from '../macro/MacroKeyboardEventMatcher';
 export class Shortcut implements KeyboardEventMatcher {
     static keyDeliminator: string = '+';
     static comboDeliminator: string = ',';
+
     static from(
         combinationKey: string,
         registry: MacroRegistry = DEFAULT_MACRO_REGISTRY
@@ -23,11 +24,14 @@ export class Shortcut implements KeyboardEventMatcher {
             )
         );
     }
+
     private matchTimes: number = 0;
     private readonly parts: ShortcutPart[];
+
     private constructor(matchers: KeyboardEventMatcher[][]) {
         this.parts = matchers.map(it => new ShortcutPart(it));
     }
+
     match(event: KeyboardEvent): boolean {
         if (this.isFullMatch()) {
             this.reset();
@@ -43,23 +47,34 @@ export class Shortcut implements KeyboardEventMatcher {
         }
         return false;
     }
+
     reset() {
         this.matchTimes = 0;
     }
+
     isPartMatch() {
         return this.matchTimes != this.parts.length;
     }
+
     isFullMatch() {
         return this.matchTimes === this.parts.length;
     }
+
     str() {
         return this.parts.map(it => it.str()).join(Shortcut.comboDeliminator);
     }
+
     partiallyMatchesStr() {
         return this.parts
             .slice(0, this.matchTimes)
             .map(it => it.str())
             .join(Shortcut.comboDeliminator);
+    }
+
+    equals(other: Shortcut) {
+        return !this.parts.some((it, i) => {
+            return it.equals(other.parts[i]);
+        });
     }
 }
 
@@ -69,6 +84,7 @@ class ShortcutPart {
     private alt: boolean = false;
     private meta: boolean = false;
     private readonly matchersWithoutModifiers: KeyboardEventMatcher[];
+
     constructor(private readonly allMatchers: KeyboardEventMatcher[]) {
         this.matchersWithoutModifiers = allMatchers.filter(matcher => {
             if (matcher instanceof MacroKeyboardEventMatcher) {
@@ -90,6 +106,7 @@ class ShortcutPart {
             return true;
         });
     }
+
     match(event: KeyboardEvent): boolean {
         if (this.ctrl !== event.ctrlKey) {
             return false;
@@ -107,9 +124,23 @@ class ShortcutPart {
             matcher.match(event)
         );
     }
+
     str() {
         return this.allMatchers
             .map(it => it.str())
             .join(Shortcut.keyDeliminator);
+    }
+
+    equals(other: ShortcutPart | undefined) {
+        return (
+            !other ||
+            (this.ctrl === other.ctrl &&
+                this.alt === other.alt &&
+                this.shift === other.shift &&
+                this.meta === other.meta &&
+                !this.allMatchers.some((it, i) => {
+                    return it.str() !== other.allMatchers[i]?.str();
+                }))
+        );
     }
 }

@@ -49,6 +49,7 @@ export class Keyboard {
     private readonly _unregisterEvents = () => {
         // PASS
     };
+
     constructor(
         options: KeyboardConstructorOptions = {
             anchor: document
@@ -62,24 +63,29 @@ export class Keyboard {
         this.registerEvents();
         this.partiallyMatchShortcutsStore.dispatch(new Set<Shortcut>());
     }
+
     public setAnchor(anchor: ShortcutEventTarget) {
         this._unregisterEvents();
         this.anchor = anchor;
         this.keyboardEventStore.reset();
         this.registerEvents();
     }
+
     public getAnchor() {
         return this.anchor;
     }
+
     public getPartMatchShortcuts() {
         return Array.from(this._getPartiallyMatchShortcuts());
     }
+
     public resetAll() {
         const shortcuts = this._getPartiallyMatchShortcuts();
         shortcuts.forEach(it => it.reset());
         shortcuts.clear();
         this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
+
     public fire(e: KeyboardEvent) {
         if (this.paused) {
             return;
@@ -117,6 +123,7 @@ export class Keyboard {
             this.partiallyMatchShortcutsStore.dispatch(shortcuts);
         }
     }
+
     public addInterceptor(interceptor: Interceptor, unshift: boolean = false) {
         const index = this.interceptors.indexOf(interceptor);
         if (index === -1) {
@@ -133,6 +140,7 @@ export class Keyboard {
             }
         };
     }
+
     private registerEvents() {
         const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
             switch (e.type) {
@@ -157,6 +165,7 @@ export class Keyboard {
         const clear = this.destroyer.record(removeListener);
         return combine(removeListener, clear);
     }
+
     private commandsOf(context: string): string[] {
         const fallbackContexts: FullContextOptions[] = [];
         const obtainFallbackContexts = (ctx: string) => {
@@ -178,6 +187,7 @@ export class Keyboard {
             (it, index) => allCommands.indexOf(it) === index
         );
     }
+
     private executeCommand(
         e: KeyboardEvent,
         commandName: string,
@@ -208,14 +218,17 @@ export class Keyboard {
         const shortcutEvent = new ShortcutEventImpl(commandOptions.shortcut, e);
         runner(shortcutEvent);
     }
+
     private _getPartiallyMatchShortcuts() {
         return this.partiallyMatchShortcutsStore.getData() as Set<Shortcut>;
     }
+
     onMatchPartChange(callback: (shortcuts: Set<Shortcut>) => void) {
         return this.partiallyMatchShortcutsStore.subscribe(shortcuts => {
             callback(shortcuts as Set<Shortcut>);
         });
     }
+
     keymap(keymapOptions: KeymapOptions) {
         const commands = keymapOptions.commands;
         if (commands) {
@@ -226,18 +239,23 @@ export class Keyboard {
             this.recordContexts(contexts);
         }
     }
+
     getCommandOptions(commandName: string): ParsedCommandOptions | undefined {
         return this.commands[commandName];
     }
+
     getCommands() {
         return this.commands;
     }
+
     getCommandsOfContext(contextName: string) {
         return this.commandsOf(contextName);
     }
+
     getContexts() {
         return this.contexts;
     }
+
     switchContext(context: string) {
         const contextOptions = this.contexts[context];
         if (!contextOptions) {
@@ -247,9 +265,11 @@ export class Keyboard {
         }
         return this.activationContextManager.push(context);
     }
+
     getCurrentContext() {
         return this.activationContextManager.peak();
     }
+
     onShortcutKeyMatch(
         shortcut: string | Shortcut,
         handler: ShortcutEventHandler,
@@ -275,6 +295,7 @@ export class Keyboard {
         });
         return unsubscribe;
     }
+
     on(
         command: string,
         handler: ShortcutEventHandler,
@@ -300,15 +321,30 @@ export class Keyboard {
         });
         return remove;
     }
+
     pause() {
         this.paused = true;
     }
+
     resume() {
         this.paused = false;
     }
+
     destroy() {
         this.destroyer.destroy();
     }
+
+    isShortcutOccupied(shortcut: string | Shortcut, contextName?: string) {
+        const oShortcut =
+            typeof shortcut === 'string' ? Shortcut.from(shortcut) : shortcut;
+        const commands = contextName
+            ? this.commandsOf(contextName)
+            : Object.keys(this.commands);
+        return commands.some(commandName => {
+            return !!this.commands[commandName]?.shortcut?.equals(oShortcut);
+        });
+    }
+
     private recordCommands(commands: Record<string, CommandOptions | string>) {
         for (const commandName in commands) {
             let options = commands[commandName];
