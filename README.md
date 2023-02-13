@@ -19,7 +19,7 @@ A powerful and lightweight JavaScript library, implemented using TypeScript, for
 - Matching Function: 💡 Quickly solve the shortcut key matching problem with ease.
 - Key Combinations: 🎹 Supports key combinations like Ctrl + K, V and Ctrl + K, Ctrl + P.
 - Custom Locale: 🌎 Supports different keyboard types and allows you to customize key names to better match your needs.
-- Framework/Library Integration: 🔗 Provides multiple libraries for quick integration, such as @shortcuts/angular, @shortcuts/react, @vgerbot/shortcuts-rxjs, @vgerbot/shortcuts-vue2, and @vgerbot/shortcuts-vue.
+- Framework/Library Integration: 🔗 Provides multiple libraries for quick integration, such as [@vgerbot/shortcuts-angular](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/angular/projects/shortcuts), [@vgerbot/shortcuts-react](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/react), [@vgerbot/shortcuts-rxjs](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/rxjs), [@vgerbot/shortcuts-vue2](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/vue), and [@vgerbot/shortcuts-vue](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/vue3).
 
 ## 📚 Documentation:
 Check out the library's official documentation at https://vgerbot-libraries.github.io/shortcuts/.
