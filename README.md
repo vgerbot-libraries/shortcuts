@@ -10,26 +10,23 @@
 ![NPM](https://img.shields.io/npm/l/@vgerbot/shortcuts?style=social)
 -->
 
-A powerful and lightweight JavaScript library implemented by TypeScript for handling keyboard shortcuts.
+A powerful and lightweight JavaScript library, implemented using TypeScript, for managing keyboard shortcuts.
 
-## 💪 Features
+## ⚡️ Key Features:
 
-- Configurable shortcut keys: Make your app support custom shortcut keys;
-- Context management: It ensures that your shortcut keys fire in the correct context;
-- Matching function: Allows you quickly solve the shortcut key matching problem.
-- Key combos: E.g: `Ctrl+K,V`, `Ctrl+K,Ctrl+P`
-- Custom locale: Support for different type of Keyboard or you can customize key names with a locale that better matches your needs.
-- Frameworks/Libraries integration: We provide multiple libraries for quick integration, E.g: `@shortcuts/angular`, `@shortcuts/react`, `@vgerbot/shortcuts-rxjs`, `@vgerbot/shortcuts-vue2`, `@vgerbot/shortcuts-vue`
+- Configurable Shortcut Keys: 🔨 Your app can now support custom shortcut keys with ease.
+- Context Management: 🔒 Your shortcut keys will only fire in the correct context, ensuring smooth operation.
+- Matching Function: 💡 Quickly solve the shortcut key matching problem with ease.
+- Key Combinations: 🎹 Supports key combinations like Ctrl + K, V and Ctrl + K, Ctrl + P.
+- Custom Locale: 🌎 Supports different keyboard types and allows you to customize key names to better match your needs.
+- Framework/Library Integration: 🔗 Provides multiple libraries for quick integration, such as @shortcuts/angular, @shortcuts/react, @vgerbot/shortcuts-rxjs, @vgerbot/shortcuts-vue2, and @vgerbot/shortcuts-vue.
 
-## 🚀 Documentations
+## 📚 Documentation:
+Check out the library's official documentation at https://vgerbot-libraries.github.io/shortcuts/.
 
-<https://vgerbot-libraries.github.io/shortcuts/>
+## 💬 Found a bug? Missing a specific feature?
+Feel free to file a new issue with a respective title and description on the [vgerbot-libraries/shortcuts](https://github.com/vgerbot-libraries/shortcuts) repository. If you have already found a solution to your problem, we would be happy to review your pull request! 🤝
 
-## 🤝 Found a bug? Missing a specific feature?
+## 📖 License:
 
-Feel free to **file a new issue** with a respective title and description on the [vgerbot-libraries/shortcuts](https://github.com/vgerbot-libraries/shortcuts) repository.
-If you already found a solution to your problem, **I would love to review your pull request**!
-
-## 📘 License
-
-The `@shortcuts` library is released under the under terms of the [MIT License](./LICENSE)
+The @vgerbot/shortcuts library is released under the terms of the [MIT License](./LICENSE).
