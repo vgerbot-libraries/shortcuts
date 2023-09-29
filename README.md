@@ -10,7 +10,9 @@
 ![NPM](https://img.shields.io/npm/l/@vgerbot/shortcuts?style=social)
 -->
 
-A powerful and lightweight JavaScript library, implemented using TypeScript, for managing keyboard shortcuts.
+A powerful keyboard shortcuts library implemented in TypeScript, enabling flexible and configurable keyboard shortcut functionality.
+
+`@vgerbot/shortcuts` is an open-source project written in TypeScript that aims to simplify the implementation of flexible and configurable keyboard shortcuts for your applications. Whether you are developing web apps, desktop apps, this library provides a simple yet powerful way to manage and handle user input for keyboard shortcuts.
 
 ## ⚡️ Key Features:
 
@@ -22,11 +24,13 @@ A powerful and lightweight JavaScript library, implemented using TypeScript, for
 - Framework/Library Integration: 🔗 Provides multiple libraries for quick integration, such as [@vgerbot/shortcuts-angular](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/angular/projects/shortcuts), [@vgerbot/shortcuts-react](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/react), [@vgerbot/shortcuts-rxjs](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/rxjs), [@vgerbot/shortcuts-vue2](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/vue), and [@vgerbot/shortcuts-vue](https://github.com/vgerbot-libraries/shortcuts/tree/master/packages/vue3).
 
 ## 📚 Documentation:
+
 Check out the library's official documentation at https://vgerbot-libraries.github.io/shortcuts/.
 
 ## 💬 Found a bug? Missing a specific feature?
+
 Feel free to file a new issue with a respective title and description on the [vgerbot-libraries/shortcuts](https://github.com/vgerbot-libraries/shortcuts) repository. If you have already found a solution to your problem, we would be happy to review your pull request! 🤝
 
 ## 📖 License:
 
-The @vgerbot/shortcuts library is released under the terms of the [MIT License](./LICENSE).
+The `@vgerbot/shortcuts` library is released under the terms of the [MIT License](./LICENSE).
