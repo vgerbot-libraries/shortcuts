@@ -1,11 +1,12 @@
 import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
+import { ShortcutKeyboardEvent } from '../foundation/ShortcutKeyboardEvent';
 
 class KeyMatcher implements KeyboardEventMatcher {
     constructor(
         private readonly key: string,
         private readonly caseSensitive: boolean
     ) {}
-    match(event: KeyboardEvent): boolean {
+    match(event: ShortcutKeyboardEvent): boolean {
         if (this.caseSensitive) {
             return event.key === this.key;
         }

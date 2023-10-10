@@ -2,11 +2,12 @@ import {
     KeyboardEventMatcher,
     KeyboardEventMatcherFn
 } from '../foundation/KeyboardEventMatcher';
+import { ShortcutKeyboardEvent } from '../foundation/ShortcutKeyboardEvent';
 
 export function and(
     ...matchers: Array<KeyboardEventMatcher | KeyboardEventMatcherFn>
 ) {
-    return (keyboardEvent: KeyboardEvent) => {
+    return (keyboardEvent: ShortcutKeyboardEvent) => {
         return (
             matchers.length > 0 &&
             matchers.every(it => {

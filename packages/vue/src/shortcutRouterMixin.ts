@@ -2,6 +2,7 @@ import { Keyboard } from '@vgerbot/shortcuts';
 import { ComponentOptions, VueConstructor } from 'vue';
 import { PluginOptions } from './PluginOptions';
 import { noop } from './noop';
+import type VueRouter from 'vue-router';
 
 export function shortcutRouterMixin(
     VueConstr: VueConstructor<Vue>,
@@ -9,7 +10,7 @@ export function shortcutRouterMixin(
 ): ComponentOptions<Vue> {
     return {
         created(this: Vue) {
-            const router = this.$router;
+            const router = (this as any).$router as VueRouter;
             if (!router || router.app !== this) {
                 return;
             }

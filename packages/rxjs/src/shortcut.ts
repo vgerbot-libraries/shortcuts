@@ -1,4 +1,4 @@
-import { Shortcut } from '@vgerbot/shortcuts';
+import { Shortcut, ShortcutKeyboardEvent } from '@vgerbot/shortcuts';
 import { Observable } from 'rxjs';
 
 export function shortcut(shortcutKey: string) {
@@ -9,7 +9,7 @@ export function shortcut(shortcutKey: string) {
                 event => {
                     if (
                         event instanceof KeyboardEvent &&
-                        shortcutMatcher.match(event)
+                        shortcutMatcher.match(event as ShortcutKeyboardEvent)
                     ) {
                         subscriber.next(event);
                     }

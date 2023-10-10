@@ -5,7 +5,12 @@ import {
     Input,
     Output
 } from '@angular/core';
-import { Shortcut, ShortcutEvent, ShortcutEventImpl } from '@vgerbot/shortcuts';
+import {
+    Shortcut,
+    ShortcutEvent,
+    ShortcutEventImpl,
+    ShortcutKeyboardEvent
+} from '@vgerbot/shortcuts';
 
 @Component({
     selector: 'shortcuts[key]',
@@ -47,7 +52,7 @@ export class ShortcutsKeyComponent {
             event.stopPropagation();
         }
         const shortcut = Shortcut.from(this.shortcutKey);
-        if (shortcut.match(event)) {
+        if (shortcut.match(event as ShortcutKeyboardEvent)) {
             const shortcutEvent = new ShortcutEventImpl(shortcut, event);
             this.emitter.emit(shortcutEvent);
         }

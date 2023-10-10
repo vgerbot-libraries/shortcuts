@@ -1,5 +1,7 @@
+import { ShortcutKeyboardEvent } from './ShortcutKeyboardEvent';
+
 export interface KeyboardEventMatcher {
-    match(event: KeyboardEvent): boolean;
+    match(event: ShortcutKeyboardEvent | KeyboardEvent): boolean;
 
     /**
      * @desc Help text for this matcher.
@@ -9,5 +11,5 @@ export interface KeyboardEventMatcher {
     str(): string;
 }
 export interface KeyboardEventMatcherFn {
-    (event: KeyboardEvent): boolean;
+    (event: ShortcutKeyboardEvent): boolean;
 }

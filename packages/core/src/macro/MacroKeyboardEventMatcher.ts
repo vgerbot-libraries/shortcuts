@@ -1,4 +1,5 @@
 import { KeyboardEventMatcher } from '../foundation/KeyboardEventMatcher';
+import { ShortcutKeyboardEvent } from '../foundation/ShortcutKeyboardEvent';
 
 export class MacroKeyboardEventMatcher {
     constructor(
@@ -6,7 +7,7 @@ export class MacroKeyboardEventMatcher {
         readonly origin: KeyboardEventMatcher
     ) {}
 
-    match(event: KeyboardEvent): boolean {
+    match(event: ShortcutKeyboardEvent): boolean {
         return this.origin.match(event);
     }
 

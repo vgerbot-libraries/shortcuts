@@ -2,11 +2,12 @@ import {
     KeyboardEventMatcher,
     KeyboardEventMatcherFn
 } from '../foundation/KeyboardEventMatcher';
+import { ShortcutKeyboardEvent } from '../foundation/ShortcutKeyboardEvent';
 
 export function or(
     ...matchers: Array<KeyboardEventMatcher | KeyboardEventMatcherFn>
 ): KeyboardEventMatcherFn {
-    return (keyboardEvent: KeyboardEvent) => {
+    return (keyboardEvent: ShortcutKeyboardEvent) => {
         return matchers.some(it => {
             if (typeof it === 'function') {
                 return it(keyboardEvent);

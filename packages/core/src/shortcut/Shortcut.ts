@@ -6,6 +6,7 @@ import { AltKeyMatcher } from '../matchers/AltKeyMatcher';
 import { ShiftKeyMatcher } from '../matchers/ShiftKeyMatcher';
 import { MetaKeyMatcher } from '../matchers/MetaKeyMatcher';
 import { MacroKeyboardEventMatcher } from '../macro/MacroKeyboardEventMatcher';
+import { ShortcutKeyboardEvent } from '../foundation/ShortcutKeyboardEvent';
 
 export class Shortcut implements KeyboardEventMatcher {
     static keyDeliminator: string = '+';
@@ -32,7 +33,7 @@ export class Shortcut implements KeyboardEventMatcher {
         this.parts = matchers.map(it => new ShortcutPart(it));
     }
 
-    match(event: KeyboardEvent): boolean {
+    match(event: ShortcutKeyboardEvent | KeyboardEvent): boolean {
         if (this.isFullMatch()) {
             this.reset();
         }
@@ -107,7 +108,7 @@ class ShortcutPart {
         });
     }
 
-    match(event: KeyboardEvent): boolean {
+    match(event: ShortcutKeyboardEvent | KeyboardEvent): boolean {
         if (this.ctrl !== event.ctrlKey) {
             return false;
         }

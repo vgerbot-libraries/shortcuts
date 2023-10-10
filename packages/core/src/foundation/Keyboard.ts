@@ -27,6 +27,7 @@ import {
 } from '../common/addKeyboardEventListener';
 import { combine } from '../common/combine';
 import { ShortcutEventTarget } from './ShortcutEventTarget';
+import { ShortcutKeyboardEvent } from './ShortcutKeyboardEvent';
 
 export class Keyboard {
     private readonly commands: Record<
@@ -43,8 +44,8 @@ export class Keyboard {
     private readonly registry: MacroRegistry;
     private readonly partiallyMatchShortcutsStore: Store<Set<Shortcut>> =
         new Store();
-    private readonly keyboardEventStore: Store<KeyboardEvent> =
-        new Store<KeyboardEvent>();
+    private readonly keyboardEventStore: Store<ShortcutKeyboardEvent> =
+        new Store<ShortcutKeyboardEvent>();
     private readonly interceptors: Interceptor[] = [];
     private readonly _unregisterEvents = () => {
         // PASS
@@ -86,7 +87,7 @@ export class Keyboard {
         this.partiallyMatchShortcutsStore.dispatch(shortcuts);
     }
 
-    public fire(e: KeyboardEvent) {
+    public fire(e: ShortcutKeyboardEvent) {
         if (this.paused) {
             return;
         }
@@ -142,14 +143,14 @@ export class Keyboard {
     }
 
     private registerEvents() {
-        const keyboardEventHandler = <EventListener>((e: KeyboardEvent) => {
+        const keyboardEventHandler = (e: ShortcutKeyboardEvent) => {
             switch (e.type) {
                 case 'keydown':
                 case 'keyup':
                     this.fire(e);
                     break;
             }
-        });
+        };
         const removeListener = combine(
             addKeydownEventListener(
                 this.anchor,
@@ -189,7 +190,7 @@ export class Keyboard {
     }
 
     private executeCommand(
-        e: KeyboardEvent,
+        e: ShortcutKeyboardEvent,
         commandName: string,
         commandOptions: ParsedCommandOptions
     ) {

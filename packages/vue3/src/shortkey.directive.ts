@@ -3,7 +3,8 @@ import {
     addKeyupEventListener,
     combine,
     Shortcut,
-    ShortcutEventImpl
+    ShortcutEventImpl,
+    ShortcutKeyboardEvent
 } from '@vgerbot/shortcuts';
 import { Directive, DirectiveBinding, VNode } from 'vue';
 import { ShortcutDirectiveOptions } from './ShortcutDirectiveOptions';
@@ -51,7 +52,7 @@ function update(
     const keydown = modKeydown || keyup || true;
     const shortcut = Shortcut.from(shortcutKey, directiveOptions.macroRegistry);
 
-    const listener = (event: KeyboardEvent) => {
+    const listener = (event: ShortcutKeyboardEvent) => {
         if (!shortcut.match(event)) {
             return;
         }
