@@ -15,7 +15,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version:
-          - 14.x
+          - 16.19.0
     steps:
       - name: CHECKOUT GIT REPOSIRORY
         uses: actions/checkout@v2
