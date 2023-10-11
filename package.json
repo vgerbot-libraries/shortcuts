@@ -71,5 +71,21 @@
     "bugs": {
         "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
-    "homepage": "https://github.com/y1j2x34/shortcuts#readme"
+    "homepage": "https://github.com/y1j2x34/shortcuts#readme",
+    "workspaces": {
+        "packages": [
+            "./packages/*"
+        ],
+        "nohoist": [
+            "rxjs",
+            "@angular/*",
+            "@angular-devkit/*",
+            "ng-packagr",
+            "vue",
+            "vue-router",
+            "@vue/*",
+            "@compodoc/*",
+            "jasmine-core"
+        ]
+    }
 }
