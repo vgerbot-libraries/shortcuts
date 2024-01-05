@@ -33,9 +33,10 @@ describe('@vgerbot/shortcuts-rxjs', () => {
         const promise = fromShortcutKeyEvent(
             document.body,
             'Enter',
-            'keydown',
-            {},
-            selector
+            {
+                selector,
+                eventName: 'keydown'
+            }
         )
             .pipe(take(1))
             .toPromise();

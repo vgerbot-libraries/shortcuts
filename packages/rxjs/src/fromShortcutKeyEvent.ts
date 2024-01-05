@@ -8,14 +8,28 @@ import { shortcut } from './shortcut';
 export function fromShortcutKeyEvent<T>(
     target: EventTargetLike,
     shortcutKey: string,
-    eventName: 'keydown' | 'keyup' = 'keydown',
-    options: EventListenerOptions = {},
-    selector?: SelectorMethodSignature<T>
-) {
-    if (selector) {
-        return fromEvent<T>(target, eventName, options, selector).pipe(
-            shortcut(shortcutKey)
-        );
+    options?: {
+        eventListenerOptions?: EventListenerOptions | boolean;
+        eventName?: 'keydown' | 'keyup';
+        selector?: SelectorMethodSignature<T>;
     }
-    return fromEvent<T>(target, eventName, options).pipe(shortcut(shortcutKey));
+) {
+    const { eventListenerOptions, eventName, selector } = Object.assign(
+        {
+            eventListenerOptions: {},
+            eventName: 'keydown'
+        },
+        options || {}
+    );
+    if (selector) {
+        return fromEvent<T>(
+            target,
+            eventName,
+            eventListenerOptions,
+            selector
+        ).pipe(shortcut(shortcutKey));
+    }
+    return fromEvent<T>(target, eventName, eventListenerOptions).pipe(
+        shortcut(shortcutKey)
+    );
 }
