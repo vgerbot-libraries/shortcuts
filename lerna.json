@@ -1,21 +1,5 @@
 {
-    "packages": [
-        "packages/*"
-    ],
-    "command": {
-        "bootstrap": {
-            "nohoist": [
-                "rxjs",
-                "@angular/*",
-                "@angular-devkit/*",
-                "ng-packagr",
-                "vue",
-                "vue-router",
-                "@vue/*",
-                "@compodoc/*",
-                "jasmine-core"
-            ]
-        }
-    },
-    "version": "1.0.0"
+    "useWorkspaces": true,
+    "version": "1.0.0",
+    "npmClient": "yarn"
 }
