@@ -1,22 +1,29 @@
 import { useKeyboard } from '../hooks';
 import type { Shortcut } from '@vgerbot/shortcuts';
 
-type EventOptions =
+type ForwardEventOptions =
     | {
           eventType: 'click' | 'mouseup' | 'mousedown' | 'dblclick';
-          eventInitDict: MouseEventInit;
+          eventInitDict?: MouseEventInit;
       }
     | {
           eventType: 'pointerdown' | 'pointerup';
-          eventInitDict: PointerEventInit;
+          eventInitDict?: PointerEventInit;
       }
     | {
           eventType: 'touchstart' | 'touchend';
-          eventInitDict: TouchEventInit;
+          eventInitDict?: TouchEventInit;
       };
 
+export type ForwardCommandOptions = ForwardEventOptions & {
+    command: string;
+};
+export type ForwardShortcutOptions = ForwardEventOptions & {
+    shortcut: string | Shortcut;
+};
+
 /**
- * const shortcutKey = useKeyOfCommand('cut')
+ * const shortcut = useShortcutOfCommand('cut')
  * <ContextMenu>
  *  <ContextMenuItem use:command={{
  *      command: 'cut',
@@ -24,29 +31,11 @@ type EventOptions =
  *    }} extra={shortcutKey()}></ContextMenuItem>
  * </ContextMenu>
  */
+export function forward(el: HTMLElement, options: ForwardCommandOptions): void;
+export function forward(el: HTMLElement, options: ForwardShortcutOptions): void;
 export function forward(
     el: HTMLElement,
-    options: EventOptions & {
-        command: string;
-    }
-): void;
-export function forward(
-    el: HTMLElement,
-    options: EventOptions & {
-        shortcut: string | Shortcut;
-    }
-): void;
-export function forward(
-    el: HTMLElement,
-    options: EventOptions &
-        (
-            | {
-                  command: string;
-              }
-            | {
-                  shortcut: string | Shortcut;
-              }
-        )
+    options: ForwardCommandOptions | ForwardShortcutOptions
 ) {
     useKeyboard(keyboard => {
         const forwardHandler = () => {
@@ -64,7 +53,7 @@ export function forward(
     });
 }
 
-function createManualEvent(options: EventOptions) {
+function createManualEvent(options: ForwardEventOptions) {
     switch (options.eventType) {
         case 'click':
         case 'mousedown':
