@@ -37,6 +37,8 @@ export class Keyboard {
     private readonly contexts: Record<string, FullContextOptions> = {};
     private readonly activationContextManager = new ActivationContextManager();
     private readonly eventEmitter = new EventEmitter<ShortcutEvent>();
+    private readonly commandChangeEventEmitter =
+        new EventEmitter<ParsedCommandOptions>();
     private paused: boolean = false;
     private destroyer = new Disposable();
     private anchor: ShortcutEventTarget;
@@ -244,6 +246,12 @@ export class Keyboard {
     getCommandOptions(commandName: string): ParsedCommandOptions | undefined {
         return this.commands[commandName];
     }
+    onCommandChange(
+        commandName: string,
+        callback: (options: ParsedCommandOptions) => void
+    ) {
+        return this.commandChangeEventEmitter.on(commandName, callback);
+    }
 
     getCommands() {
         return this.commands;
@@ -371,6 +379,11 @@ export class Keyboard {
                 ),
                 shortcut: Shortcut.from(options.shortcut, this.registry)
             };
+            this.commandChangeEventEmitter.emit(
+                commandName,
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                this.commands[commandName]!
+            );
         }
     }
 
