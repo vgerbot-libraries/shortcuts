@@ -27,22 +27,22 @@ export class Shortcut implements KeyboardEventMatcher {
     }
 
     private matchTimes: number = 0;
-    private readonly parts: ShortcutPart[];
+    private readonly segments: ShortcutSegment[];
 
     private constructor(matchers: KeyboardEventMatcher[][]) {
-        this.parts = matchers.map(it => new ShortcutPart(it));
+        this.segments = matchers.map(it => new ShortcutSegment(it));
     }
 
     match(event: ShortcutKeyboardEvent | KeyboardEvent): boolean {
         if (this.isFullMatch()) {
             this.reset();
         }
-        const shortcutPart = this.parts[this.matchTimes];
+        const shortcutSegment = this.segments[this.matchTimes];
         /* istanbul ignore if */
-        if (!shortcutPart) {
+        if (!shortcutSegment) {
             return false;
         }
-        if (shortcutPart.match(event)) {
+        if (shortcutSegment.match(event)) {
             this.matchTimes += 1;
             return true;
         }
@@ -53,33 +53,35 @@ export class Shortcut implements KeyboardEventMatcher {
         this.matchTimes = 0;
     }
 
-    isPartMatch() {
-        return this.matchTimes != this.parts.length;
+    isPartialMatch() {
+        return this.matchTimes != this.segments.length;
     }
 
     isFullMatch() {
-        return this.matchTimes === this.parts.length;
+        return this.matchTimes === this.segments.length;
     }
 
     str() {
-        return this.parts.map(it => it.str()).join(Shortcut.comboDeliminator);
+        return this.segments
+            .map(it => it.str())
+            .join(Shortcut.comboDeliminator);
     }
 
     partiallyMatchesStr() {
-        return this.parts
+        return this.segments
             .slice(0, this.matchTimes)
             .map(it => it.str())
             .join(Shortcut.comboDeliminator);
     }
 
     equals(other: Shortcut) {
-        return !this.parts.some((it, i) => {
-            return it.equals(other.parts[i]);
+        return !this.segments.some((it, i) => {
+            return it.equals(other.segments[i]);
         });
     }
 }
 
-class ShortcutPart {
+class ShortcutSegment {
     private ctrl: boolean = false;
     private shift: boolean = false;
     private alt: boolean = false;
@@ -132,7 +134,7 @@ class ShortcutPart {
             .join(Shortcut.keyDeliminator);
     }
 
-    equals(other: ShortcutPart | undefined) {
+    equals(other: ShortcutSegment | undefined) {
         return (
             !other ||
             (this.ctrl === other.ctrl &&
