@@ -30,14 +30,10 @@ describe('@vgerbot/shortcuts-rxjs', () => {
     it('fromShortcutEvent selector should be called', async () => {
         const selector = jest.fn().mockReturnValue(event);
 
-        const promise = fromShortcutKeyEvent(
-            document.body,
-            'Enter',
-            {
-                selector,
-                eventName: 'keydown'
-            }
-        )
+        const promise = fromShortcutKeyEvent(document.body, 'Enter', {
+            selector,
+            eventName: 'keydown'
+        })
             .pipe(take(1))
             .toPromise();
 
