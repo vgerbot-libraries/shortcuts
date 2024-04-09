@@ -1,8 +1,12 @@
 {
     "compilerOptions": {
         "jsx": "preserve",
-        "jsxImportSource": "solid-js"
+        "jsxImportSource": "solid-js",
+        "rootDir": "src",
+        "declaration": true,
+        "declarationDir": "lib"
     },
     "extends": "../../tsconfig.json",
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": ["node_modules"]
 }

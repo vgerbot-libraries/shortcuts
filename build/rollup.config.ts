@@ -3,7 +3,7 @@ import path from 'path';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 // const { nodeResolve } = require('@rollup/plugin-node-resolve');
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -41,6 +41,7 @@ const rollupConfig = [
             output,
             plugins: [
                 nodeResolve({
+                    extensions: ['ts', 'tsx', 'js'],
                     mainFields: ['module', 'browser', 'main']
                 }),
                 commonjs({

@@ -5,13 +5,21 @@
     "author": "y1j2x34 <y1j2x34@qq.com>",
     "homepage": "https://github.com/y1j2x34/shortcuts/tree/main/packages/solid#readme",
     "license": "MIT",
-    "main": "lib/index.cjs.js",
+    "main": "dist/index.umd.js",
+    "module": "dist/index.module.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.module.js",
+            "browser": "./dist/index.umd.js"
+        }
+    },
     "directories": {
         "lib": "lib",
         "test": "__tests__"
     },
     "files": [
-        "lib"
+        "dist"
     ],
     "publishConfig": {
         "registry": "https://registry.npmmirror.com/"
@@ -20,7 +28,9 @@
         "type": "git",
         "url": "git+https://github.com/y1j2x34/shortcuts.git"
     },
-    "scripts": {},
+    "scripts": {
+        "build": "rollup -c ./build/rollup.config.ts --configPlugin typescript"
+    },
     "bugs": {
         "url": "https://github.com/y1j2x34/shortcuts/issues"
     },
@@ -28,7 +38,12 @@
         "@vgerbot/shortcuts": "^1.0.0",
         "solid-js": "^1.8.16"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "@rollup/plugin-typescript": "^11.1.6",
+        "babel-preset-solid": "^1.8.16",
+        "rollup": "^4.14.1",
+        "rollup-preset-solid": "^2.0.1"
+    },
     "peerDependencies": {
         "solid-js": ">= 1.8.0"
     }

@@ -13,6 +13,14 @@
     "typings": "lib/index.d.ts",
     "types": "lib/index.d.ts",
     "library": "Shortcuts",
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "import": "./lib/index.es.js",
+            "require": "./lib/index.cjs.js",
+            "default": "./lib/index.umd.js"
+        }
+    },
     "directories": {
         "lib": "lib",
         "test": "__test__"
