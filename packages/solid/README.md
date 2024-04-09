@@ -97,3 +97,35 @@ const MyComponent = () => {
   // ...
 };
 ```
+
+### `forward`
+
+The `forward` directive allows you to forward keyboard shortcut events to a DOM element, triggering events such as `click`, `touch`, or `pointer` events on that element. This can be useful for integrating keyboard shortcuts with components or libraries that rely on these types of events.
+
+```jsx
+import { forward } from '@vgerbot/shortcuts-solid';
+
+const MyComponent = () => {
+  let buttonRef;
+
+  return (
+    <button
+      ref={buttonRef}
+      use:forward={{ eventType: 'click', shortcut: 'Ctrl+S' }}
+      onClick={() => console.log('Button clicked!')}
+    >
+      Save file
+    </button>
+  );
+};
+```
+
+In the example above, the `Ctrl+S` shortcut will trigger a `click` event on the button element, executing the `onClick` handler.
+
+The `forward` directive accepts an options object with the following properties:
+
+- `eventType` (optional): The type of event to trigger on the DOM element. Defaults to `click`. Can be any valid event type from the `HTMLElementEventMap`.
+- `command`: A string representing the keyboard shortcut command to listen for.
+- `shortcut`: Alternatively, you can provide a shortcut object or string instead of a command.
+
+This directive provides a convenient way to integrate keyboard shortcuts directly into your Solid.js components, bridging the gap between keyboard events and UI interactions.
